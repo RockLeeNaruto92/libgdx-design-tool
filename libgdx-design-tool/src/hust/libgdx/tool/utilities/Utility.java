@@ -1,7 +1,12 @@
 package hust.libgdx.tool.utilities;
 
+import java.util.ArrayList;
+
 import hust.libgdx.tool.constants.Constant;
 
+import com.badlogic.gdx.Application.ApplicationType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -27,5 +32,27 @@ public class Utility {
 			.padRight(Constant.VERTICAL_GROUP_PAD_RIGHT);
 		
 		return checkbox;
+	}
+	
+	public static ArrayList<Object> getListFile(String path, Object obj){
+		FileHandle dir;
+		ArrayList<Object> list = new ArrayList<Object>();
+		
+		if (obj != null) list.add(obj);
+		
+		if (Gdx.app.getType() == ApplicationType.Android){
+			dir = Gdx.files.internal(path);
+		}else{
+			dir = Gdx.files.absolute(path);
+		}
+		
+		for (FileHandle file : dir.list()) {
+			if (!file.isDirectory())
+				list.add(file.name());
+			else 
+				list.add(getListFile(path + "/" + file.name(), file.name()));
+		}
+		
+		return list;
 	}
 }

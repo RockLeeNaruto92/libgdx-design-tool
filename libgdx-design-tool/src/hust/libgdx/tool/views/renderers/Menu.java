@@ -6,10 +6,7 @@ import hust.libgdx.tool.utilities.Utility;
 
 import java.util.ArrayList;
 
-import sun.security.krb5.internal.PAData;
-
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
