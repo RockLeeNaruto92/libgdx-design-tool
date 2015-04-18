@@ -1,0 +1,200 @@
+{ 
+		com.badlogic.gdx.graphics.Color: {
+   			green: { a: 1, b: 0, g: 1, r: 0 },
+   			white: { a: 1, b: 1, g: 1, r: 1 },
+   			red: { a: 1, b: 0, g: 0, r: 1 },
+   			black: { a: 1, b: 0, g: 0, r: 0 }
+   		},
+   		com.badlogic.gdx.graphics.g2d.BitmapFont: {
+   			default-font: {file: default.fnt}
+   		}
+		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+			default: {
+				font: default-font
+			},
+			
+			default-locked:{
+				up: lock,
+				down: lock,
+				checked: lock,
+				font: default-font
+			},
+			
+			backToMainBtn: {
+				up: backMenu,
+				down: backMenuClick,
+				checked: backMenuClick,
+				font: default-font
+			},
+			
+			replayBtn: {
+				up: replay,
+				down: replayClick,
+				checked: replayClick,
+				font: default-font
+			},
+					
+			weaponbtn: {
+				up: weapon,
+				down: weaponClick,
+				checked: weaponClick,
+				font: default-font
+			},
+			
+			skillbtn: {
+				up: skillBtn,
+				down: skillBtnClick,
+				checked: skillBtnClick,
+				font: default-font
+			},
+			
+			basicWeaponBtn: {
+				up: groundWeapon,
+				down: groundWeaponClick,
+				checked: groundWeaponClick,
+				font: default-font
+			},
+			
+			advanceWeaponBtn: {
+				up: airWeapon,
+				down: airWeaponClick,
+				checked: airWeaponClick,
+				font: default-font
+			},
+			
+			buildingBtn: {
+				up: building,
+				down: buildingClick,
+				checked: buildingClick,
+				font: default-font
+			},
+			
+			rockSkillBtn: {
+				up: skillRock,
+				down: skillRockClick,
+				checked: skillRockClick,
+				font: default-font
+			},
+			
+			sellSkillBtn: {
+				up: skillSell,
+				down: skillSellClick,
+				checked: skillSellClick,
+				font: default-font
+			},
+			
+			antidotalBtn: {
+				up: antidotal,
+				down: antidotalClick,
+				checked: antidotalClick,
+				font: default-font
+			},
+			
+			catapultBtn: {
+				up: catapult,
+				down: catapultClick,
+				checked: catapultClick,
+				font: default-font
+			},
+			
+			icegunBtn: {
+				up: icegun,
+				down: icegunClick,
+				checked: icegunClick,
+				font: default-font
+			},
+			
+			bowBtn: {
+				up: bow,
+				down: bowClick,
+				checked: bowClick,
+				font: default-font
+			},
+			
+			skillBuildingBtn: {
+				up: skillBuilding,
+				down: skillBuildingClick,
+				checked: skillBuildingClick,
+				font: default-font
+			},
+			
+			attackBuildingBtn: {
+				up: attackBuilding,
+				down: attackBuildingClick,
+				checked: attackBuildingClick,
+				font: default-font
+			},
+			
+			pauseBtn: {
+				up: pause,
+				down: pauseClick,
+				checked: pause,
+				font: default-font
+			},
+			
+			quickPlayBtn: {
+				up: quickPlay,
+				down: quickPlayClick,
+				checked: quickPlay,
+				font: default-font
+			}
+		},
+		
+		com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+			default: {
+				
+			}
+		},
+		com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
+   			default: { minus: quickPlay, plus: quickPlay, selection: quickPlayClick }
+		},
+		com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+   			default: { fontColorUnselected: red, selection: quickPlay, fontColorSelected: red, font: default-font }		
+   		},
+   		com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle:{
+   			default-horizontal: {
+   				background: quickPlay
+   				
+   			}
+   		},
+   		com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle:{
+   			default:{
+   			}
+   		},
+   		com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
+   			default: {
+   				font: default-font,
+   				checkboxOn: quickPlay, 
+   				checkboxOff: quickPlayClick
+   			}
+   		},
+   		com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
+   			default: {
+   				font: default-font,
+   				checked: quickPlayClick,
+   				up: quickPlay,
+   				down: quickPlayClick,
+   				imageChecked: pauseClick,
+   				imageUp: pause,
+   				imageDown: pauseClick
+   			}
+   		},
+   		com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
+   			default-horizontal: {
+   				background: quickPlay,
+   				disabledBackground: quickPlayClick,
+   				knob: pause
+   			}
+   		},
+   		
+   		
+   		
+   		com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle:{
+   			default: {
+   				fontColor: red,
+   				font: default-font,
+   				listStyle: default,
+   				scrollStyle: default
+   			}
+   		}
+ }

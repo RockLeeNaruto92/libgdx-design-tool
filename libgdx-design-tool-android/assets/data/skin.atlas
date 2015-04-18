@@ -1,0 +1,477 @@
+
+skin.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+loseBg
+  rotate: false
+  xy: 1, 612
+  size: 711, 397
+  orig: 711, 397
+  offset: 0, 0
+  index: -1
+pauseBg
+  rotate: false
+  xy: 1, 213
+  size: 711, 397
+  orig: 711, 397
+  offset: 0, 0
+  index: -1
+airWeaponLabel
+  rotate: false
+  xy: 1, 91
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+antidotalLabel
+  rotate: false
+  xy: 363, 91
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+airWeapon
+  rotate: false
+  xy: 714, 889
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+airWeaponClick
+  rotate: false
+  xy: 714, 767
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+antidotal
+  rotate: false
+  xy: 830, 889
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+antidotalClick
+  rotate: false
+  xy: 714, 645
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+attackBuilding
+  rotate: false
+  xy: 830, 767
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+attackBuildingClick
+  rotate: false
+  xy: 714, 523
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+balloon
+  rotate: false
+  xy: 830, 645
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+balloonClick
+  rotate: false
+  xy: 714, 401
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+bow
+  rotate: false
+  xy: 830, 523
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+bowClick
+  rotate: false
+  xy: 714, 279
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+building
+  rotate: false
+  xy: 830, 401
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+buildingClick
+  rotate: false
+  xy: 830, 279
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+backMenu
+  rotate: false
+  xy: 1, 1
+  size: 142, 88
+  orig: 142, 88
+  offset: 0, 0
+  index: -1
+backMenuClick
+  rotate: false
+  xy: 145, 1
+  size: 142, 88
+  orig: 142, 88
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 289, 1
+  size: 142, 88
+  orig: 142, 88
+  offset: 0, 0
+  index: -1
+playClick
+  rotate: false
+  xy: 433, 1
+  size: 142, 88
+  orig: 142, 88
+  offset: 0, 0
+  index: -1
+replay
+  rotate: false
+  xy: 577, 1
+  size: 142, 88
+  orig: 142, 88
+  offset: 0, 0
+  index: -1
+catapult
+  rotate: false
+  xy: 725, 157
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+catapultClick
+  rotate: false
+  xy: 841, 157
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+replayClick
+  rotate: false
+  xy: 725, 67
+  size: 142, 88
+  orig: 142, 88
+  offset: 0, 0
+  index: -1
+groundWeapon
+  rotate: false
+  xy: 869, 35
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+
+skin2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+winBg
+  rotate: false
+  xy: 1, 611
+  size: 711, 397
+  orig: 711, 397
+  offset: 0, 0
+  index: -1
+antidotalLockedLabel
+  rotate: false
+  xy: 1, 489
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+attackBuildingLabel
+  rotate: false
+  xy: 1, 367
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+attackBuildingLockedLabel
+  rotate: false
+  xy: 1, 245
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+balloonLabel
+  rotate: false
+  xy: 1, 123
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+balloonLockedLabel
+  rotate: false
+  xy: 1, 1
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+bowLabel
+  rotate: false
+  xy: 363, 489
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+bowLockedLabel
+  rotate: false
+  xy: 363, 367
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+buildingLabel
+  rotate: false
+  xy: 363, 245
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+catapultLabel
+  rotate: false
+  xy: 363, 123
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+groundWeaponLabel
+  rotate: false
+  xy: 363, 1
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+groundWeaponClick
+  rotate: false
+  xy: 714, 888
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+help
+  rotate: false
+  xy: 714, 766
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+helpClick
+  rotate: false
+  xy: 830, 888
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+icegun
+  rotate: false
+  xy: 714, 644
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+icegunClick
+  rotate: false
+  xy: 830, 766
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+lock
+  rotate: false
+  xy: 830, 644
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+pause
+  rotate: false
+  xy: 725, 522
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+pauseClick
+  rotate: false
+  xy: 725, 400
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+quickPlay
+  rotate: false
+  xy: 725, 278
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+quickPlayClick
+  rotate: false
+  xy: 725, 156
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillBtn
+  rotate: false
+  xy: 725, 34
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillBtnClick
+  rotate: false
+  xy: 841, 522
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillBuilding
+  rotate: false
+  xy: 841, 400
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillBuildingClick
+  rotate: false
+  xy: 841, 278
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillRock
+  rotate: false
+  xy: 841, 156
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillRockClick
+  rotate: false
+  xy: 841, 34
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+
+skin3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+icegunLabel
+  rotate: false
+  xy: 1, 367
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+rockSkillLabel
+  rotate: false
+  xy: 1, 245
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+rockSkillLockedLabel
+  rotate: false
+  xy: 363, 367
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+sellSkillLabel
+  rotate: false
+  xy: 1, 123
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+skillBuildingLabel
+  rotate: false
+  xy: 363, 245
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+skillBuildingLockedLabel
+  rotate: false
+  xy: 1, 1
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+springLabel
+  rotate: false
+  xy: 363, 123
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+springLockedLabel
+  rotate: false
+  xy: 363, 1
+  size: 360, 120
+  orig: 360, 120
+  offset: 0, 0
+  index: -1
+skillSell
+  rotate: false
+  xy: 725, 367
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+skillSellClick
+  rotate: false
+  xy: 725, 245
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+spring
+  rotate: false
+  xy: 841, 367
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+springClick
+  rotate: false
+  xy: 725, 123
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+weapon
+  rotate: false
+  xy: 841, 245
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
+weaponClick
+  rotate: false
+  xy: 725, 1
+  size: 114, 120
+  orig: 114, 120
+  offset: 0, 0
+  index: -1
