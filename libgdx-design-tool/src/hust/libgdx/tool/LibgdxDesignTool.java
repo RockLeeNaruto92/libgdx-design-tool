@@ -21,7 +21,6 @@ public class LibgdxDesignTool implements ApplicationListener {
 	public void create() {
 		stage = new Stage();
 		render = new HomeRenderer();
-		
 	}
 
 	@Override

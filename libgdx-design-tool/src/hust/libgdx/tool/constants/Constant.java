@@ -18,7 +18,14 @@ public class Constant {
 	public static Vector2 DESIGN_SIZE = new Vector2(0.6f, 0.66875f);
 	public static Vector2 DESIGN_LOCATION = new Vector2(0.2f, 0.3f);
 	
-	public static Vector2 SUB_MENU_SIZE = new Vector2(0.3f, 0);
+	public static Vector2 SUB_MENU_SIZE = new Vector2(0.3f, 0f);
 	
+	public static float GROUP_PAD_LEFT = 20f;
+	public static float HORIZONTAL_GROUP_SPACE = 20f;
+	public static float VERTICAL_GROUP_SPACE = 1f;
+	public static float VERTICAL_GROUP_PAD_RIGHT = 10f;
+	public static float VERTICAL_GROUP_IMAGE_WIDTH = 15f;
+	public static float VERTICAL_GROUP_IMAGE_HEIGHT = 15f;
+	public static float FONT_SCALE = 0.7f;
 	
 }

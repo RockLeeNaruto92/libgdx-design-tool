@@ -1,17 +1,19 @@
 package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
-import hust.libgdx.tool.constants.Word;
+
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 
 public class HomeRenderer extends ApplicationRenderer {
 	private Texture texture = new Texture(Gdx.files.internal("data/black.png"));
@@ -19,16 +21,19 @@ public class HomeRenderer extends ApplicationRenderer {
 	private Skin skin;
 	
 	private Stage stage;
-	private TextButton fileMenu, windowsMenu;
+	private Menu menu;
 	private TextButton packageTab, paletteTab;
 	private TextButton designTab, sourceTab;
 	private TextButton property, outline, preview;
 	private HorizontalGroup menuGroup;
+	private VerticalGroup subMenuGroup;
+	private List<CheckBox> subFileMenu, subWindowsMenu;
 	
 	public HomeRenderer() {
 		super();
 		
 		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
 		
 		loadDatas();
 		
@@ -44,30 +49,11 @@ public class HomeRenderer extends ApplicationRenderer {
 	}
 
 	private void createMenuPart() {
-		menuGroup = new HorizontalGroup();
-		
-		fileMenu = new TextButton(Word.FILE, skin);
-		fileMenu.getLabel().setFontScale(0.7f);
-		
-		menuGroup.addActor(fileMenu);
-		
-		windowsMenu = new TextButton(Word.WINDOWS, skin);
-		windowsMenu.getLabel().setFontScale(0.7f);
-		menuGroup.addActor(windowsMenu);
-		
-		menuGroup.padLeft(10);
-		menuGroup.padTop(0);
-		menuGroup.space(20f);
-		menuGroup.setDebug(true);
-		
-		Rectangle bound = getActualBound(Constant.MENU_LOCATION, Constant.MENU_SIZE);
-		menuGroup.setX(bound.x);
-		menuGroup.setY(bound.y);
-		
-		stage.addActor(menuGroup);
+		menu = new Menu(stage, skin);
 	}
 
 	private void createPalletePart() {
+		
 	}
 
 	private void createPropertyPart() {
@@ -168,16 +154,5 @@ public class HomeRenderer extends ApplicationRenderer {
 
 		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
 		
-	}
-	
-	private Rectangle getActualBound(Vector2 location, Vector2 size){
-		Rectangle bound = new Rectangle();
-		
-		bound.width = Constant.SCREEN_SIZE.x * size.x;
-		bound.height = Constant.SCREEN_SIZE.y * size.y;
-		bound.x = Constant.SCREEN_SIZE.x * location.x;
-		bound.y = Constant.SCREEN_SIZE.y * location.y;
-		
-		return bound;
 	}
 }
