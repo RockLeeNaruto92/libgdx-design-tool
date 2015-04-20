@@ -28,4 +28,14 @@ public class Constant {
 	public static float VERTICAL_GROUP_IMAGE_HEIGHT = 15f;
 	public static float FONT_SCALE = 0.7f;
 	
+	// 18, 18
+	public static Vector2 TREE_ICON_SIZE = new Vector2(0.01317716f, 0.0234375f);
+	// 18, 18
+	public static Vector2 TREE_NODE_ICON_SIZE = new Vector2(0.01317716f, 0.0234375f);
+	
+	
+	public static String ICON_FOLDER_OPEN = "folder_open.png";
+	public static String ICON_FOLDER_CLOSE = "folder_close.png";
+	public static String ICON_FILE = "file.png";
+	
 }

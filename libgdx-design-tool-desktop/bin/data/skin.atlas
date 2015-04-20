@@ -475,3 +475,29 @@ weaponClick
   orig: 114, 120
   offset: 0, 0
   index: -1
+
+a.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+file
+  rotate: false
+  xy: 2, 2
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+folder_close
+  rotate: false
+  xy: 2, 12
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+folder_open
+  rotate: false
+  xy: 2, 22
+  size: 8, 7
+  orig: 8, 8
+  offset: 0, 1
+  index: -1

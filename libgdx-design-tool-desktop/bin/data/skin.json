@@ -7,7 +7,10 @@
    		},
    		com.badlogic.gdx.graphics.g2d.BitmapFont: {
    			default-font: {file: default.fnt}
-   		}
+   		},
+   		com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+   			default: {font: default-font}
+   		},
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 			default: {
 				font: default-font
@@ -146,7 +149,7 @@
 			}
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {
-   			default: { minus: quickPlay, plus: quickPlay, selection: quickPlayClick }
+   			default: { minus: file, plus: folder_close, selection: file }
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
    			default: { fontColorUnselected: red, selection: quickPlay, fontColorSelected: red, font: default-font }		
