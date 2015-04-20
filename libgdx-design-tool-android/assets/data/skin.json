@@ -12,6 +12,11 @@
    			default: {font: default-font}
    		},
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+			toggle: {
+				font: default-font,
+				up: backMenu,
+				down: backMenuClick
+			},
 			default: {
 				font: default-font
 			},

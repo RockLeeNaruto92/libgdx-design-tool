@@ -4,10 +4,13 @@ import hust.libgdx.tool.constants.Constant;
 
 import java.util.List;
 
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
@@ -22,6 +25,7 @@ public class HomeRenderer extends ApplicationRenderer {
 	
 	private Stage stage;
 	private Menu menu;
+	private PackageExplore packageExplore;
 	private TextButton packageTab, paletteTab;
 	private TextButton designTab, sourceTab;
 	private TextButton property, outline, preview;
@@ -53,7 +57,16 @@ public class HomeRenderer extends ApplicationRenderer {
 	}
 
 	private void createPalletePart() {
+		Vector2 location = new Vector2();
+		Vector2 size = new Vector2();
 		
+		location.x = Constant.PALETTE_LOCATION.x * Constant.SCREEN_SIZE.x;
+		location.y = Constant.PALETTE_LOCATION.y * Constant.SCREEN_SIZE.y;
+		
+		size.x = Constant.PALETTE_SIZE.x * Constant.SCREEN_SIZE.x;
+		size.y = Constant.PALETTE_SIZE.y * Constant.SCREEN_SIZE.y;
+		
+		packageExplore = new PackageExplore("D:\\Example", stage, skin, location, size);
 	}
 
 	private void createPropertyPart() {
@@ -71,9 +84,6 @@ public class HomeRenderer extends ApplicationRenderer {
 	public void render() {
 		batch.begin();
 		// draw all
-		
-		
-		
 		drawMenu();
 //		drawPalette();
 //		drawProperty();
