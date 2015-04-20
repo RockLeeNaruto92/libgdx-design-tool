@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class PackageExplore {
-	private boolean visible = true;
+	private boolean visible = false;
 	private TextButton btnPackageExplore;
 	
 	private String folderPath;
@@ -51,17 +51,18 @@ public class PackageExplore {
 		ScrollPane scroll = new ScrollPane(table, skin);
 		table.pad(10).defaults().expandX().space(4);
 		
-		for (int i = 0; i < 100; i++){
-			table.row();
-			Tree tree = Utility.createTreeFromArrayList(root, skin);
-			table.add(tree).align(Align.topLeft);
-		}
+		table.row();
+		Tree tree = Utility.createTreeFromArrayList(root, skin);
+		table.add(tree).align(Align.topLeft);
+		
 		table.align(Align.topLeft);
 		
 		container.add(scroll).expand().fill();
 		container.row().space(10).padBottom(10);
 		container.align(Align.topLeft);
 		container.debugAll();
+		
+		container.setVisible(false);
 	}
 	
 	private NodeElement createRootNodeElement(){

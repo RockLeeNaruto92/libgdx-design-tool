@@ -78,6 +78,22 @@ public class Utility {
 		return tree;
 	}
 	
+	public static Tree createTreeFromArrayList(ArrayList<NodeElement> roots, Skin skin){
+		Tree tree = new Tree(skin);
+		
+		for (NodeElement root : roots) {
+			Node rootNode = new Node(createTreeNodeLabel(root.name, skin));
+			tree.add(rootNode);
+			
+			// create childs node
+			for (NodeElement element : root.childs) {
+				createNodeOfTree(element, skin, rootNode);
+			}
+		}
+		
+		return tree;
+	}
+	
 	private static Label createTreeNodeLabel(String text, Skin skin ){
 		Label label = new Label(text, skin);
 		label.setFontScale(Constant.FONT_SCALE);

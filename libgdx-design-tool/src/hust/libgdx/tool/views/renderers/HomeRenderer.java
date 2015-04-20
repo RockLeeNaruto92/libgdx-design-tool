@@ -67,6 +67,8 @@ public class HomeRenderer extends ApplicationRenderer {
 		size.y = Constant.PALETTE_SIZE.y * Constant.SCREEN_SIZE.y;
 		
 		packageExplore = new PackageExplore("D:\\Example", stage, skin, location, size);
+		
+		new Palette(stage, skin, location, size);
 	}
 
 	private void createPropertyPart() {

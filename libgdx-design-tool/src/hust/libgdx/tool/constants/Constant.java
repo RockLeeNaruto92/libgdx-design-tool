@@ -37,5 +37,6 @@ public class Constant {
 	public static String ICON_FOLDER_OPEN = "folder_open.png";
 	public static String ICON_FOLDER_CLOSE = "folder_close.png";
 	public static String ICON_FILE = "file.png";
+	public static String FILE_UIELEMENT_LIST = "uielementList.txt";
 	
 }
