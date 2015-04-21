@@ -18,6 +18,8 @@ public class Main {
 		
 		System.out.println(screenSize);
 		
+//		new LwjglApplication(new OrthographicCameraExample(), cfg);
+//		new LwjglApplication(new ScrollPaneTest(), cfg);
 		new LwjglApplication(new LibgdxDesignTool(), cfg);
 	}
 }

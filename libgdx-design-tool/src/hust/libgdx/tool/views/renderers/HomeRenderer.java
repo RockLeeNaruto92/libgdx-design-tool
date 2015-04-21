@@ -1,43 +1,46 @@
 package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
+import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 
 import java.util.List;
 
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class HomeRenderer extends ApplicationRenderer {
+public class HomeRenderer extends ApplicationRenderer implements InputProcessor {
 	private Texture texture = new Texture(Gdx.files.internal("data/black.png"));
 	private Sprite sprite = new Sprite(texture);
 	private Skin skin;
 	
-	private Stage stage;
+	private Stage mainStage;
 	private Menu menu;
 	private PackageExplore packageExplore;
-	private TextButton packageTab, paletteTab;
-	private TextButton designTab, sourceTab;
-	private TextButton property, outline, preview;
-	private HorizontalGroup menuGroup;
-	private VerticalGroup subMenuGroup;
-	private List<CheckBox> subFileMenu, subWindowsMenu;
+	private Editor editor;
 	
-	public HomeRenderer() {
+	private UIElementController controller;
+	
+	public HomeRenderer(UIElementController controller) {
 		super();
+		this.controller = controller;
 		
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
+		createStages();
 		
 		loadDatas();
 		
@@ -46,6 +49,13 @@ public class HomeRenderer extends ApplicationRenderer {
 		createPropertyPart();
 		createOutlinePart();
 		createEditorPart();
+		
+		InputMultiplexer im = new InputMultiplexer(mainStage, editor.getStage());
+		Gdx.input.setInputProcessor(im);
+	}
+	
+	private void createStages(){
+		mainStage = new Stage();
 	}
 	
 	private void loadDatas(){
@@ -53,7 +63,7 @@ public class HomeRenderer extends ApplicationRenderer {
 	}
 
 	private void createMenuPart() {
-		menu = new Menu(stage, skin);
+		menu = new Menu(mainStage, skin);
 	}
 
 	private void createPalletePart() {
@@ -66,20 +76,29 @@ public class HomeRenderer extends ApplicationRenderer {
 		size.x = Constant.PALETTE_SIZE.x * Constant.SCREEN_SIZE.x;
 		size.y = Constant.PALETTE_SIZE.y * Constant.SCREEN_SIZE.y;
 		
-		packageExplore = new PackageExplore("D:\\Example", stage, skin, location, size);
+//		packageExplore = new PackageExplore("D:\\Example", mainStage, skin, location, size);
 		
-		new Palette(stage, skin, location, size);
+		new Palette(mainStage, skin, location, size);
 	}
 
 	private void createPropertyPart() {
+		Vector2 location = new Vector2();
+		Vector2 size = new Vector2();
+		
+		location.x = Constant.PROPERTY_LOCATION.x * Constant.SCREEN_SIZE.x;
+		location.y = Constant.PROPERTY_LOCATION.y * Constant.SCREEN_SIZE.y;
+		
+		size.x = Constant.PROPERTY_SIZE.x * Constant.SCREEN_SIZE.x;
+		size.y = Constant.PROPERTY_SIZE.y * Constant.SCREEN_SIZE.y;
+		
+//		new ActorProperty(stage, skin, location, size);
 	}
 
 	private void createOutlinePart() {
 	}
 
 	private void createEditorPart() {
-		// TODO Auto-generated method stub
-		
+		editor = new Editor(skin);
 	}
 
 	@Override
@@ -95,8 +114,10 @@ public class HomeRenderer extends ApplicationRenderer {
 		// end draw
 		batch.end();
 		
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
+		mainStage.act(Gdx.graphics.getDeltaTime());
+		mainStage.draw();
+		
+		editor.render();
 	}
 
 	private void drawMenu() {
@@ -166,5 +187,57 @@ public class HomeRenderer extends ApplicationRenderer {
 
 		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
 		
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Skin getSkin() {
+		return skin;
 	}
 }

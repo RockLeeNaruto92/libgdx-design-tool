@@ -1,10 +1,28 @@
 package hust.libgdx.tool.views;
 
+import hust.libgdx.tool.controllers.Controller;
+
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 
 
 public class ApplicationScreen implements Screen, InputProcessor{
+	private Controller controller;
+	
+	public ApplicationScreen(){
+	}
+	
+	public ApplicationScreen(Controller controller){
+		this.controller = controller;
+	}
+	
+	public Controller getController() {
+		return controller;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
 
 	@Override
 	public boolean keyDown(int keycode) {

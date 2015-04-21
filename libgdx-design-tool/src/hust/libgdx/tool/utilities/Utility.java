@@ -1,8 +1,10 @@
 package hust.libgdx.tool.utilities;
 
-import java.util.ArrayList;
-
 import hust.libgdx.tool.constants.Constant;
+import hust.libgdx.tool.models.UIElementType;
+import hust.libgdx.tool.views.renderers.CustomTree;
+
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -10,12 +12,18 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree.Node;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class Utility {
 	public enum NodeType{
@@ -31,6 +39,13 @@ public class Utility {
 		bound.y = Constant.SCREEN_SIZE.y * location.y;
 		
 		return bound;
+	}
+	
+	public static float getActualValue(float arg, boolean width){
+		if (width)
+			return Constant.SCREEN_SIZE.x * arg;
+		else
+			return Constant.SCREEN_SIZE.y * arg;
 	}
 	
 	public static CheckBox createSubMenuCheckbox(String text, Skin skin){
@@ -63,66 +78,109 @@ public class Utility {
 		return parent;
 	}
 	
-	public static Tree createTreeFromArrayList(NodeElement root, Skin skin){
+	public static Tree createTreeFromArrayList(NodeElement root, Skin skin, UIElementType[] types){
 		Tree tree = new Tree(skin);
-		// create root node
-		Node rootNode = new Node(createTreeNodeLabel(root.name, skin));
-		tree.add(rootNode);
-		
-		// create childs node
-		for (NodeElement element : root.childs) {
-			createNodeOfTree(element, skin, rootNode);
-		}
+//		int index = 0;
+//		// create root node
+//		Node rootNode = new Node(createTreeNodeLabel(root.name, skin, null));
+//		tree.add(rootNode);
+//		
+//		// create childs node
+//		for (NodeElement element : root.childs) {
+////			createNodeOfTree(element, skin, rootNode, );
+//		}
 		
 		
 		return tree;
 	}
 	
-	public static Tree createTreeFromArrayList(ArrayList<NodeElement> roots, Skin skin){
-		Tree tree = new Tree(skin);
+	
+	
+	public static TextField createTextFieldWithSlider(Table parent, Vector2 parentSize, String[] labels, float[] widths, float sliderInfo[], Skin skin){
+		int i;
 		
-		for (NodeElement root : roots) {
-			Node rootNode = new Node(createTreeNodeLabel(root.name, skin));
-			tree.add(rootNode);
+		parent.row();
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
 			
-			// create childs node
-			for (NodeElement element : root.childs) {
-				createNodeOfTree(element, skin, rootNode);
+			parent.add(label).align(Align.topLeft).width(widths[i] * parentSize.x);
+		}
+		
+		final TextField textfield = new TextField("", skin);
+		parent.add(textfield).align(Align.topLeft).width(widths[i++] * parentSize.x);
+		
+		float sliderWidth = 0;
+		while (i < widths.length) sliderWidth += widths[i++] * parentSize.x;
+
+		final Slider slider = new Slider(sliderInfo[0], sliderInfo[1], sliderInfo[2], false, skin);
+		slider.getStyle().knob.setMinHeight(parentSize.y * Constant.PROPERTY_ROW_HEIGHT);
+		slider.getStyle().knob.setMinWidth(parentSize.x * Constant.SLIDER_KNOB_WIDTH);
+		parent.add(slider).align(Align.topLeft).width(sliderWidth).height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT);
+		
+		slider.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				textfield.setText(slider.getValue() + "");
+				// set object value
+				
 			}
-		}
+		});
 		
-		return tree;
+		textfield.addListener(new InputListener(){
+			@Override
+			public boolean keyTyped(InputEvent event, char character) {
+				// check validation
+				
+				// set object value if validation is true
+				return super.keyTyped(event, character);
+			}
+		});
+		
+		
+		return textfield;
 	}
 	
-	private static Label createTreeNodeLabel(String text, Skin skin ){
-		Label label = new Label(text, skin);
-		label.setFontScale(Constant.FONT_SCALE);
+	public static TextField createTextFieldWithOutSlider(Table parent, Vector2 parentSize, String[] labels, float[] widths, Skin skin){
+		int i;
 		
-		return label;
+		parent.row();
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
+			
+			parent.add(label).align(Align.topLeft).width(widths[i] * parentSize.x);
+		}
+		
+		final TextField textfield = new TextField("", skin);
+		parent.add(textfield).align(Align.topLeft).width(widths[i++] * parentSize.x);
+		
+		textfield.addListener(new InputListener(){
+
+			@Override
+			public boolean keyTyped(InputEvent event, char character) {
+				System.out.println(textfield.getText());
+				return super.keyTyped(event, character);
+			}
+			
+		});
+		
+		return textfield;
 	}
 	
-	private static Node createNodeOfTree(NodeElement object, Skin skin, Node parent){
-		Node node = new Node(createTreeNodeLabel(object.name, skin));
-		
-		parent.add(node);
-		if (object.childs == null) return node;
-		for (NodeElement element : object.childs) {
-			createNodeOfTree(element, skin, node);
-		}
-		
-		return node;
-	}
-
-	private static Drawable getIcon(NodeType type, Skin skin) {
-		switch (type) {
-		case FILE:
-			break;
-
-		default:
-			break;
-		}
-		return null;
-	}
+//	public static Button createCheckbox(Table parent, Vector2 parentSize, String[] labels, float[] widths, Skin skin){
+//		int i;
+//		
+//		parent.row();
+//		for (i = 0; i < labels.length; i++){
+//			Label label = new Label(labels[i], skin);
+//			label.setFontScale(Constant.FONT_SCALE);
+//			
+//			parent.add(label).align(Align.topLeft).width(widths[i] * parentSize.x);
+//		}
+//		
+//		
+//	}
 	
 	public static class NodeElement {
 		NodeType type;

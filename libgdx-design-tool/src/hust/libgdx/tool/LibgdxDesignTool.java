@@ -1,5 +1,6 @@
 package hust.libgdx.tool;
 
+import hust.libgdx.tool.views.HomeScreen;
 import hust.libgdx.tool.views.renderers.HomeRenderer;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -9,11 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class LibgdxDesignTool implements ApplicationListener {
 	Stage stage;
-	HomeRenderer render;
+	HomeScreen homeScreen;
 	
 	@Override
 	public void create() {
-		render = new HomeRenderer();
+		stage = new Stage();
+		
+		
+		homeScreen = new HomeScreen();
 	}
 
 	@Override
@@ -24,8 +28,10 @@ public class LibgdxDesignTool implements ApplicationListener {
 	public void render() {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		stage.draw();
 
-		render.render();
+		homeScreen.render(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override

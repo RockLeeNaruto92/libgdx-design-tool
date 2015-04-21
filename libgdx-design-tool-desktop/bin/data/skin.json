@@ -18,7 +18,10 @@
 				down: backMenuClick
 			},
 			default: {
-				font: default-font
+				font: default-font,
+				up: backMenu,
+				down: backMenuClick,
+				over: lock
 			},
 			
 			default-locked:{
@@ -145,6 +148,13 @@
 				down: quickPlayClick,
 				checked: quickPlay,
 				font: default-font
+			}
+		},
+		
+		com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
+			default: {
+				font: default-font,
+				fontColor: red
 			}
 		},
 		
