@@ -2,7 +2,6 @@ package hust.libgdx.tool.utilities;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.models.UIElementType;
-import hust.libgdx.tool.views.renderers.CustomTree;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree;
-import com.badlogic.gdx.scenes.scene2d.ui.Tree.Node;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
@@ -168,25 +166,12 @@ public class Utility {
 		return textfield;
 	}
 	
-//	public static Button createCheckbox(Table parent, Vector2 parentSize, String[] labels, float[] widths, Skin skin){
-//		int i;
-//		
-//		parent.row();
-//		for (i = 0; i < labels.length; i++){
-//			Label label = new Label(labels[i], skin);
-//			label.setFontScale(Constant.FONT_SCALE);
-//			
-//			parent.add(label).align(Align.topLeft).width(widths[i] * parentSize.x);
-//		}
-//		
-//		
-//	}
-	
 	public static class NodeElement {
-		NodeType type;
-		String name;
+		private NodeType type;
+		private String name;
+		private Object object;
+		private ArrayList<NodeElement> childs;
 		
-		ArrayList<NodeElement> childs;
 		
 		public NodeElement(NodeType type, String name, ArrayList<NodeElement> childs){
 			this.type = type;
@@ -194,6 +179,15 @@ public class Utility {
 			this.childs = childs;
 		}
 		
+		public NodeElement(NodeType type, String name, Object object,
+				ArrayList<NodeElement> childs) {
+			super();
+			this.type = type;
+			this.name = name;
+			this.object = object;
+			this.childs = childs;
+		}
+
 		public NodeType getType() {
 			return type;
 		}
@@ -216,6 +210,14 @@ public class Utility {
 
 		public void setChilds(ArrayList<NodeElement> childs) {
 			this.childs = childs;
+		}
+
+		public Object getObject() {
+			return object;
+		}
+
+		public void setObject(Object object) {
+			this.object = object;
 		}
 
 		@Override

@@ -40,7 +40,7 @@ public abstract class CustomTree {
 	}
 	
 	private void init(){
-		readTreeInfo();
+		roots = readTreeInfo();
 		createContainer();
 		createTree();
 		createScroll();
@@ -52,6 +52,7 @@ public abstract class CustomTree {
 		container.setY(location.y);
 		container.setWidth(size.x);
 		container.setHeight(size.y);
+		container.align(Align.topLeft);
 		
 		stage.addActor(container);
 	}
@@ -59,12 +60,10 @@ public abstract class CustomTree {
 	private void createScroll(){
 		ScrollPane scrollPane = new ScrollPane(table, skin);
 		
-		container.add(scrollPane).expand().fill();
-		container.align(Align.topLeft);
+		container.add(scrollPane).expand().fill().align(Align.topLeft);
 	}
 	
 	private void createTree(){
-		table = new Table(skin);
 		tree = new Tree(skin);
 		
 		for (NodeElement root : roots) {
@@ -78,6 +77,11 @@ public abstract class CustomTree {
 			for (NodeElement node : root.getChilds()) 
 				createChildNode(node, rootNode);
 		}
+
+		table = new Table(skin);
+		table.row();
+		table.add(tree);
+		table.align(Align.topLeft);
 		
 	}
 	

@@ -1,6 +1,6 @@
 package hust.libgdx.tool.views.renderers;
 
-import hust.libgdx.tool.constants.Word;
+import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.utilities.Utility;
 import hust.libgdx.tool.utilities.Utility.NodeElement;
 import hust.libgdx.tool.utilities.Utility.NodeType;
@@ -11,58 +11,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Tree;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
-public class PackageExplore {
+public class PackageExplore extends CustomTree {
 	private boolean visible = false;
 	private TextButton btnPackageExplore;
 	
 	private String folderPath;
 	private Table table, container;
 	
-	public PackageExplore(String folderPath, Stage stage, Skin skin, Vector2 location, Vector2 size){
-		this.folderPath = folderPath;
-		
-		init(stage, skin, location, size);
-	}
-	
-	private void init(Stage stage, Skin skin, Vector2 location, Vector2 size){
-		NodeElement root = createRootNodeElement();
-		
-		btnPackageExplore = new TextButton(Word.PALETTE, skin);
-		
-		container = new Table();
-		container.setX(location.x);
-		container.setY(location.y);
-		container.setWidth(size.x);
-		container.setHeight(size.y);
-		stage.addActor(container);
-		
-		container.add(btnPackageExplore);
-		container.row();
-		
-		table = new Table();
-		
-		ScrollPane scroll = new ScrollPane(table, skin);
-		table.pad(10).defaults().expandX().space(4);
-		
-		table.row();
-		Tree tree = Utility.createTreeFromArrayList(root, skin);
-		table.add(tree).align(Align.topLeft);
-		
-		table.align(Align.topLeft);
-		
-		container.add(scroll).expand().fill();
-		container.row().space(10).padBottom(10);
-		container.align(Align.topLeft);
-		container.debugAll();
-		
-		container.setVisible(false);
+//	public PackageExplore(Stage stage, Skin skin, Vector2 location, Vector2 size){
+//		this.folderPath = folderPath;
+//	}
+	public PackageExplore(Stage stage, Skin skin, Vector2 location, Vector2 size) {
+		super(stage, skin, location, size);
 	}
 	
 	private NodeElement createRootNodeElement(){
@@ -79,5 +44,35 @@ public class PackageExplore {
 		root.retrive(0);
 		
 		return root;
+	}
+
+	@Override
+	public void onTouchDown(UIElementType type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTouchUp(UIElementType type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTouchDrag() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<NodeElement> readTreeInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Label createNodeLabel(NodeElement node) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -2,29 +2,20 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
-import hust.libgdx.tool.views.renderers.properties.ActorProperty;
-
-import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class HomeRenderer extends ApplicationRenderer implements InputProcessor {
+public class HomeRenderer extends ApplicationRenderer{
 	private Texture texture = new Texture(Gdx.files.internal("data/black.png"));
 	private Sprite sprite = new Sprite(texture);
 	private Skin skin;
@@ -56,6 +47,41 @@ public class HomeRenderer extends ApplicationRenderer implements InputProcessor 
 	
 	private void createStages(){
 		mainStage = new Stage();
+		mainStage.addListener(new InputListener(){
+
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				// TODO Auto-generated method stub
+				System.out.println("Touch down on main stage " + event.getStageX() + "-" + event.getStageY());
+				return super.touchDown(event, x, y, pointer, button);
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+					int pointer, int button) {
+				// TODO Auto-generated method stub
+				System.out.println("Touch up on main stage " + event.getStageX() + "-" + event.getStageY());
+				super.touchUp(event, x, y, pointer, button);
+			}
+
+			@Override
+			public void touchDragged(InputEvent event, float x, float y,
+					int pointer) {
+				// TODO Auto-generated method stub
+				System.out.println("Touch drag on main stage " + event.getStageX() + "-" + event.getStageY());
+				super.touchDragged(event, x, y, pointer);
+			}
+
+			@Override
+			public boolean mouseMoved(InputEvent event, float x, float y) {
+				// TODO Auto-generated method stub
+				System.out.println("Mouse move in mainstage " + event.getStageX() + "-" + event.getStageY());
+				return super.mouseMoved(event, x, y);
+			}
+			
+			
+		});
 	}
 	
 	private void loadDatas(){
@@ -77,8 +103,9 @@ public class HomeRenderer extends ApplicationRenderer implements InputProcessor 
 		size.y = Constant.PALETTE_SIZE.y * Constant.SCREEN_SIZE.y;
 		
 //		packageExplore = new PackageExplore("D:\\Example", mainStage, skin, location, size);
+		System.out.println("Pallete location: " + location);
 		
-		new Palette(mainStage, skin, location, size);
+		new Palette(mainStage, skin, location, size, controller);
 	}
 
 	private void createPropertyPart() {
@@ -189,55 +216,19 @@ public class HomeRenderer extends ApplicationRenderer implements InputProcessor 
 		
 	}
 
-	@Override
-	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public Skin getSkin() {
 		return skin;
+	}
+
+	public boolean isInEditor(Vector2 currentTouchPos) {
+		return editor.contain(currentTouchPos);
+	}
+
+	public void addNewActor(Actor newActor, float x, float y) {
+		editor.addNewActor(newActor, x, y);
+	}
+
+	public void setActorLocation(Actor newActor, float x, float y) {
+		editor.setActorLocation(newActor, x, y);
 	}
 }
