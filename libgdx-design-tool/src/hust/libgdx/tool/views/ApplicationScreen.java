@@ -2,14 +2,19 @@ package hust.libgdx.tool.views;
 
 import hust.libgdx.tool.controllers.Controller;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 
 
 public class ApplicationScreen implements Screen, InputProcessor{
 	private Controller controller;
+	private InputMultiplexer inputMultiplexer;
 	
 	public ApplicationScreen(){
+		inputMultiplexer = new InputMultiplexer(this);
+		Gdx.input.setInputProcessor(inputMultiplexer);
 	}
 	
 	public ApplicationScreen(Controller controller){
@@ -22,6 +27,10 @@ public class ApplicationScreen implements Screen, InputProcessor{
 
 	public void setController(Controller controller) {
 		this.controller = controller;
+	}
+	
+	public void addProcessor(InputProcessor processor){
+		inputMultiplexer.addProcessor(processor);
 	}
 
 	@Override

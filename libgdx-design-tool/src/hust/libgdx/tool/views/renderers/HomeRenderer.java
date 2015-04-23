@@ -40,48 +40,10 @@ public class HomeRenderer extends ApplicationRenderer{
 		createPropertyPart();
 		createOutlinePart();
 		createEditorPart();
-		
-		InputMultiplexer im = new InputMultiplexer(mainStage, editor.getStage());
-		Gdx.input.setInputProcessor(im);
 	}
 	
 	private void createStages(){
 		mainStage = new Stage();
-		mainStage.addListener(new InputListener(){
-
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				// TODO Auto-generated method stub
-				System.out.println("Touch down on main stage " + event.getStageX() + "-" + event.getStageY());
-				return super.touchDown(event, x, y, pointer, button);
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y,
-					int pointer, int button) {
-				// TODO Auto-generated method stub
-				System.out.println("Touch up on main stage " + event.getStageX() + "-" + event.getStageY());
-				super.touchUp(event, x, y, pointer, button);
-			}
-
-			@Override
-			public void touchDragged(InputEvent event, float x, float y,
-					int pointer) {
-				// TODO Auto-generated method stub
-				System.out.println("Touch drag on main stage " + event.getStageX() + "-" + event.getStageY());
-				super.touchDragged(event, x, y, pointer);
-			}
-
-			@Override
-			public boolean mouseMoved(InputEvent event, float x, float y) {
-				// TODO Auto-generated method stub
-				System.out.println("Mouse move in mainstage " + event.getStageX() + "-" + event.getStageY());
-				return super.mouseMoved(event, x, y);
-			}
-			
-			
-		});
 	}
 	
 	private void loadDatas(){
@@ -222,6 +184,14 @@ public class HomeRenderer extends ApplicationRenderer{
 
 	public boolean isInEditor(Vector2 currentTouchPos) {
 		return editor.contain(currentTouchPos);
+	}
+	
+	public Stage getStage() {
+		return mainStage;
+	}
+	
+	public Stage getEditorStage(){
+		return editor.getStage();
 	}
 
 	public void addNewActor(Actor newActor, float x, float y) {

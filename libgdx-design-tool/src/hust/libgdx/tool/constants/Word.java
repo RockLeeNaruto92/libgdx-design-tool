@@ -11,6 +11,7 @@ public class Word {
 	public static final String PREVIEW = "Preview";
 	
 	public static final String LABEL_PATTERN_NAME = "Label";
+	public static final String CHECKBOX_PATTERN_NAME = "Checkbox";
 	
 	public static final String LOCATION = "Location";
 	public static final String X = "X";

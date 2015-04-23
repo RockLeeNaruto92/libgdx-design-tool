@@ -8,13 +8,14 @@ import hust.libgdx.tool.views.HomeScreen;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class UIElementController extends Controller{
 	private static int i = 0;
 	
-	private Actor newActor;
+	private Actor currentActor;
 	private HomeScreen screen;
 	private ArrayList<Actor> actors;
 	private UIElementType selectActorType = UIElementType.EMPTY;
@@ -34,6 +35,7 @@ public class UIElementController extends Controller{
 	}
 	
 	public void onTouchUp(float x, float y){
+		System.out.println("Touch up at " + x + "-" + y);
 		if (selectActorType != UIElementType.EMPTY){
 			if (isTouchingInEditor())
 				drop(x, y);
@@ -46,27 +48,29 @@ public class UIElementController extends Controller{
 	
 	public void onTouchMove(float x, float y){
 		currentTouchPos.set(x, y);
-		
+
+		if (selectActorType == UIElementType.EMPTY) return;
 		if (isTouchingInEditor()){
 			drag(x, y);
 		}
 	}
 	
 	public void drag(float x, float y){
-		if (newActor == null)
-			newActor = createNewActor(selectActorType, screen.getRender().getSkin());
+		if (currentActor == null)
+			currentActor = createNewActor(selectActorType, screen.getRender().getSkin());
 		
 		// set new position for new actor with editor
-		screen.getRender().setActorLocation(newActor, x, y);
+		screen.getRender().setActorLocation(currentActor, x, y);
 	}
 	
 	public void drop(float x, float y){
-		newActor = createNewActor(selectActorType, screen.getRender().getSkin());
+		currentActor = createNewActor(selectActorType, screen.getRender().getSkin());
 		
 		// add new actor to list of actors
-		actors.add(newActor);
+		actors.add(currentActor);
 		// add actor to editor stage
-		screen.getRender().addNewActor(newActor, x, y);
+		screen.getRender().addNewActor(currentActor, x, y);
+		freeNewActor();
 		
 		// show property
 	}
@@ -77,33 +81,36 @@ public class UIElementController extends Controller{
 	
 	private Actor createNewActor(UIElementType type, Skin skin){
 		Actor actor = null;
-		String name;
+		String name = getDefaultName(type);
 		
 		switch (type) {
 		case LABEL:
-			actor = new Label(getDefaultName(type), skin);
+			actor = new Label(name, skin);
+			break;
+		case CHECKBOX:
+			actor = new CheckBox(name, skin);
 			break;
 
 		default:
 			break;
 		}
 		
-		if (actor != null){
-			name = getDefaultName(type);
+		if (actor != null)
 			actor.setName(name);
-		}
 		
 		return actor;
 	}
 	
 	private void freeNewActor(){
-		newActor = null;
+		currentActor = null;
 	}
 	
 	private static String getDefaultName(UIElementType type){
 		switch (type) {
 		case LABEL:
 			return Word.LABEL_PATTERN_NAME + (i++);
+		case CHECKBOX:
+			return Word.CHECKBOX_PATTERN_NAME + (i++);
 		default:
 			break;
 		}

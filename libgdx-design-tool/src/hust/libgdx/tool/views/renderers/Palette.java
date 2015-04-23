@@ -93,6 +93,7 @@ public class Palette extends CustomTree {
 			public void touchUp(InputEvent event, float x, float y,
 					int pointer, int button) {
 				System.out.println("Touch up " + event.getStageX() + "-" + event.getStageY());
+				
 				super.touchUp(event, x, y, pointer, button);
 			}
 
