@@ -1,5 +1,7 @@
 package hust.libgdx.tool.views.renderers;
 
+import java.util.ArrayList;
+
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 
@@ -202,11 +204,33 @@ public class HomeRenderer extends ApplicationRenderer{
 		editor.removeActor(actor);
 	}
 	
+	public void removeActors(ArrayList<Actor> actors) {
+		for (Actor actor : actors) {
+			editor.removeActor(actor);
+		}
+	}
+	
 	public boolean isContainActor(Actor actor){
 		return editor.contain(actor);
+	}
+	
+	public boolean isContainActors(ArrayList<Actor> actors){
+		for (Actor actor : actors) {
+			if (!isContainActor(actor))
+				return false;
+		}
+		
+		return true;
 	}
 
 	public void setActorLocation(Actor newActor, float x, float y) {
 		editor.setActorLocation(newActor, x, y);
+	}
+	
+	public void setActorsLocation(ArrayList<Actor> actors, Vector2 distance){
+		for (Actor actor : actors) {
+			actor.setX(actor.getX() + distance.x);
+			actor.setY(actor.getY() + distance.y);
+		}
 	}
 }
