@@ -32,6 +32,9 @@ public class UIElementController extends Controller{
 	public void onTouchDown(Object type, float x, float y){
 		selectActorType = (UIElementType)type;
 		currentTouchPos.set(x, y);
+		
+		// tao 1 actor moi
+		currentActor = createNewActor(selectActorType, screen.getRender().getSkin());		
 	}
 	
 	public void onTouchUp(float x, float y){
@@ -39,8 +42,10 @@ public class UIElementController extends Controller{
 		if (selectActorType != UIElementType.EMPTY){
 			if (isTouchingInEditor())
 				drop(x, y);
-			else
+			else{
+				screen.getRender().removeActor(currentActor);
 				freeNewActor();
+			}
 			
 			selectActorType = UIElementType.EMPTY;
 		}
@@ -56,8 +61,15 @@ public class UIElementController extends Controller{
 	}
 	
 	public void drag(float x, float y){
+		currentTouchPos.set(x, y);
+		
 		if (currentActor == null)
 			currentActor = createNewActor(selectActorType, screen.getRender().getSkin());
+		
+		// add actor to editor stage if actor in dragdroppart
+		if (screen.getRender().isInEditor(currentTouchPos) && !screen.getRender().isContainActor(currentActor)){
+			screen.getRender().addNewActor(currentActor, x, y);
+		}
 		
 		// set new position for new actor with editor
 		screen.getRender().setActorLocation(currentActor, x, y);
@@ -68,11 +80,11 @@ public class UIElementController extends Controller{
 		
 		// add new actor to list of actors
 		actors.add(currentActor);
-		// add actor to editor stage
-		screen.getRender().addNewActor(currentActor, x, y);
 		freeNewActor();
 		
 		// show property
+		
+		// update outline
 	}
 	
 	private boolean isTouchingInEditor(){

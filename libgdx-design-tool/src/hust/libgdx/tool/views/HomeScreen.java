@@ -40,7 +40,7 @@ public class HomeScreen extends ApplicationScreen{
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		float y = Constant.SCREEN_SIZE.y - screenY;
 		controller.onTouchMove(screenX, y);
-		System.out.println("Drag " + screenX + "-" + y);
+		
 		return super.touchDragged(screenX, screenY, pointer);
 	}
 

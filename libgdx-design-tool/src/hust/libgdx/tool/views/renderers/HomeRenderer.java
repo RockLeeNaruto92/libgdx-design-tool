@@ -197,6 +197,14 @@ public class HomeRenderer extends ApplicationRenderer{
 	public void addNewActor(Actor newActor, float x, float y) {
 		editor.addNewActor(newActor, x, y);
 	}
+	
+	public void removeActor(Actor actor){
+		editor.removeActor(actor);
+	}
+	
+	public boolean isContainActor(Actor actor){
+		return editor.contain(actor);
+	}
 
 	public void setActorLocation(Actor newActor, float x, float y) {
 		editor.setActorLocation(newActor, x, y);

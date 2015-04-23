@@ -4,20 +4,18 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.utilities.Utility;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 
-public class Editor implements InputProcessor {
+public class Editor{
 	private Stage stage;
-	private Skin skin;
 	private Rectangle bound;
 	
 	public Editor(Skin skin){
-		this.skin = skin;
 		stage = new Stage();
 		
 		bound = new Rectangle();
@@ -31,54 +29,6 @@ public class Editor implements InputProcessor {
 		return stage;
 	}
 
-	@Override
-	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public void render(){
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
@@ -87,6 +37,10 @@ public class Editor implements InputProcessor {
 	public boolean contain(Vector2 currentTouchPos) {
 		return bound.contains(currentTouchPos);
 	}
+	
+	public boolean contain(Actor actor){
+		return stage.getActors().contains(actor, true);
+	}
 
 	public void addNewActor(Actor newActor, float x, float y) {
 		// set location for new Actor 
@@ -94,9 +48,21 @@ public class Editor implements InputProcessor {
 		
 		stage.addActor(newActor);
 	}
+	
+	public void removeActor(Actor actor){
+		Array<Actor> actors = stage.getActors();
+		
+		for (Actor object : actors) {
+			if (actor == object){
+				// delete actor
+				actor.remove();
+				return;
+			}
+		}
+	}
 
 	public void setActorLocation(Actor newActor, float x, float y) {
-		newActor.setX(x + bound.x);
-		newActor.setY(y + bound.y);
+		newActor.setX(x - newActor.getWidth() / 2);
+		newActor.setY(y - newActor.getHeight() / 2);
 	}
 }
