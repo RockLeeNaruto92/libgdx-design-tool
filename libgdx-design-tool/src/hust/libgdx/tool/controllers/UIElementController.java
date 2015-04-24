@@ -294,4 +294,13 @@ public class UIElementController extends Controller {
 
 		return selectedActors;
 	}
+	
+	public void deleteSelectedActors(){
+		for (Actor actor : selectedActors)
+			actors.remove(actor);
+		
+		screen.getRender().removeActors(selectedActors);
+		selectedActors.clear();
+		displayBound(false);
+	}
 }

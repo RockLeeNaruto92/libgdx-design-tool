@@ -54,6 +54,15 @@ public class HomeScreen extends ApplicationScreen{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		controller.onTouchDown(screenX, Constant.SCREEN_SIZE.y - screenY);
+		
 		return super.touchDown(screenX, screenY, pointer, button);
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		if (keycode == 112) // delete key
+			controller.deleteSelectedActors();
+		
+		return super.keyDown(keycode);
 	}
 }
