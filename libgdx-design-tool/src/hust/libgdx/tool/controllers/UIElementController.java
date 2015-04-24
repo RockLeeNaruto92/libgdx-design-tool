@@ -81,6 +81,9 @@ public class UIElementController extends Controller {
 	 */
 	public void onTouchDown(Object type, float x, float y) {
 		setCurrentAction(Action.CREATE);
+		
+		// clear selected actors
+		selectedActors.clear();
 
 		selectActorType = (UIElementType) type;
 		currentTouchPos.set(x, y);
@@ -115,8 +118,11 @@ public class UIElementController extends Controller {
 		
 		switch (currentAction) {
 		case CREATE:
-			if (isTouchingInEditor())
+			if (isTouchingInEditor()){
 				drop(x, y);
+				selectedBound = getSelectedBound(true);
+				displayBound(true);
+			}
 			else {
 				screen.getRender().removeActors(selectedActors);
 				freeNewActor();
