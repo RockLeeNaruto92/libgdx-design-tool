@@ -1,19 +1,17 @@
 package hust.libgdx.tool.views.renderers;
 
-import java.util.ArrayList;
-
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -26,6 +24,8 @@ public class HomeRenderer extends ApplicationRenderer{
 	private Menu menu;
 	private PackageExplore packageExplore;
 	private Editor editor;
+	
+	private boolean displayBound;
 	
 	private UIElementController controller;
 	
@@ -97,18 +97,35 @@ public class HomeRenderer extends ApplicationRenderer{
 		batch.begin();
 		// draw all
 		drawMenu();
-//		drawPalette();
-//		drawProperty();
-//		drawPreview();
-//		drawOutline();
+		drawPalette();
+		drawProperty();
+		drawPreview();
+		drawOutline();
 //		drawDesign();
+		// draw bound of selected actors
+		
 		// end draw
 		batch.end();
 		
 		mainStage.act(Gdx.graphics.getDeltaTime());
 		mainStage.draw();
 		
+//		Rectangle bound = new Rectangle(100, 100, 500, 500);
+//		drawBound(bound);
+		if (displayBound) drawBound(controller.getSelectedBound(false));
+		
 		editor.render();
+	}
+	
+	private void drawBound(Rectangle bound){
+		shape.setAutoShapeType(true);
+		shape.begin();
+		shape.setColor(Color.RED);
+		shape.rect(bound.x, bound.y, bound.width, bound.height);
+		
+//		System.out.println("Draw rect " + bound);
+		
+		shape.end();
 	}
 
 	private void drawMenu() {
@@ -232,5 +249,13 @@ public class HomeRenderer extends ApplicationRenderer{
 			actor.setX(actor.getX() + distance.x);
 			actor.setY(actor.getY() + distance.y);
 		}
+	}
+
+	public boolean isDisplayBound() {
+		return displayBound;
+	}
+
+	public void setDisplayBound(boolean displayBound) {
+		this.displayBound = displayBound;
 	}
 }

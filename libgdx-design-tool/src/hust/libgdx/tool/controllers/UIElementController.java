@@ -1,11 +1,10 @@
 package hust.libgdx.tool.controllers;
 
-import java.util.ArrayList;
-
-import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.views.HomeScreen;
+
+import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -16,9 +15,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class UIElementController extends Controller{
+public class UIElementController extends Controller {
+	public enum Action {
+		CREATE, SELECTING, SELECTED, NONE
+	}
+
 	private static int i = 0;
-	
+
+	private Action currentAction = Action.NONE;
 	private Actor currentActor;
 	private ArrayList<Actor> selectedActors;
 	private HomeScreen screen;
@@ -27,104 +31,189 @@ public class UIElementController extends Controller{
 	private Vector2 currentTouchPos = new Vector2();
 	private Vector2 beforeTouchPos = new Vector2();
 	private Rectangle selectedBound;
-	
-	public UIElementController(){
+
+	public UIElementController() {
 		actors = new ArrayList<Actor>();
 		selectedActors = new ArrayList<Actor>();
 		selectedBound = new Rectangle();
 	}
-	
-	public void setScreen(HomeScreen screen){
+
+	public void setScreen(HomeScreen screen) {
 		this.screen = screen;
 	}
-	
-	private Rectangle getSelectedBound(){
-		float minX = Float.MAX_VALUE; 
-		float minY = Float.MAX_VALUE;
-		float maxX = Float.MIN_VALUE;
-		float maxY = Float.MIN_VALUE;
-		
-		for (Actor actor : selectedActors) {
-			if (actor.getX() > maxX) maxX = actor.getX();
-			if (actor.getX() < minX) minX = actor.getX();
-			if (actor.getY() > maxY) maxY = actor.getY();
-			if (actor.getY() < minY) minY = actor.getY();
+
+	/**
+	 * Get selected bound
+	 * 
+	 * @param choose
+	 *            : if (true) -> caculate selected bound from selected actors
+	 * @return
+	 */
+	public Rectangle getSelectedBound(boolean choose) {
+		if (choose) {
+			float minX = Float.MAX_VALUE;
+			float minY = Float.MAX_VALUE;
+			float maxX = Float.MIN_VALUE;
+			float maxY = Float.MIN_VALUE;
+			
+			for (Actor actor : selectedActors) {
+				if (actor.getX() + actor.getWidth() > maxX)
+					maxX = actor.getX() + actor.getWidth();
+				if (actor.getX() < minX)
+					minX = actor.getX();
+				if (actor.getY() + actor.getHeight() > maxY)
+					maxY = actor.getY() + actor.getHeight();
+				if (actor.getY() < minY)
+					minY = actor.getY();
+			}
+			
+			selectedBound.set(minX, minY, maxX - minX, maxY - minY);
 		}
-		
-		selectedBound.set(minX, minY, maxX - minX, maxY - minY);
 		return selectedBound;
 	}
-	
-	public void onTouchDown(Object type, float x, float y){
-		selectActorType = (UIElementType)type;
+
+	/**
+	 * Process when touch down on Palette node label
+	 * 
+	 * @param type
+	 * @param x
+	 * @param y
+	 */
+	public void onTouchDown(Object type, float x, float y) {
+		setCurrentAction(Action.CREATE);
+
+		selectActorType = (UIElementType) type;
 		currentTouchPos.set(x, y);
-		
+
 		// tao 1 actor moi
-		currentActor = createNewActor(selectActorType, screen.getRender().getSkin());		
+		currentActor = createNewActor(selectActorType, screen.getRender().getSkin());
 		// add to selector elements
 		selectedActors.add(currentActor);
 	}
-	
-	public void onTouchUp(float x, float y){
-		System.out.println("Touch up at " + x + "-" + y);
-		if (selectActorType != UIElementType.EMPTY){
+
+	/**
+	 * Process when touch on main stage
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void onTouchDown(float x, float y) {
+		if (!screen.getRender().isInEditor(new Vector2(x, y))) {
+			displayBound(false);
+		} else {
+			setCurrentAction(Action.SELECTING);
+			// set selected bound x, y
+			selectedBound.x = x;
+			selectedBound.y = y;
+			displayBound(true);
+		}
+	}
+
+	public void onTouchUp(float x, float y) {
+		System.out.println("Current action: " + currentAction);
+		System.out.println("Selected actors: " + selectedActors.size());
+		
+		switch (currentAction) {
+		case CREATE:
 			if (isTouchingInEditor())
 				drop(x, y);
-			else{
+			else {
 				screen.getRender().removeActors(selectedActors);
 				freeNewActor();
+				// show errors
 			}
+			setCurrentAction(Action.NONE);
+			break;
+		case SELECTING:
+			selectedBound.width = Math.abs(x - selectedBound.x);
+			selectedBound.height = Math.abs(y - selectedBound.y);
+			selectedBound.x = Math.min(x, selectedBound.x);
+			selectedBound.y = Math.min(y, selectedBound.y);
 			
-			selectActorType = UIElementType.EMPTY;
+			System.out.println("SELECTING UP: " + selectedBound);
+			// get actors in select bound
+			selectedActors = getActorsInSelectedBound();
+			System.out.println(selectedActors.size());
+			if (selectedActors.isEmpty()) {
+				displayBound(false);
+				setCurrentAction(Action.NONE);
+			} else {
+				displayBound(true);
+				selectedBound = getSelectedBound(true);
+				System.out.println(selectedBound);
+				setCurrentAction(Action.SELECTED);
+			}
+			break;
+		case SELECTED:
+			selectedBound = getSelectedBound(true);
+			System.out.println(selectedBound);
+			displayBound(true);
+			break;
+
+		default:
+			break;
 		}
 	}
-	
-	public void onTouchMove(float x, float y){
+
+	public void onTouchMove(float x, float y) {
 		beforeTouchPos.set(currentTouchPos);
 		currentTouchPos.set(x, y);
-		
-		if (selectedActors.isEmpty()) return;
-		if (isTouchingInEditor()){
+
+		switch (currentAction) {
+		case CREATE:
+			if (selectedActors.isEmpty())
+				return;
 			drag(x, y);
+			break;
+		case SELECTING:
+			selectedBound.width = x - selectedBound.x;
+			selectedBound.height = y - selectedBound.y;
+			displayBound(true);
+			break;
+		case SELECTED:
+			drag(x, y);
+			break;
+		default:
+			break;
 		}
 	}
-	
-	public void drag(float x, float y){
-		Vector2 distance = new Vector2(currentTouchPos.x - beforeTouchPos.x, currentTouchPos.y - beforeTouchPos.y);
-		
-		// add actor to editor stage if actor in dragdroppart when create new actor
-		if (screen.getRender().isInEditor(currentTouchPos) && !screen.getRender().isContainActors(selectedActors)){
-			for (Actor actor : selectedActors) {
+
+	public void drag(float x, float y) {
+		Vector2 distance = new Vector2(currentTouchPos.x - beforeTouchPos.x,
+				currentTouchPos.y - beforeTouchPos.y);
+
+		// add actor to editor stage if actor in dragdroppart when create new
+		// actor
+		if (screen.getRender().isInEditor(currentTouchPos)
+				&& !screen.getRender().isContainActors(selectedActors)) {
+			for (Actor actor : selectedActors)
 				screen.getRender().addNewActor(actor, x, y);
-			}
 		}
-		
+
 		// get distance of touch position and bottom right point of select bound
-		
+
 		// set new position for new actor with editor
 		screen.getRender().setActorsLocation(selectedActors, distance);
 	}
-	
-	public void drop(float x, float y){
-		currentActor = createNewActor(selectActorType, screen.getRender().getSkin());
-		
+
+	public void drop(float x, float y) {
 		// add new actor to list of actors
 		actors.add(currentActor);
 		freeNewActor();
-		
+
 		// show property
-		
+
 		// update outline
 	}
-	
-	private boolean isTouchingInEditor(){
+
+	private boolean isTouchingInEditor() {
 		return screen.getRender().isInEditor(currentTouchPos);
 	}
-	
-	private Actor createNewActor(UIElementType type, Skin skin){
+
+	private Actor createNewActor(UIElementType type, Skin skin) {
 		Actor actor = null;
 		final String name = getDefaultName(type);
-		
+
 		switch (type) {
 		case LABEL:
 			actor = new Label(name, skin);
@@ -136,48 +225,42 @@ public class UIElementController extends Controller{
 		default:
 			break;
 		}
-		
+
 		final Actor tempActor = actor;
-		
-		if (actor != null){
+
+		if (actor != null) {
 			actor.setName(name);
-			actor.addListener(new InputListener(){
+			actor.addListener(new InputListener() {
 				@Override
 				public boolean touchDown(InputEvent event, float x, float y,
 						int pointer, int button) {
-					currentActor = tempActor;
 					// clear all selected actors
 					selectedActors.clear();
+					// add current actor to selected actors list
+					selectedActors.add(tempActor);
+					// set action
+					setCurrentAction(Action.SELECTED);
+					selectedBound = getSelectedBound(true);
+					// display bound
+					displayBound(true);
 					
-					System.out.println("current actor: " + tempActor.getName() + "-" + selectedActors.isEmpty());
-					selectedActors.add(currentActor);
 					return super.touchDown(event, x, y, pointer, button);
-				}
-
-				@Override
-				public void enter(InputEvent event, float x, float y,
-						int pointer, Actor fromActor) {
-					System.out.println("Enter actor " + name + ": " + event.getStageX() +"-" + event.getStageY());
-					super.enter(event, x, y, pointer, fromActor);
-				}
-
-				@Override
-				public void exit(InputEvent event, float x, float y,
-						int pointer, Actor toActor) {
-					System.out.println("Exit actor " + name + ": " + event.getStageX() +"-" + event.getStageY());
-					super.exit(event, x, y, pointer, toActor);
 				}
 			});
 		}
-		
+
 		return actor;
 	}
-	
-	private void freeNewActor(){
+
+	private void freeNewActor() {
 		currentActor = null;
 	}
-	
-	private static String getDefaultName(UIElementType type){
+
+	private void displayBound(boolean display) {
+		screen.getRender().setDisplayBound(display);
+	}
+
+	private static String getDefaultName(UIElementType type) {
 		switch (type) {
 		case LABEL:
 			return Word.LABEL_PATTERN_NAME + (i++);
@@ -186,7 +269,23 @@ public class UIElementController extends Controller{
 		default:
 			break;
 		}
-		
+
 		return null;
+	}
+
+	public void setCurrentAction(Action action) {
+		currentAction = action;
+	}
+
+	private ArrayList<Actor> getActorsInSelectedBound() {
+		selectedActors.clear();
+		for (Actor actor : actors) {
+			if (selectedBound.contains(actor.getX(), actor.getY())
+					&& selectedBound.contains(actor.getX() + actor.getWidth(),
+							actor.getY() + actor.getHeight()))
+				selectedActors.add(actor);
+		}
+
+		return selectedActors;
 	}
 }

@@ -23,6 +23,12 @@ public class Editor{
 		bound.y = Utility.getActualValue(Constant.DESIGN_LOCATION.y, false);
 		bound.width = Utility.getActualValue(Constant.DESIGN_SIZE.x, true);
 		bound.height = Utility.getActualValue(Constant.DESIGN_SIZE.y, false);
+		
+		System.out.println("Editor : " + bound);
+	}
+	
+	public Rectangle getBound(){
+		return bound;
 	}
 	
 	public Stage getStage(){
