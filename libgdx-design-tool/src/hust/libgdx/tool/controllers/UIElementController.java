@@ -25,6 +25,7 @@ public class UIElementController extends Controller{
 	private ArrayList<Actor> actors;
 	private UIElementType selectActorType = UIElementType.EMPTY;
 	private Vector2 currentTouchPos = new Vector2();
+	private Vector2 beforeTouchPos = new Vector2();
 	private Rectangle selectedBound;
 	
 	public UIElementController(){
@@ -79,6 +80,7 @@ public class UIElementController extends Controller{
 	}
 	
 	public void onTouchMove(float x, float y){
+		beforeTouchPos.set(currentTouchPos);
 		currentTouchPos.set(x, y);
 		
 		if (selectedActors.isEmpty()) return;
@@ -88,7 +90,7 @@ public class UIElementController extends Controller{
 	}
 	
 	public void drag(float x, float y){
-		currentTouchPos.set(x, y);
+		Vector2 distance = new Vector2(currentTouchPos.x - beforeTouchPos.x, currentTouchPos.y - beforeTouchPos.y);
 		
 		// add actor to editor stage if actor in dragdroppart when create new actor
 		if (screen.getRender().isInEditor(currentTouchPos) && !screen.getRender().isContainActors(selectedActors)){
@@ -100,7 +102,7 @@ public class UIElementController extends Controller{
 		// get distance of touch position and bottom right point of select bound
 		
 		// set new position for new actor with editor
-		screen.getRender().setActorLocation(currentActor, x, y, currentTouchPos);
+		screen.getRender().setActorsLocation(selectedActors, distance);
 	}
 	
 	public void drop(float x, float y){
@@ -144,17 +146,12 @@ public class UIElementController extends Controller{
 				public boolean touchDown(InputEvent event, float x, float y,
 						int pointer, int button) {
 					currentActor = tempActor;
-					System.out.println("current actor: " + tempActor.getName());
+					// clear all selected actors
+					selectedActors.clear();
+					
+					System.out.println("current actor: " + tempActor.getName() + "-" + selectedActors.isEmpty());
+					selectedActors.add(currentActor);
 					return super.touchDown(event, x, y, pointer, button);
-				}
-
-				@Override
-				public boolean mouseMoved(InputEvent event, float x, float y) {
-					// TODO : Change Mouse symbol
-					onTouchMove(event.getStageX(), event.getStageY());
-					// TODO : 
-					System.out.println("Mouse moved in actor " + name + ": " + event.getStageX() +"-" + event.getStageY());
-					return super.mouseMoved(event, x, y);
 				}
 
 				@Override
