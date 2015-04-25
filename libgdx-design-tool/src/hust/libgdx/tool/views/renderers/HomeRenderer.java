@@ -102,7 +102,6 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawPreview();
 		drawOutline();
 //		drawDesign();
-		// draw bound of selected actors
 		
 		// end draw
 		batch.end();
@@ -110,8 +109,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		mainStage.act(Gdx.graphics.getDeltaTime());
 		mainStage.draw();
 		
-//		Rectangle bound = new Rectangle(100, 100, 500, 500);
-//		drawBound(bound);
+		// draw bound of selected elector
 		if (displayBound) drawBound(controller.getSelectedBound(false));
 		
 		editor.render();
