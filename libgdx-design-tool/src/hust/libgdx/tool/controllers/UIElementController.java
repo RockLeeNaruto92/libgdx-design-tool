@@ -387,8 +387,11 @@ public class UIElementController extends Controller {
 			actor.setY(y);
 			break;
 		case W:
+			actor.setWidth(actor.getWidth() + actor.getX() - x);
+			actor.setX(x);
 			break;
 		case E:
+			actor.setWidth(x - actor.getX());
 			break;
 		case NE:
 			break;
