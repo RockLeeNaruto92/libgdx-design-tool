@@ -87,6 +87,7 @@ public class UIElementController extends Controller {
 
 		selectActorType = (UIElementType) type;
 		currentTouchPos.set(x, y);
+		System.out.println("Set x, y on touch pos");
 
 		// tao 1 actor moi
 		currentActor = createNewActor(selectActorType, screen.getRender().getSkin());
@@ -101,6 +102,7 @@ public class UIElementController extends Controller {
 	 * @param y
 	 */
 	public void onTouchDown(float x, float y) {
+		System.out.println("Touch down pos: " + x + "-" + y);
 		if (!screen.getRender().isInEditor(new Vector2(x, y))) {
 			displayBound(false);
 		} else {
@@ -108,6 +110,7 @@ public class UIElementController extends Controller {
 			// set selected bound x, y
 			selectedBound.x = x;
 			selectedBound.y = y;
+			currentTouchPos.set(x, y);
 			displayBound(true);
 		}
 	}
@@ -130,6 +133,7 @@ public class UIElementController extends Controller {
 			}
 			setCurrentAction(Action.NONE);
 			break;
+			
 		case SELECTING:
 			selectedBound.width = Math.abs(x - selectedBound.x);
 			selectedBound.height = Math.abs(y - selectedBound.y);
@@ -150,6 +154,7 @@ public class UIElementController extends Controller {
 				setCurrentAction(Action.SELECTED);
 			}
 			break;
+			
 		case SELECTED:
 			selectedBound = getSelectedBound(true);
 			System.out.println(selectedBound);
@@ -164,6 +169,9 @@ public class UIElementController extends Controller {
 	public void onTouchMove(float x, float y) {
 		beforeTouchPos.set(currentTouchPos);
 		currentTouchPos.set(x, y);
+		System.out.println("before touch: " + beforeTouchPos);
+		System.out.println("Current touch: " + currentTouchPos);
+		System.out.println("-------------------------------");
 
 		switch (currentAction) {
 		case CREATE:
@@ -178,6 +186,7 @@ public class UIElementController extends Controller {
 			break;
 		case SELECTED:
 			drag(x, y);
+//			selectedBound = getSelectedBound(true);
 			break;
 		default:
 			break;
