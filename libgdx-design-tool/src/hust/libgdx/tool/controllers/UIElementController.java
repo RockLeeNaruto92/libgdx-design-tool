@@ -383,8 +383,8 @@ public class UIElementController extends Controller {
 			actor.setHeight(y - actor.getY());
 			break;
 		case S:
-			actor.setY(y);
 			actor.setHeight(actor.getHeight() + actor.getY() - y);
+			actor.setY(y);
 			break;
 		case W:
 			break;
