@@ -394,12 +394,24 @@ public class UIElementController extends Controller {
 			actor.setWidth(x - actor.getX());
 			break;
 		case NE:
+			actor.setWidth(x - actor.getX());
+			actor.setHeight(y - actor.getY());
 			break;
 		case NW:
+			actor.setHeight(y - actor.getY());
+			actor.setWidth(actor.getWidth() + actor.getX() - x);
+			actor.setX(x);
 			break;
 		case SE:
+			actor.setHeight(actor.getHeight() + actor.getY() - y);
+			actor.setY(y);
+			actor.setWidth(x - actor.getX());
 			break;
-		case SW: 
+		case SW:
+			actor.setHeight(actor.getHeight() + actor.getY() - y);
+			actor.setY(y);
+			actor.setWidth(actor.getWidth() + actor.getX() - x);
+			actor.setX(x);
 			break;
 		default:
 			break;
