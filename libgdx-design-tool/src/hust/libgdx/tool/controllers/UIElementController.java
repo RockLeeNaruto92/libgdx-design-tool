@@ -20,7 +20,7 @@ public class UIElementController extends Controller {
 		CREATE, SELECTING, SELECTED, NONE, RESIZE
 	}
 	
-	enum MOUSE_POSITION {
+	enum Direction {
 		N, S, E, W, 
 		NE, NW, SE, SW, CENTER, NONE
 	}
@@ -28,6 +28,7 @@ public class UIElementController extends Controller {
 	private static int i = 0;
 
 	private Action currentAction = Action.NONE;
+	private Direction resizeDirection = Direction.CENTER;
 	private Actor currentActor;
 	private ArrayList<Actor> selectedActors;
 	private HomeScreen screen;
@@ -155,10 +156,15 @@ public class UIElementController extends Controller {
 				setCurrentAction(Action.SELECTED);
 			}
 			break;
+			
 		case SELECTED:
 			selectedBound = getSelectedBound(true);
 			System.out.println(selectedBound);
 			displayBound(true);
+			break;
+			
+		case RESIZE:
+			setCurrentAction(Action.NONE);
 			break;
 
 		default:
@@ -183,6 +189,9 @@ public class UIElementController extends Controller {
 			break;
 		case SELECTED:
 			drag(x, y);
+			break;
+		case RESIZE:
+			resizeActor(currentActor, x, y);
 			break;
 		default:
 			break;
@@ -246,17 +255,17 @@ public class UIElementController extends Controller {
 				public boolean touchDown(InputEvent event, float x, float y,
 						int pointer, int button) {
 					// check mouse position
-					System.out.println("Mouse position: " + getMousePositionRelativeActor(tempActor, x, y));
-					
-					// clear all selected actors
-					selectedActors.clear();
-					// add current actor to selected actors list
-//					selectedActors.add(tempActor);
-					// set action
-					setCurrentAction(Action.SELECTING);
-//					selectedBound = getSelectedBound(true);
-					// display bound
-					displayBound(true);
+					resizeDirection = getMousePositionRelativeActor(tempActor, x, y);
+					if (resizeDirection != Direction.CENTER){
+						setCurrentAction(Action.RESIZE);
+						currentActor = tempActor;
+						setResizeDirection(resizeDirection);
+					} else {
+						
+						selectedActors.clear();
+						setCurrentAction(Action.SELECTING);
+						displayBound(true);
+					}
 					
 					return super.touchDown(event, x, y, pointer, button);
 				}
@@ -299,6 +308,10 @@ public class UIElementController extends Controller {
 	public void setCurrentAction(Action action) {
 		currentAction = action;
 	}
+	
+	private void setResizeDirection(Direction resizeDirection){
+		this.resizeDirection = resizeDirection;
+	}
 
 	/**
 	 * if contain --> get all actor that is contained by selectBound
@@ -337,23 +350,52 @@ public class UIElementController extends Controller {
 		displayBound(false);
 	}
 	
-	private MOUSE_POSITION getMousePositionRelativeActor(Actor actor, float x, float y){
+	private Direction getMousePositionRelativeActor(Actor actor, float x, float y){
 		float width = actor.getWidth();
 		float height = actor.getHeight();
 		float pad = 10;
 		
 		if (x < pad)
-			if (y < pad) return MOUSE_POSITION.SW;
-			else if (y > height - pad) return MOUSE_POSITION.NW;
-			else return MOUSE_POSITION.W;
+			if (y < pad) return Direction.SW;
+			else if (y > height - pad) return Direction.NW;
+			else return Direction.W;
 		else if (x > width - pad)
-			if (y < pad) return MOUSE_POSITION.SE;
-			else if (y > height - pad) return MOUSE_POSITION.NE;
-			else return MOUSE_POSITION.E;
+			if (y < pad) return Direction.SE;
+			else if (y > height - pad) return Direction.NE;
+			else return Direction.E;
 		else 
-			if (y < pad) return MOUSE_POSITION.S;
-			else if (y > height - pad) return MOUSE_POSITION.N;
-			else return MOUSE_POSITION.CENTER;
+			if (y < pad) return Direction.S;
+			else if (y > height - pad) return Direction.N;
+			else return Direction.CENTER;
 	}
 	
+	private void resizeActor(Actor actor, float x, float y){
+		switch (resizeDirection) {
+		case N:
+			actor.setHeight(y - actor.getY());
+			break;
+		case S:
+			actor.setY(y);
+			actor.setHeight(actor.getHeight() + actor.getY() - y);
+			break;
+		case W:
+			break;
+		case E:
+			break;
+		case NE:
+			break;
+		case NW:
+			break;
+		case SE:
+			break;
+		case SW: 
+			break;
+		default:
+			break;
+		}
+		
+		System.out.println(actor.getHeight());
+		
+		selectedBound = getSelectedBound(true);
+	}
 }
