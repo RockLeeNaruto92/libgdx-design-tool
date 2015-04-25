@@ -16,8 +16,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class UIElementController extends Controller {
-	public enum Action {
-		CREATE, SELECTING, SELECTED, NONE
+	enum Action {
+		CREATE, SELECTING, SELECTED, NONE, RESIZE
+	}
+	
+	enum MOUSE_POSITION {
+		N, S, E, W, 
+		NE, NW, SE, SW, CENTER, NONE
 	}
 
 	private static int i = 0;
@@ -113,9 +118,6 @@ public class UIElementController extends Controller {
 	}
 
 	public void onTouchUp(float x, float y) {
-		System.out.println("Current action: " + currentAction);
-		System.out.println("Selected actors: " + selectedActors.size());
-		
 		switch (currentAction) {
 		case CREATE:
 			if (isTouchingInEditor()){
@@ -240,6 +242,9 @@ public class UIElementController extends Controller {
 				@Override
 				public boolean touchDown(InputEvent event, float x, float y,
 						int pointer, int button) {
+					// check mouse position
+					System.out.println("Mouse position: " + getMousePositionRelativeActor(tempActor, x, y));
+					
 					// clear all selected actors
 					selectedActors.clear();
 					// add current actor to selected actors list
@@ -251,6 +256,15 @@ public class UIElementController extends Controller {
 					displayBound(true);
 					
 					return super.touchDown(event, x, y, pointer, button);
+				}
+
+				@Override
+				public boolean mouseMoved(InputEvent event, float x, float y) {
+					// TODO 
+					// set cursor image
+					
+					
+					return super.mouseMoved(event, x, y);
 				}
 			});
 		}
@@ -302,5 +316,24 @@ public class UIElementController extends Controller {
 		screen.getRender().removeActors(selectedActors);
 		selectedActors.clear();
 		displayBound(false);
+	}
+	
+	private MOUSE_POSITION getMousePositionRelativeActor(Actor actor, float x, float y){
+		float width = actor.getWidth();
+		float height = actor.getHeight();
+		float pad = 10;
+		
+		if (x < pad)
+			if (y < pad) return MOUSE_POSITION.SW;
+			else if (y > height - pad) return MOUSE_POSITION.NW;
+			else return MOUSE_POSITION.W;
+		else if (x > width - pad)
+			if (y < pad) return MOUSE_POSITION.SE;
+			else if (y > height - pad) return MOUSE_POSITION.NE;
+			else return MOUSE_POSITION.E;
+		else 
+			if (y < pad) return MOUSE_POSITION.S;
+			else if (y > height - pad) return MOUSE_POSITION.N;
+			else return MOUSE_POSITION.CENTER;
 	}
 }
