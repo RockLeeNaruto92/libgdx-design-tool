@@ -140,9 +140,12 @@ public class UIElementController extends Controller {
 			
 			System.out.println("SELECTING UP: " + selectedBound);
 			// get actors in select bound
-			selectedActors = getActorsInSelectedBound();
-			System.out.println(selectedActors.size());
-			if (selectedActors.isEmpty()) {
+			selectedActors = getActorsInSelectedBound(true);
+			
+			if (selectedActors.isEmpty())
+				selectedActors = getActorsInSelectedBound(false);
+			
+			if (selectedActors.isEmpty()){
 				displayBound(false);
 				setCurrentAction(Action.NONE);
 			} else {
@@ -248,10 +251,10 @@ public class UIElementController extends Controller {
 					// clear all selected actors
 					selectedActors.clear();
 					// add current actor to selected actors list
-					selectedActors.add(tempActor);
+//					selectedActors.add(tempActor);
 					// set action
-					setCurrentAction(Action.SELECTED);
-					selectedBound = getSelectedBound(true);
+					setCurrentAction(Action.SELECTING);
+//					selectedBound = getSelectedBound(true);
 					// display bound
 					displayBound(true);
 					
@@ -297,14 +300,30 @@ public class UIElementController extends Controller {
 		currentAction = action;
 	}
 
-	private ArrayList<Actor> getActorsInSelectedBound() {
+	/**
+	 * if contain --> get all actor that is contained by selectBound
+	 * else get actor contain selectbound
+	 * @param contain
+	 * @return
+	 */
+	private ArrayList<Actor> getActorsInSelectedBound(boolean contain) {
 		selectedActors.clear();
-		for (Actor actor : actors) {
-			if (selectedBound.contains(actor.getX(), actor.getY())
-					&& selectedBound.contains(actor.getX() + actor.getWidth(),
-							actor.getY() + actor.getHeight()))
-				selectedActors.add(actor);
-		}
+		if (contain)
+			for (Actor actor : actors) {
+				if (selectedBound.contains(actor.getX(), actor.getY())
+						&& selectedBound.contains(
+								actor.getX() + actor.getWidth(), actor.getY()
+										+ actor.getHeight()))
+					selectedActors.add(actor);
+			}
+		else 
+			for (Actor actor : actors){
+				Rectangle bound = new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
+				if (bound.contains(selectedBound)){
+					selectedActors.add(actor);
+					break;
+				}
+			}
 
 		return selectedActors;
 	}
@@ -336,4 +355,5 @@ public class UIElementController extends Controller {
 			else if (y > height - pad) return MOUSE_POSITION.N;
 			else return MOUSE_POSITION.CENTER;
 	}
+	
 }
