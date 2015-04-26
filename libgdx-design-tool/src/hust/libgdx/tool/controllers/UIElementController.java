@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -207,15 +208,20 @@ public class UIElementController extends Controller {
 	}
 
 	public void drag(float x, float y) {
-		Vector2 distance = new Vector2(currentTouchPos.x - beforeTouchPos.x,
-				currentTouchPos.y - beforeTouchPos.y);
+//		Vector2 distance = new Vector2(currentTouchPos.x - beforeTouchPos.x,
+//				currentTouchPos.y - beforeTouchPos.y);
+		Vector2 relativeCurrentPoint = screen.getRender().getRelativePointWithEditor(currentTouchPos.x, currentTouchPos.y);
+		Vector2 relativeBeforePoint = screen.getRender().getRelativePointWithEditor(beforeTouchPos.x, beforeTouchPos.y);
+		Vector2 distance = new Vector2(relativeCurrentPoint.x - relativeBeforePoint.x, relativeCurrentPoint.y - relativeBeforePoint.y);
 
-		// add actor to editor stage if actor in dragdroppart when create new
-		// actor
+		// add actor to editor stage if actor in dragdroppart when create new actor
 		if (screen.getRender().isInEditor(currentTouchPos)
 				&& !screen.getRender().isContainActors(selectedActors)) {
-			for (Actor actor : selectedActors)
-				screen.getRender().addNewActor(actor, x, y);
+			for (Actor actor : selectedActors){
+				
+				screen.getRender().addNewActor(actor, relativeCurrentPoint.x, relativeCurrentPoint.y);
+				System.out.println("Relative point: " + relativeCurrentPoint);
+			}
 		}
 
 		// get distance of touch position and bottom right point of select bound

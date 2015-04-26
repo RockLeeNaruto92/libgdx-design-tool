@@ -256,4 +256,8 @@ public class HomeRenderer extends ApplicationRenderer{
 	public void setDisplayBound(boolean displayBound) {
 		this.displayBound = displayBound;
 	}
+	
+	public Vector2 getRelativePointWithEditor(float screenX, float screenY){
+		return editor.getStagePoint(screenX, screenY);
+	}
 }
