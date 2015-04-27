@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -108,13 +107,18 @@ public class UIElementController extends Controller {
 	 * @param y
 	 */
 	public void onTouchDown(float x, float y) {
-		screen.getRender().setSelecting(true);
 		if (!screen.getRender().isInEditor(new Vector2(x, y))) {
 			displayBound(false);
 		} else {
-			setCurrentAction(Action.SELECTING);
-			// set selected bound x, y
-			selectedBound.set(x, y, 0, 0);
+			if (selectedBound.contains(x, y) && currentAction == Action.SELECTED){
+				screen.getRender().setSelecting(false);
+			} else {
+				screen.getRender().setSelecting(true);
+				setCurrentAction(Action.SELECTING);
+				// set selected bound x, y
+				selectedBound.set(x, y, 0, 0);
+			}
+			
 			currentTouchPos.set(x, y);
 			displayBound(true);
 		}
@@ -134,7 +138,7 @@ public class UIElementController extends Controller {
 				freeNewActor();
 				// show errors
 			}
-			setCurrentAction(Action.NONE);
+			setCurrentAction(Action.SELECTED);
 			break;
 			
 		case SELECTING:
@@ -166,6 +170,7 @@ public class UIElementController extends Controller {
 			
 		case SELECTED:
 			selectedBound = getSelectedBound(true);
+			screen.getRender().setSelecting(false);
 			displayBound(true);
 			break;
 			
@@ -181,11 +186,10 @@ public class UIElementController extends Controller {
 	public void onTouchMove(float x, float y) {
 		beforeTouchPos.set(currentTouchPos);
 		currentTouchPos.set(x, y);
-
+		
 		switch (currentAction) {
 		case CREATE:
-			if (selectedActors.isEmpty())
-				return;
+			if (selectedActors.isEmpty()) return;
 			drag(x, y);
 			break;
 		case SELECTING:
@@ -195,7 +199,7 @@ public class UIElementController extends Controller {
 			break;
 		case SELECTED:
 			drag(x, y);
-//			selectedBound = getSelectedBound(true);
+			selectedBound = getSelectedBound(true);
 			break;
 		case RESIZE:
 			resizeActor(currentActor, x, y);
@@ -264,8 +268,7 @@ public class UIElementController extends Controller {
 						setCurrentAction(Action.RESIZE);
 						currentActor = tempActor;
 						setResizeDirection(resizeDirection);
-					} else {
-						
+					} else if (currentAction != Action.SELECTED){
 						selectedActors.clear();
 						setCurrentAction(Action.SELECTING);
 						displayBound(true);
