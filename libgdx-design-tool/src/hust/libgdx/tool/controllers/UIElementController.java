@@ -108,13 +108,13 @@ public class UIElementController extends Controller {
 	 * @param y
 	 */
 	public void onTouchDown(float x, float y) {
+		screen.getRender().setSelecting(true);
 		if (!screen.getRender().isInEditor(new Vector2(x, y))) {
 			displayBound(false);
 		} else {
 			setCurrentAction(Action.SELECTING);
 			// set selected bound x, y
-			selectedBound.x = x;
-			selectedBound.y = y;
+			selectedBound.set(x, y, 0, 0);
 			currentTouchPos.set(x, y);
 			displayBound(true);
 		}
@@ -127,6 +127,7 @@ public class UIElementController extends Controller {
 				drop(x, y);
 				selectedBound = getSelectedBound(true);
 				displayBound(true);
+				screen.getRender().setSelecting(false);
 			}
 			else {
 				screen.getRender().removeActors(selectedActors);
@@ -137,10 +138,13 @@ public class UIElementController extends Controller {
 			break;
 			
 		case SELECTING:
-			selectedBound.width = Math.abs(x - selectedBound.x);
-			selectedBound.height = Math.abs(y - selectedBound.y);
-			selectedBound.x = Math.min(x, selectedBound.x);
-			selectedBound.y = Math.min(y, selectedBound.y);
+			Vector2 currentRelativePoint = screen.getRender().getRelativePointWithEditor(x, y);
+			Vector2 beforeRelativePoint = screen.getRender().getRelativePointWithEditor(selectedBound.x, selectedBound.y);
+			
+			selectedBound.width = Math.abs(currentRelativePoint.x - beforeRelativePoint.x);
+			selectedBound.height = Math.abs(currentRelativePoint.y - beforeRelativePoint.y);
+			selectedBound.x = Math.min(currentRelativePoint.x, beforeRelativePoint.x);
+			selectedBound.y = Math.min(currentRelativePoint.y, beforeRelativePoint.y);
 			
 			// get actors in select bound
 			selectedActors = getActorsInSelectedBound(true);
@@ -153,6 +157,8 @@ public class UIElementController extends Controller {
 				setCurrentAction(Action.NONE);
 			} else {
 				displayBound(true);
+				screen.getRender().setSelecting(false);
+				
 				selectedBound = getSelectedBound(true);
 				setCurrentAction(Action.SELECTED);
 			}
@@ -200,15 +206,13 @@ public class UIElementController extends Controller {
 	}
 
 	public void drag(float x, float y) {
-//		Vector2 distance = new Vector2(currentTouchPos.x - beforeTouchPos.x,
-//				currentTouchPos.y - beforeTouchPos.y);
 		Vector2 relativeCurrentPoint = screen.getRender().getRelativePointWithEditor(currentTouchPos.x, currentTouchPos.y);
 		Vector2 relativeBeforePoint = screen.getRender().getRelativePointWithEditor(beforeTouchPos.x, beforeTouchPos.y);
 		Vector2 distance = new Vector2(relativeCurrentPoint.x - relativeBeforePoint.x, relativeCurrentPoint.y - relativeBeforePoint.y);
 
 		// add actor to editor stage if actor in dragdroppart when create new actor
 		if (screen.getRender().isInEditor(currentTouchPos) && !screen.getRender().isContainActors(selectedActors)) {
-			for (Actor actor : selectedActors) 
+			for (Actor actor : selectedActors)
 				screen.getRender().addNewActor(actor, relativeCurrentPoint.x, relativeCurrentPoint.y);
 		}
 		

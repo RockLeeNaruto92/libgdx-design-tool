@@ -4,9 +4,11 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.utilities.Utility;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -20,6 +22,7 @@ public class Editor{
 	private Rectangle bound;
 	private OrthographicCamera camera;
 	private Sprite sprite;
+	private ShapeRenderer shape;
 	
 	public Editor(Skin skin){
 		sprite = new Sprite(new Texture(Gdx.files.internal("data/black.png")));
@@ -31,6 +34,8 @@ public class Editor{
 		bound.y = Utility.getActualValue(Constant.DESIGN_LOCATION.y, false);
 		bound.width = Utility.getActualValue(Constant.DESIGN_SIZE.x, true);
 		bound.height = Utility.getActualValue(Constant.DESIGN_SIZE.y, false);
+		
+		shape = new ShapeRenderer();
 	}
 	
 	private void createStageWithCamera(){
@@ -53,13 +58,15 @@ public class Editor{
 	}
 
 	public void render(){
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
 		stage.getBatch().begin();
 		
 		stage.getBatch().draw(sprite.getTexture(), 0, 0, stage.getWidth(), stage.getHeight());
 		
 		stage.getBatch().end();
+		
+		camera.update();
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
 
 	public boolean contains(Vector2 currentTouchPos) {
@@ -106,5 +113,14 @@ public class Editor{
 	
 	protected void zoomout(){
 		camera.zoom -= Constant.CAMERA_ZOOM_STEP;
+	}
+
+	protected void drawBound(Rectangle bound) {
+		shape.setAutoShapeType(true);
+		shape.setProjectionMatrix(camera.combined);
+		shape.begin();
+		shape.setColor(Color.RED);
+		shape.rect(bound.x, bound.y, bound.width, bound.height);
+		shape.end();
 	}
 }

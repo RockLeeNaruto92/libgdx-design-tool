@@ -26,6 +26,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	private Editor editor;
 	
 	private boolean displayBound;
+	private boolean isSelecting = true;
 	
 	private UIElementController controller;
 	
@@ -111,7 +112,12 @@ public class HomeRenderer extends ApplicationRenderer{
 		mainStage.draw();
 		
 		// draw bound of selected elector
-		if (displayBound) drawBound(controller.getSelectedBound(false));
+		if (displayBound) drawBound(controller.getSelectedBound(false), isSelecting);
+	}
+
+	private void drawBound(Rectangle bound, boolean isSelecting){
+		if (isSelecting) drawBound(bound);
+		else editor.drawBound(bound);
 	}
 	
 	private void drawBound(Rectangle bound){
@@ -119,8 +125,6 @@ public class HomeRenderer extends ApplicationRenderer{
 		shape.begin();
 		shape.setColor(Color.RED);
 		shape.rect(bound.x, bound.y, bound.width, bound.height);
-		
-//		System.out.println("Draw rect " + bound);
 		
 		shape.end();
 	}
@@ -133,7 +137,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawBound.x = 0;
 		drawBound.y = Constant.SCREEN_SIZE.y - drawBound.height;
 
-		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+//		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+		drawBound(drawBound);
 	}
 
 	private void drawPalette() {
@@ -144,7 +149,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawBound.x = Constant.SCREEN_SIZE.x * Constant.PALETTE_LOCATION.x;
 		drawBound.y = Constant.SCREEN_SIZE.y * Constant.PALETTE_LOCATION.y;
 
-		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+//		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+		drawBound(drawBound);
 		
 	}
 
@@ -156,7 +162,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawBound.x = Constant.SCREEN_SIZE.x * Constant.PROPERTY_LOCATION.x;
 		drawBound.y = Constant.SCREEN_SIZE.y * Constant.PROPERTY_LOCATION.y;
 
-		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+//		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+		drawBound(drawBound);
 	}
 
 	private void drawPreview() {
@@ -167,7 +174,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawBound.x = Constant.SCREEN_SIZE.x * Constant.PREVIEW_LOCATION.x;
 		drawBound.y = Constant.SCREEN_SIZE.y * Constant.PREVIEW_LOCATION.y;
 
-		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+//		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+		drawBound(drawBound);
 	}
 
 	private void drawOutline() {
@@ -178,7 +186,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawBound.x = Constant.SCREEN_SIZE.x * Constant.OUTLINE_LOCATION.x;
 		drawBound.y = Constant.SCREEN_SIZE.y * Constant.OUTLINE_LOCATION.y;
 
-		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+//		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+		drawBound(drawBound);
 		
 	}
 
@@ -190,8 +199,13 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawBound.x = Constant.SCREEN_SIZE.x * Constant.DESIGN_LOCATION.x;
 		drawBound.y = Constant.SCREEN_SIZE.y * Constant.DESIGN_LOCATION.y;
 
-		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+//		batch.draw(sprite, drawBound.x, drawBound.y, drawBound.width, drawBound.height);
+		drawBound(drawBound);
 		
+	}
+	
+	public void setSelecting(boolean isSelecting) {
+		this.isSelecting = isSelecting;
 	}
 
 	public Skin getSkin() {
