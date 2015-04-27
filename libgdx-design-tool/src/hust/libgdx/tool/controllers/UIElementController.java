@@ -268,6 +268,7 @@ public class UIElementController extends Controller {
 						setCurrentAction(Action.RESIZE);
 						currentActor = tempActor;
 						setResizeDirection(resizeDirection);
+						screen.getRender().setSelecting(false);
 					} else if (currentAction != Action.SELECTED){
 						selectedActors.clear();
 						setCurrentAction(Action.SELECTING);
@@ -381,6 +382,11 @@ public class UIElementController extends Controller {
 	}
 	
 	private void resizeActor(Actor actor, float x, float y){
+		Vector2 relativePoint = screen.getRender().getRelativePointWithEditor(x, y);
+		
+		x = relativePoint.x;
+		y = relativePoint.y;
+		
 		switch (resizeDirection) {
 		case N:
 			actor.setHeight(y - actor.getY());
