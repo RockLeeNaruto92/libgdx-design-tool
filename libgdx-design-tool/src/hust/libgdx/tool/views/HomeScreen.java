@@ -59,10 +59,15 @@ public class HomeScreen extends ApplicationScreen{
 	}
 
 	@Override
-	public boolean keyDown(int keycode) {
-		if (keycode == 112) // delete key
-			controller.deleteSelectedActors();
+	public boolean keyTyped(char character) {
+		if (character == '='){
+			controller.zoom(true);
+		}
+		else if (character == '-'){
+			controller.zoom(false);
+		}
 		
-		return super.keyDown(keycode);
+		return super.keyTyped(character);
 	}
+	
 }

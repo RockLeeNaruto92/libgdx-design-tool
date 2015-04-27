@@ -25,6 +25,8 @@ public class Constant {
 	
 	public static Vector2 SUB_MENU_SIZE = new Vector2(0.3f, 0f);
 	
+	public static float CAMERA_ZOOM_STEP = 0.1f;
+	
 	public static float GROUP_PAD_LEFT = 20f;
 	public static float HORIZONTAL_GROUP_SPACE = 20f;
 	public static float VERTICAL_GROUP_SPACE = 1f;

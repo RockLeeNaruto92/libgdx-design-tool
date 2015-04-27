@@ -369,6 +369,10 @@ public class UIElementController extends Controller {
 			else return Direction.CENTER;
 	}
 	
+	public void zoom(boolean zoomin){
+		screen.getRender().zoomEditor(zoomin);
+	}
+	
 	private void resizeActor(Actor actor, float x, float y){
 		switch (resizeDirection) {
 		case N:

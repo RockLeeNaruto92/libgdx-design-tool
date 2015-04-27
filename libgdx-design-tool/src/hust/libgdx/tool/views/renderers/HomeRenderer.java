@@ -94,6 +94,7 @@ public class HomeRenderer extends ApplicationRenderer{
 
 	@Override
 	public void render() {
+		editor.render();
 		batch.begin();
 		// draw all
 		drawMenu();
@@ -111,8 +112,6 @@ public class HomeRenderer extends ApplicationRenderer{
 		
 		// draw bound of selected elector
 		if (displayBound) drawBound(controller.getSelectedBound(false));
-		
-		editor.render();
 	}
 	
 	private void drawBound(Rectangle bound){
@@ -259,5 +258,10 @@ public class HomeRenderer extends ApplicationRenderer{
 	
 	public Vector2 getRelativePointWithEditor(float screenX, float screenY){
 		return editor.getStagePoint(screenX, screenY);
+	}
+
+	public void zoomEditor(boolean zoomin) {
+		if (zoomin) editor.zoomin();
+		else editor.zoomout();
 	}
 }

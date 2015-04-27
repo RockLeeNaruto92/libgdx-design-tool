@@ -37,14 +37,11 @@ public class Editor{
 		stage = new Stage();
 		
 		camera = new OrthographicCamera(stage.getWidth(), stage.getHeight());
-		camera.zoom += 2;
-		camera.update();
 		camera.setToOrtho(false);
 		camera.project(camera.position);
 		
 		stage.setDebugAll(true);
 		stage.getViewport().setCamera(camera);
-		
 	}
 	
 	public Rectangle getBound(){
@@ -101,5 +98,13 @@ public class Editor{
 		Vector3 point = camera.unproject(new Vector3(screenX, Constant.SCREEN_SIZE.y - screenY, 0));
 		
 		return new Vector2(point.x, point.y);
+	}
+	
+	protected void zoomin(){
+		camera.zoom += Constant.CAMERA_ZOOM_STEP;
+	}
+	
+	protected void zoomout(){
+		camera.zoom -= Constant.CAMERA_ZOOM_STEP;
 	}
 }
