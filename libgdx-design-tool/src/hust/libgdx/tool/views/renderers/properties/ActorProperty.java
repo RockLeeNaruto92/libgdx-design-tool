@@ -23,7 +23,10 @@ public class ActorProperty extends Property{
 	}
 	
 	private void createTextFieldName(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.NAME};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
 		
+		name = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.NAME);
 	}
 	
 	private void createTextFieldX(Skin skin, Vector2 parentSize){
@@ -67,6 +70,7 @@ public class ActorProperty extends Property{
 	}
 	
 	private void setActorProperty(Actor actor){
+		name.setText(actor.getName());
 		x.setText(actor.getX() + "");
 		y.setText(actor.getY() + "");
 		width.setText(actor.getWidth() + "");
@@ -75,6 +79,7 @@ public class ActorProperty extends Property{
 
 	@Override
 	public void createProperties(Skin skin, Vector2 parentSize) {
+		createTextFieldName(skin, parentSize);
 		createTextFieldX(skin, parentSize);
 		createTextFieldY(skin, parentSize);
 		createTextFieldWidth(skin, parentSize);

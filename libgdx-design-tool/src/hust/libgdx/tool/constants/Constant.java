@@ -37,6 +37,7 @@ public class Constant {
 	public static float VERTICAL_GROUP_IMAGE_HEIGHT = 15f;
 	public static float FONT_SCALE = 0.7f;
 	
+	public static int PROPERTY_COLUMNS = 4;
 	public static float PROPERTY_COLUMN_1 = 0.2f;
 	public static float PROPERTY_COLUMN_2 = 0.1f;
 	public static float PROPERTY_COLUMN_3 = 0.2f;

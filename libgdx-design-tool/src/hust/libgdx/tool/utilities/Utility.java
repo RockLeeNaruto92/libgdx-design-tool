@@ -70,6 +70,7 @@ public class Utility {
 			
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD);
 		}
 		
@@ -134,6 +135,7 @@ public class Utility {
 
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD);
 		}
 
@@ -142,7 +144,8 @@ public class Utility {
 		parent.add(textfield).align(Align.left)
 				.width(widths[i++] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-				.pad(Constant.PROPERTY_CELL_PAD);
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
 		
 		// add listener to text field, if textfield change value -> check validation and set value for object
 		textfield.addListener(new InputListener(){

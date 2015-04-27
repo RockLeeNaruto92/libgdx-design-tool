@@ -14,6 +14,7 @@ public class Word {
 	public static final String CHECKBOX_PATTERN_NAME = "Checkbox";
 
 	public static final String NULL = "";
+	public static final String NAME = "Name";
 	public static final String LOCATION = "Location";
 	public static final String X = "X";
 	public static final String Y = "Y";
