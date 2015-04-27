@@ -35,20 +35,15 @@ public class Editor{
 	
 	private void createStageWithCamera(){
 		stage = new Stage();
+		
 		camera = new OrthographicCamera(stage.getWidth(), stage.getHeight());
 		camera.zoom += 2;
 		camera.update();
 		camera.setToOrtho(false);
+		camera.project(camera.position);
+		
 		stage.setDebugAll(true);
-		System.out.println("Stage size: " + stage.getWidth()+ "-" + stage.getHeight());
-		System.out.println("camera pos: " + camera.position);
-		System.out.println("camera pos: " + camera.project(camera.position));
-		Vector3 topLeftScreenPoint = camera.unproject(new Vector3(0, 0, 0));
-		System.out.println("topleft screen to camera: " + topLeftScreenPoint);
-//		System.out.println(camera.position);
 		stage.getViewport().setCamera(camera);
-		System.out.println("Stage size: " + stage.getWidth()+ "-" + stage.getHeight());
-//		System.out.println("Camera pos unproject:" + camera.unproject(camera.position));
 		
 	}
 	
@@ -65,16 +60,12 @@ public class Editor{
 		stage.draw();
 		stage.getBatch().begin();
 		
-//		stage.getBatch().draw(sprite.getTexture(), sprite.getWidth()/2, sprite.getHeight()/2, 50, 50);
 		stage.getBatch().draw(sprite.getTexture(), 0, 0, stage.getWidth(), stage.getHeight());
 		
 		stage.getBatch().end();
 	}
 
 	public boolean contains(Vector2 currentTouchPos) {
-		System.out.println("Editor bound: " + bound);
-		System.out.println("Current touch pos: " + currentTouchPos);
-		System.out.println("editor contain current pos: " + bound.contains(currentTouchPos));
 		return bound.contains(currentTouchPos);
 	}
 	
@@ -108,7 +99,6 @@ public class Editor{
 	
 	public Vector2 getStagePoint(float screenX, float screenY){
 		Vector3 point = camera.unproject(new Vector3(screenX, Constant.SCREEN_SIZE.y - screenY, 0));
-//		Vector3 topLeftScreenPoint = camera.unproject(new Vector3(0, 0, 0));
 		
 		return new Vector2(point.x, point.y);
 	}
