@@ -11,6 +11,12 @@
    		com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
    			default: {font: default-font}
    		},
+   		com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: { 
+			"default": { 
+				"titleFont": "default-font",
+				background: pauseBg
+			},
+		},
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 			toggle: {
 				font: default-font,
@@ -154,7 +160,8 @@
 		com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 			default: {
 				font: default-font,
-				fontColor: red
+				fontColor: red,
+				background: quickPlay
 			}
 		},
 		

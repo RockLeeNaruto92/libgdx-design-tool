@@ -2,47 +2,23 @@ package hust.libgdx.tool.views.renderers.properties;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
+import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.utilities.Utility;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
-public class ActorProperty {
-	private Actor object;
-	
+public class ActorProperty extends Property{
 	private TextField x, y, width, height;
-	private Table table, container;
 	
-	public ActorProperty(Stage stage, Skin skin, Vector2 location, Vector2 size){
-		container = new Table();
-		container.setX(location.x);
-		container.setY(location.y);
-		container.setWidth(size.x);
-		container.setHeight(size.y);
-		container.align(Align.topLeft);
-		stage.addActor(container);
-		
-		table = new Table();
-		table.setFillParent(true);
-		ScrollPane scroll = new ScrollPane(table, skin);
-		
-		createTextFieldX(skin, size);
-		createTextFieldY(skin, size);
-		createTextFieldWidth();
-		createTextFieldHeight();
-		createOtherField();
-		
-		container.row();
-		container.add(scroll);
-		container.debugAll();
+	public ActorProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
+		super(stage, skin, location, size, controller);
 	}
 	
 	private void createTextFieldX(Skin skin, Vector2 parentSize){
@@ -50,15 +26,15 @@ public class ActorProperty {
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.X_RANGE.x, Constant.X_RANGE.y, Constant.SLIDER_STEP};
 		
-		x = Utility.createTextFieldWithSlider(table, parentSize, labels, widths, sliderInfo, skin);
+		x = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.X);
 	}
 	
 	private void createTextFieldY(Skin skin, Vector2 parentSize){
-		String[] labels = {"", Word.X};
+		String[] labels = {"", Word.Y};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.Y_RANGE.x, Constant.Y_RANGE.y, Constant.SLIDER_STEP};
 		
-		y = Utility.createTextFieldWithSlider(table, parentSize, labels, widths, sliderInfo, skin);
+		y = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.Y);
 	}
 	
 	private void createTextFieldWidth(){
@@ -71,5 +47,18 @@ public class ActorProperty {
 	
 	private void createOtherField(){
 		
+	}
+	
+	public void refresh(){
+		setActorProperty(getObject());
+	}
+	
+	public void setActorProperty(Actor actor){
+		x.setText(actor.getX() + "");
+	}
+
+	@Override
+	public void createProperties(Skin skin, Vector2 parentSize) {
+		createTextFieldX(skin, parentSize);
 	}
 }

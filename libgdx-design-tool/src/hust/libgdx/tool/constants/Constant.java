@@ -39,7 +39,8 @@ public class Constant {
 	public static float PROPERTY_COLUMN_2 = 0.1f;
 	public static float PROPERTY_COLUMN_3 = 0.2f;
 	public static float PROPERTY_COLUMN_4 = 0.5f;
-	public static float PROPERTY_ROW_HEIGHT = 0.1f; 
+	public static float PROPERTY_ROW_HEIGHT = 0.1f;
+	public static float PROPERTY_CELL_PAD = 2f;
 	
 	// 18, 18
 	public static Vector2 TREE_ICON_SIZE = new Vector2(0.01317716f, 0.0234375f);

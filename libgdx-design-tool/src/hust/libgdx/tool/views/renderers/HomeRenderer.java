@@ -2,6 +2,8 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.views.renderers.properties.ActorProperty;
+import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,8 @@ public class HomeRenderer extends ApplicationRenderer{
 	private Menu menu;
 	private PackageExplore packageExplore;
 	private Editor editor;
+	private MessageDialog messgaeDialog;
+	private Property property;
 	
 	private boolean displayBound;
 	private boolean isSelecting = true;
@@ -43,6 +47,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		createPropertyPart();
 		createOutlinePart();
 		createEditorPart();
+		createMessageDialog();
 	}
 	
 	private void createStages(){
@@ -83,7 +88,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		size.x = Constant.PROPERTY_SIZE.x * Constant.SCREEN_SIZE.x;
 		size.y = Constant.PROPERTY_SIZE.y * Constant.SCREEN_SIZE.y;
 		
-//		new ActorProperty(stage, skin, location, size);
+		property = new ActorProperty(mainStage, skin, location, size, controller);
 	}
 
 	private void createOutlinePart() {
@@ -91,6 +96,10 @@ public class HomeRenderer extends ApplicationRenderer{
 
 	private void createEditorPart() {
 		editor = new Editor(skin);
+	}
+	
+	private void createMessageDialog(){
+//		messgaeDialog = new MessageDialog(mainStage, skin);
 	}
 
 	@Override
@@ -103,7 +112,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		drawProperty();
 		drawPreview();
 		drawOutline();
-//		drawDesign();
+		drawDesign();
 		
 		// end draw
 		batch.end();
@@ -277,5 +286,13 @@ public class HomeRenderer extends ApplicationRenderer{
 	public void zoomEditor(boolean zoomin) {
 		if (zoomin) editor.zoomin();
 		else editor.zoomout();
+	}
+	
+	public void setPropertyObject(Actor actor){
+		property.setObject(actor);
+	}
+	
+	public Property getPropertyView(){
+		return property;
 	}
 }

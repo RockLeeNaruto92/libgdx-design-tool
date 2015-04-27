@@ -40,7 +40,6 @@ public class PackageExplore extends CustomTree {
 			root = new NodeElement(NodeType.FILE, file.name(), null);
 		}
 		
-		root = Utility.getListFile(folderPath, "Example", root);
 		root.retrive(0);
 		
 		return root;

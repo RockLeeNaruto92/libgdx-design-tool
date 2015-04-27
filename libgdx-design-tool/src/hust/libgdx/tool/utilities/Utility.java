@@ -1,7 +1,10 @@
 package hust.libgdx.tool.utilities;
 
 import hust.libgdx.tool.constants.Constant;
+import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.UIElementType;
+import hust.libgdx.tool.views.renderers.properties.ActorProperty;
+import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
 
 import java.util.ArrayList;
 
@@ -56,72 +59,54 @@ public class Utility {
 		return checkbox;
 	}
 	
-	public static NodeElement getListFile(String path, String name, NodeElement parent){
-		FileHandle dir;
-		
-		if (Gdx.app.getType() == ApplicationType.Android)
-			dir = Gdx.files.internal(path);
-		else
-			dir = Gdx.files.absolute(path);
-		
-		for (FileHandle file : dir.list()) {
-			if (!file.isDirectory())
-				parent.childs.add(new NodeElement(NodeType.FILE, file.name(), null));
-			else {
-				NodeElement folderNode = new NodeElement(NodeType.FOLDER, file.name(), new ArrayList<Utility.NodeElement>());
-				parent.childs.add(getListFile(path + "/" + file.name(), file.name(), folderNode));
-			}
-		}
-		
-		return parent;
-	}
-	
-	public static Tree createTreeFromArrayList(NodeElement root, Skin skin, UIElementType[] types){
-		Tree tree = new Tree(skin);
-//		int index = 0;
-//		// create root node
-//		Node rootNode = new Node(createTreeNodeLabel(root.name, skin, null));
-//		tree.add(rootNode);
-//		
-//		// create childs node
-//		for (NodeElement element : root.childs) {
-////			createNodeOfTree(element, skin, rootNode, );
-//		}
-		
-		
-		return tree;
-	}
-	
-	
-	
-	public static TextField createTextFieldWithSlider(Table parent, Vector2 parentSize, String[] labels, float[] widths, float sliderInfo[], Skin skin){
+	public static TextField createTextFieldWithSlider(Table parent,
+			Vector2 parentSize, String[] labels, float[] widths,
+			float sliderInfo[], Skin skin, final ActorProperty property,
+			final UIElementController controller, final ActorPropertyType type) {
 		int i;
 		
 		parent.row();
+		
+		// create all label and add to parent table
 		for (i = 0; i < labels.length; i++){
 			Label label = new Label(labels[i], skin);
 			label.setFontScale(Constant.FONT_SCALE);
 			
-			parent.add(label).align(Align.topLeft).width(widths[i] * parentSize.x);
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x)
+					.pad(Constant.PROPERTY_CELL_PAD);
 		}
 		
+		// create text field
 		final TextField textfield = new TextField("", skin);
-		parent.add(textfield).align(Align.topLeft).width(widths[i++] * parentSize.x);
+		parent.add(textfield).align(Align.left)
+				.width(widths[i++] * parentSize.x)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD);
 		
+		
+		// create slider
 		float sliderWidth = 0;
 		while (i < widths.length) sliderWidth += widths[i++] * parentSize.x;
-
+		
 		final Slider slider = new Slider(sliderInfo[0], sliderInfo[1], sliderInfo[2], false, skin);
 		slider.getStyle().knob.setMinHeight(parentSize.y * Constant.PROPERTY_ROW_HEIGHT);
 		slider.getStyle().knob.setMinWidth(parentSize.x * Constant.SLIDER_KNOB_WIDTH);
-		parent.add(slider).align(Align.topLeft).width(sliderWidth).height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT);
+		parent.add(slider).align(Align.left)
+				.width(sliderWidth)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD);
 		
+		// add listener to slider, when slider changed -> change textfield value and set object value
 		slider.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
+				// change textfield value
 				textfield.setText(slider.getValue() + "");
 				// set object value
-				
+				Actor object = property.getObject();
+				if (object == null) return;
+				controller.setObjectProperty(object, type, slider.getValue() + "");
 			}
 		});
 		
@@ -134,7 +119,6 @@ public class Utility {
 				return super.keyTyped(event, character);
 			}
 		});
-		
 		
 		return textfield;
 	}

@@ -3,6 +3,9 @@ package hust.libgdx.tool.controllers;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.views.HomeScreen;
+import hust.libgdx.tool.views.renderers.properties.ActorProperty;
+import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
+import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
@@ -132,6 +135,7 @@ public class UIElementController extends Controller {
 				selectedBound = getSelectedBound(true);
 				displayBound(true);
 				screen.getRender().setSelecting(false);
+				setPropertyView(selectedActors.get(0));
 			}
 			else {
 				screen.getRender().removeActors(selectedActors);
@@ -191,6 +195,7 @@ public class UIElementController extends Controller {
 		case CREATE:
 			if (selectedActors.isEmpty()) return;
 			drag(x, y);
+			setPropertyView(selectedActors.get(0));
 			break;
 		case SELECTING:
 			selectedBound.width = x - selectedBound.x;
@@ -200,6 +205,9 @@ public class UIElementController extends Controller {
 		case SELECTED:
 			drag(x, y);
 			selectedBound = getSelectedBound(true);
+			if (selectedActors.size() == 1)
+				setPropertyView(selectedActors.get(0));
+			
 			break;
 		case RESIZE:
 			resizeActor(currentActor, x, y);
@@ -427,5 +435,36 @@ public class UIElementController extends Controller {
 		}
 		
 		selectedBound = getSelectedBound(true);
+	}
+
+	public void setObjectProperty(Actor object, ActorPropertyType type, Object value) {
+		switch (type) {
+		case NAME:
+			object.setName((String)value);
+			break;
+		case X:
+			object.setX((float)value);
+			break;
+		case Y:
+			object.setY((float)value);
+			break;
+		case WIDTH:
+			object.setWidth((float)value);
+			break;
+		case HEIGHT:
+			object.setHeight((float)value);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void setPropertyView(Actor actor){
+		if (actor == null) return;
+		
+		ActorProperty property = (ActorProperty)screen.getRender().getPropertyView();
+		
+		property.setObject(actor);
+		property.refresh();
 	}
 }
