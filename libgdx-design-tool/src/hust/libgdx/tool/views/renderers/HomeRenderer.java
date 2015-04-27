@@ -225,6 +225,18 @@ public class HomeRenderer extends ApplicationRenderer{
 		return editor.contains(currentTouchPos);
 	}
 	
+	public boolean isInEditor(float x, float y){
+		return editor.contains(x, y);
+	}
+	
+	public boolean isInProperty(Vector2 currentTouchPos){
+		return property.contains(currentTouchPos);
+	}
+	
+	public boolean isInProperty(float x, float y){
+		return property.contains(x, y);
+	}
+	
 	public Stage getStage() {
 		return mainStage;
 	}

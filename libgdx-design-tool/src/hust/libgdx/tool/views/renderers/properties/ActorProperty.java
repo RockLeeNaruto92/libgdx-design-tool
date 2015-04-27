@@ -16,9 +16,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class ActorProperty extends Property{
 	private TextField x, y, width, height;
+	private TextField name;
 	
 	public ActorProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
 		super(stage, skin, location, size, controller);
+	}
+	
+	private void createTextFieldName(Skin skin, Vector2 parentSize){
+		
 	}
 	
 	private void createTextFieldX(Skin skin, Vector2 parentSize){

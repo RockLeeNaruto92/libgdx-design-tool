@@ -1,16 +1,13 @@
 package hust.libgdx.tool.utilities;
 
 import hust.libgdx.tool.constants.Constant;
+import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
-import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Application.ApplicationType;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
@@ -78,7 +74,7 @@ public class Utility {
 		}
 		
 		// create text field
-		final TextField textfield = new TextField("", skin);
+		final TextField textfield = new TextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
 				.width(widths[i++] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
@@ -106,7 +102,7 @@ public class Utility {
 				// set object value
 				Actor object = property.getObject();
 				if (object == null) return;
-				controller.setObjectProperty(object, type, slider.getValue() + "");
+				controller.setObjectProperty(object, type, slider.getValue());
 			}
 		});
 		
@@ -123,25 +119,36 @@ public class Utility {
 		return textfield;
 	}
 	
-	public static TextField createTextFieldWithOutSlider(Table parent, Vector2 parentSize, String[] labels, float[] widths, Skin skin){
+	public static TextField createTextFieldWithOutSlider(Table parent,
+			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
+			final ActorProperty property, final UIElementController controller,
+			final ActorPropertyType type) {
 		int i;
 		
 		parent.row();
-		for (i = 0; i < labels.length; i++){
+		
+		// create all label and add to parent table
+		for (i = 0; i < labels.length; i++) {
 			Label label = new Label(labels[i], skin);
 			label.setFontScale(Constant.FONT_SCALE);
-			
-			parent.add(label).align(Align.topLeft).width(widths[i] * parentSize.x);
-		}
-		
-		final TextField textfield = new TextField("", skin);
-		parent.add(textfield).align(Align.topLeft).width(widths[i++] * parentSize.x);
-		
-		textfield.addListener(new InputListener(){
 
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x)
+					.pad(Constant.PROPERTY_CELL_PAD);
+		}
+
+		// create text field
+		final TextField textfield = new TextField(Word.NULL, skin);
+		parent.add(textfield).align(Align.left)
+				.width(widths[i++] * parentSize.x)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD);
+		
+		// add listener to text field, if textfield change value -> check validation and set value for object
+		textfield.addListener(new InputListener(){
 			@Override
 			public boolean keyTyped(InputEvent event, char character) {
-				System.out.println(textfield.getText());
+				
 				return super.keyTyped(event, character);
 			}
 			

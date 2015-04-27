@@ -5,7 +5,6 @@ import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.views.HomeScreen;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
-import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class UIElementController extends Controller {
 	enum Action {
-		CREATE, SELECTING, SELECTED, NONE, RESIZE
+		CREATE, SELECTING, SELECTED, NONE, RESIZE, MODIFY_IN_PROPERTY
 	}
 	
 	enum Direction {
@@ -110,9 +109,7 @@ public class UIElementController extends Controller {
 	 * @param y
 	 */
 	public void onTouchDown(float x, float y) {
-		if (!screen.getRender().isInEditor(new Vector2(x, y))) {
-			displayBound(false);
-		} else {
+		if (screen.getRender().isInEditor(x, y)){
 			if (selectedBound.contains(x, y) && currentAction == Action.SELECTED){
 				screen.getRender().setSelecting(false);
 			} else {
@@ -121,9 +118,14 @@ public class UIElementController extends Controller {
 				// set selected bound x, y
 				selectedBound.set(x, y, 0, 0);
 			}
-			
 			currentTouchPos.set(x, y);
 			displayBound(true);
+			
+		} else {
+			displayBound(false);
+			
+			if (screen.getRender().isInProperty(x, y))
+				setCurrentAction(Action.MODIFY_IN_PROPERTY);
 		}
 	}
 
@@ -177,12 +179,9 @@ public class UIElementController extends Controller {
 			screen.getRender().setSelecting(false);
 			displayBound(true);
 			break;
-			
-		case RESIZE:
-			setCurrentAction(Action.NONE);
-			break;
 
 		default:
+			setCurrentAction(Action.NONE);
 			break;
 		}
 	}

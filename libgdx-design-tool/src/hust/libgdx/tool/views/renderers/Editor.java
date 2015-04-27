@@ -73,6 +73,10 @@ public class Editor{
 		return bound.contains(currentTouchPos);
 	}
 	
+	public boolean contains(float x, float y) {
+		return bound.contains(x, y);
+	}
+	
 	public boolean contains(Actor actor){
 		return stage.getActors().contains(actor, true);
 	}

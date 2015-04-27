@@ -19,13 +19,14 @@ public abstract class Property {
 	private UIElementController controller;
 	
 	public Property(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
+		this.controller = controller;
+		
 		bound = new Rectangle();
 		setBound(location, size);
 		
 		createContainer(stage, bound);
 		createProperties(skin, size);
 		createScroll(skin);
-		this.controller = controller;
 	}
 	
 	private void createContainer(Stage stage, Rectangle bound){
@@ -63,6 +64,14 @@ public abstract class Property {
 	
 	public UIElementController getController(){
 		return controller;
+	}
+	
+	public boolean contains(Vector2 point){
+		return bound.contains(point);
+	}
+	
+	public boolean contains(float x, float y){
+		return bound.contains(x, y);
 	}
 	
 	public abstract void createProperties(Skin skin, Vector2 parentSize);
