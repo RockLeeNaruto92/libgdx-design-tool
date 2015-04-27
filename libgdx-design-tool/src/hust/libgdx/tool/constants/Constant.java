@@ -20,6 +20,8 @@ public class Constant {
 	
 	public static Vector2 X_RANGE = new Vector2(-1000, 1000);
 	public static Vector2 Y_RANGE = new Vector2(-1000, 1000);
+	public static Vector2 WIDTH_RANGE = new Vector2(-1000, 1000);
+	public static Vector2 HEIGHT_RANGE = new Vector2(-1000, 1000);
 	public static float SLIDER_STEP = 0.1f;
 	public static float SLIDER_KNOB_WIDTH = 0.01f;
 	

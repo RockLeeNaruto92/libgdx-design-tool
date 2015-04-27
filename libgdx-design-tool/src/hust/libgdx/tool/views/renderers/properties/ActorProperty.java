@@ -30,19 +30,27 @@ public class ActorProperty extends Property{
 	}
 	
 	private void createTextFieldY(Skin skin, Vector2 parentSize){
-		String[] labels = {"", Word.Y};
+		String[] labels = {Word.NULL, Word.Y};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.Y_RANGE.x, Constant.Y_RANGE.y, Constant.SLIDER_STEP};
 		
 		y = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.Y);
 	}
 	
-	private void createTextFieldWidth(){
+	private void createTextFieldWidth(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.SIZE, Word.WIDTH};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		float[] sliderInfo = {Constant.WIDTH_RANGE.x, Constant.WIDTH_RANGE.y, Constant.SLIDER_STEP};
 		
+		width = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.WIDTH);
 	}
 	
-	private void createTextFieldHeight(){
+	private void createTextFieldHeight(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.NULL, Word.HEIGHT};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		float[] sliderInfo = {Constant.HEIGHT_RANGE.x, Constant.HEIGHT_RANGE.y, Constant.SLIDER_STEP};
 		
+		height = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.HEIGHT);
 	}
 	
 	private void createOtherField(){
@@ -53,12 +61,18 @@ public class ActorProperty extends Property{
 		setActorProperty(getObject());
 	}
 	
-	public void setActorProperty(Actor actor){
+	private void setActorProperty(Actor actor){
 		x.setText(actor.getX() + "");
+		y.setText(actor.getY() + "");
+		width.setText(actor.getWidth() + "");
+		height.setText(actor.getHeight() + "");
 	}
 
 	@Override
 	public void createProperties(Skin skin, Vector2 parentSize) {
 		createTextFieldX(skin, parentSize);
+		createTextFieldY(skin, parentSize);
+		createTextFieldWidth(skin, parentSize);
+		createTextFieldHeight(skin, parentSize);
 	}
 }

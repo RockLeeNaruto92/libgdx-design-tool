@@ -12,10 +12,12 @@ public class Word {
 	
 	public static final String LABEL_PATTERN_NAME = "Label";
 	public static final String CHECKBOX_PATTERN_NAME = "Checkbox";
-	
+
+	public static final String NULL = "";
 	public static final String LOCATION = "Location";
 	public static final String X = "X";
 	public static final String Y = "Y";
+	public static final String SIZE = "Size";
 	public static final String WIDTH = "Width";
-	public static final String HEIGHT = "Height"; 
+	public static final String HEIGHT = "Height";
 }

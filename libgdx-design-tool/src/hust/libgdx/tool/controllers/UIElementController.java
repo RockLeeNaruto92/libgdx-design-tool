@@ -211,6 +211,8 @@ public class UIElementController extends Controller {
 			break;
 		case RESIZE:
 			resizeActor(currentActor, x, y);
+			if (selectedActors.size() == 1)
+				setPropertyView(selectedActors.get(0));
 			break;
 		default:
 			break;
