@@ -200,7 +200,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	}
 
 	public boolean isInEditor(Vector2 currentTouchPos) {
-		return editor.contain(currentTouchPos);
+		return editor.contains(currentTouchPos);
 	}
 	
 	public Stage getStage() {
@@ -226,7 +226,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	}
 	
 	public boolean isContainActor(Actor actor){
-		return editor.contain(actor);
+		return editor.contains(actor);
 	}
 	
 	public boolean isContainActors(ArrayList<Actor> actors){

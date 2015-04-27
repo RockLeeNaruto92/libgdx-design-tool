@@ -113,6 +113,7 @@ public class UIElementController extends Controller {
 		if (!screen.getRender().isInEditor(new Vector2(x, y))) {
 			displayBound(false);
 		} else {
+			System.out.println("click in editor");
 			setCurrentAction(Action.SELECTING);
 			// set selected bound x, y
 			selectedBound.x = x;
@@ -215,16 +216,25 @@ public class UIElementController extends Controller {
 		Vector2 distance = new Vector2(relativeCurrentPoint.x - relativeBeforePoint.x, relativeCurrentPoint.y - relativeBeforePoint.y);
 
 		// add actor to editor stage if actor in dragdroppart when create new actor
-		if (screen.getRender().isInEditor(currentTouchPos)
-				&& !screen.getRender().isContainActors(selectedActors)) {
-			for (Actor actor : selectedActors){
-				
-				screen.getRender().addNewActor(actor, relativeCurrentPoint.x, relativeCurrentPoint.y);
-				System.out.println("Relative point: " + relativeCurrentPoint);
+		if (screen.getRender().isInEditor(currentTouchPos)) {
+			System.out.println("Drag is in editor");
+			if (!screen.getRender().isContainActors(selectedActors)) {
+				System.out.println("isIn editor --> create new actor");
+				for (Actor actor : selectedActors) {
+
+					screen.getRender().addNewActor(actor,
+							relativeCurrentPoint.x, relativeCurrentPoint.y);
+					System.out.println("Relative point: "
+							+ relativeCurrentPoint);
+				}
+			} else {
+				System.out.println("Not container -> not create");
 			}
 		}
+		
 
 		// get distance of touch position and bottom right point of select bound
+		System.out.println("Relative point: " + relativeCurrentPoint);
 
 		// set new position for new actor with editor
 		screen.getRender().setActorsLocation(selectedActors, distance);

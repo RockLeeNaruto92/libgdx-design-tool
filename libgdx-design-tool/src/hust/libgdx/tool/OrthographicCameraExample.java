@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class OrthographicCameraExample implements ApplicationListener {
 
@@ -19,35 +22,27 @@ public class OrthographicCameraExample implements ApplicationListener {
 
     private Sprite mapSprite;
     private float rotationSpeed;
+    Stage stage;
 
     @Override
     public void create() {
-        rotationSpeed = 0.5f;
-
-        mapSprite = new Sprite(new Texture(Gdx.files.internal("data/skin.png")));
-        mapSprite.setPosition(0, 0);
-        mapSprite.setSize(WORLD_WIDTH, WORLD_HEIGHT);
-
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
-        cam = new OrthographicCamera(30, 30 * (h / w));
-        cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
-        cam.update();
-
-        batch = new SpriteBatch();
+    	stage = new Stage();
+    	
+    	Skin skin = new Skin(Gdx.files.internal("data/skin.json"));
+    	TextButton btn = new TextButton("text button", skin);
+    	stage.addActor(btn);
+    	
+        cam = new OrthographicCamera(stage.getWidth(), stage.getHeight());
+        cam.setToOrtho(false);
+        
+        stage.setDebugAll(true);
+        stage.getViewport().setCamera(cam);
     }
 
     @Override
     public void render() {
-        handleInput();
-        cam.update();
-        batch.setProjectionMatrix(cam.combined);
-
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        mapSprite.draw(batch);
-        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     private void handleInput() {
@@ -87,9 +82,6 @@ public class OrthographicCameraExample implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-        cam.viewportWidth = 30f;
-        cam.viewportHeight = 30f * height/width;
-        cam.update();
     }
 
     @Override
@@ -98,8 +90,6 @@ public class OrthographicCameraExample implements ApplicationListener {
 
     @Override
     public void dispose() {
-        mapSprite.getTexture().dispose();
-        batch.dispose();
     }
 
     @Override
