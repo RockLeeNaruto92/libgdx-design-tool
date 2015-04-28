@@ -12,6 +12,8 @@ public class Word {
 	
 	public static final String LABEL_PATTERN_NAME = "Label";
 	public static final String CHECKBOX_PATTERN_NAME = "Checkbox";
+	
+	public static final String PROPERTY_EMPTY = "Property is not availabe!";
 
 	public static final String NULL = "";
 	public static final String NAME = "Name";

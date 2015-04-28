@@ -2,7 +2,7 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
-import hust.libgdx.tool.views.renderers.properties.ActorProperty;
+import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		size.x = Constant.PROPERTY_SIZE.x * Constant.SCREEN_SIZE.x;
 		size.y = Constant.PROPERTY_SIZE.y * Constant.SCREEN_SIZE.y;
 		
-		property = new ActorProperty(mainStage, skin, location, size, controller);
+		property = new EmptyProperty(mainStage, skin, location, size, controller);
 	}
 
 	private void createOutlinePart() {
