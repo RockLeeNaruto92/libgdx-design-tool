@@ -84,7 +84,6 @@ public class Palette extends CustomTree {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				System.out.println(type);
 				controller.onTouchDown(type, event.getStageX(), event.getStageY());
 				return super.touchDown(event, x, y, pointer, button);
 			}
@@ -92,14 +91,12 @@ public class Palette extends CustomTree {
 			@Override
 			public void touchUp(InputEvent event, float x, float y,
 					int pointer, int button) {
-				System.out.println("Touch up " + event.getStageX() + "-" + event.getStageY());
 				
 				super.touchUp(event, x, y, pointer, button);
 			}
 
 			@Override
 			public void touchDragged(InputEvent event, float x, float y, int pointer) {
-				System.out.println("Touch drag " + event.getStageX() + "-" + event.getStageY());
 				super.touchDragged(event, x, y, pointer);
 			}
 			

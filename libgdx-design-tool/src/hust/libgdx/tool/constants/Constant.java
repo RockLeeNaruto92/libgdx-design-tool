@@ -50,10 +50,12 @@ public class Constant {
 	// 18, 18
 	public static Vector2 TREE_NODE_ICON_SIZE = new Vector2(0.01317716f, 0.0234375f);
 	
-	
 	public static String ICON_FOLDER_OPEN = "folder_open.png";
 	public static String ICON_FOLDER_CLOSE = "folder_close.png";
 	public static String ICON_FILE = "file.png";
 	public static String FILE_UIELEMENT_LIST = "uielementList.txt";
+	
+	// default
+	public static String DEFAULT_IMAGE = "quickPlay"; 
 	
 }

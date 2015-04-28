@@ -2,15 +2,13 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
-import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
+import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,8 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class HomeRenderer extends ApplicationRenderer{
-	private Texture texture = new Texture(Gdx.files.internal("data/black.png"));
-	private Sprite sprite = new Sprite(texture);
 	private Skin skin;
 	
 	private Stage mainStage;
@@ -88,7 +84,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		size.x = Constant.PROPERTY_SIZE.x * Constant.SCREEN_SIZE.x;
 		size.y = Constant.PROPERTY_SIZE.y * Constant.SCREEN_SIZE.y;
 		
-		property = new EmptyProperty(mainStage, skin, location, size, controller);
+		property = new ActorProperty(mainStage, skin, location, size, controller);
 	}
 
 	private void createOutlinePart() {

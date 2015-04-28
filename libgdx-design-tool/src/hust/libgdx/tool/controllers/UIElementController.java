@@ -1,5 +1,6 @@
 package hust.libgdx.tool.controllers;
 
+import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.views.HomeScreen;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -258,6 +260,9 @@ public class UIElementController extends Controller {
 		case CHECKBOX:
 			actor = new CheckBox(name, skin);
 			break;
+		case IMAGE:
+			actor = new Image(skin, Constant.DEFAULT_IMAGE);
+			break;
 
 		default:
 			break;
@@ -315,6 +320,8 @@ public class UIElementController extends Controller {
 			return Word.LABEL_PATTERN_NAME + (i++);
 		case CHECKBOX:
 			return Word.CHECKBOX_PATTERN_NAME + (i++);
+		case IMAGE:
+			return Word.IMAGE_PATTERN_NAME + (i++);
 		default:
 			break;
 		}
