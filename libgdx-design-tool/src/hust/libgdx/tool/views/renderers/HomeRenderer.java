@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class HomeRenderer extends ApplicationRenderer{
+	public static Texture DEFAULT_SPRITE_TEXTURE;
+	
 	private Skin skin;
 	
 	private Stage mainStage;
@@ -52,6 +55,8 @@ public class HomeRenderer extends ApplicationRenderer{
 	
 	private void loadDatas(){
 		skin = new Skin(Gdx.files.internal("data/skin.json"));
+		
+		DEFAULT_SPRITE_TEXTURE = new Texture(Gdx.files.internal("data/default/sprite.png"));
 	}
 
 	private void createMenuPart() {

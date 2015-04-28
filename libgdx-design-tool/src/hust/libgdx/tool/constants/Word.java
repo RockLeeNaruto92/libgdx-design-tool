@@ -13,6 +13,7 @@ public class Word {
 	public static final String LABEL_PATTERN_NAME = "Label";
 	public static final String CHECKBOX_PATTERN_NAME = "Checkbox";
 	public static final String IMAGE_PATTERN_NAME = "Image";
+	public static final String SPRITE_PATTERN_NAME = "Sprite";
 	
 	public static final String PROPERTY_EMPTY = "Property is not availabe!";
 
