@@ -37,6 +37,15 @@ public class Constant {
 	public static float VERTICAL_GROUP_IMAGE_HEIGHT = 15f;
 	public static float FONT_SCALE = 0.7f;
 	
+	public static float BORDER_WIDTH = 2;
+	
+	public static float DIALOG_WIDTH = 0.5f;
+	public static float DIALOG_HEIGHT = 0.5f;
+	public static float DIALOG_COLUMN_0_WIDTH = 0.1f;
+	public static float DIALOG_COLUMN_1_WIDTH = 0.3f;
+	public static float DIALOG_COLUMN_2_WIDTH = 0.6f;
+	public static float DIALOG_ROW_HEIGHT = 0.1f;
+	
 	public static int PROPERTY_COLUMNS = 4;
 	public static float PROPERTY_COLUMN_1 = 0.2f;
 	public static float PROPERTY_COLUMN_2 = 0.1f;

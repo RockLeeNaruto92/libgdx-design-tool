@@ -2,6 +2,7 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.views.renderers.dialogs.MessageDialog;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class HomeRenderer extends ApplicationRenderer{
 	public static Texture DEFAULT_SPRITE_TEXTURE;
+	public static Sprite SPRITE_BORDER;
 	
 	private Skin skin;
 	
@@ -57,6 +60,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		skin = new Skin(Gdx.files.internal("data/skin.json"));
 		
 		DEFAULT_SPRITE_TEXTURE = new Texture(Gdx.files.internal("data/default/sprite.png"));
+		SPRITE_BORDER = new Sprite(new Texture(Gdx.files.internal("data/border.png")));
 	}
 
 	private void createMenuPart() {

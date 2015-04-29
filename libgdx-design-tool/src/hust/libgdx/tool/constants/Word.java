@@ -16,6 +16,10 @@ public class Word {
 	public static final String SPRITE_PATTERN_NAME = "Sprite";
 	
 	public static final String PROPERTY_EMPTY = "Property is not availabe!";
+	
+	public static final String OBJECTS = "Objects: ";
+	public static final String SELECT_OBJECT = "Select object";
+	public static final String CREATE_NEW_OBJECT = "Create new object";
 
 	public static final String NULL = "";
 	public static final String NAME = "Name";

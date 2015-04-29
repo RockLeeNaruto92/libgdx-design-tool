@@ -228,8 +228,9 @@ public class UIElementController extends Controller {
 
 		// add actor to editor stage if actor in dragdroppart when create new actor
 		if (screen.getRender().isInEditor(currentTouchPos) && !screen.getRender().isContainActors(selectedActors)) {
-			for (Actor actor : selectedActors)
+			for (Actor actor : selectedActors){
 				screen.getRender().addNewActor(actor, relativeCurrentPoint.x, relativeCurrentPoint.y);
+			}
 		}
 		
 		// set new position for new actor with editor
@@ -266,6 +267,8 @@ public class UIElementController extends Controller {
 			break;
 		case SPRITE:
 			actor = new LSprite();
+			break;
+		case ANIMATION:
 			break;
 
 		default:

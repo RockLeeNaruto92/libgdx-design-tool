@@ -14,8 +14,17 @@
    		com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: { 
 			"default": { 
 				"titleFont": "default-font",
-				background: pauseBg
+				background: list-background
 			},
+		},
+		com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+			default: {
+				up: backMenu,
+				checked: backMenuClick,
+				down: lock,
+				over: quickPlay,
+				checkedOver: quickPlayClick
+			}
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 			toggle: {
@@ -161,7 +170,8 @@
 			default: {
 				font: default-font,
 				fontColor: red,
-				background: quickPlay
+				background: textfield-background,
+				disabledBackground: textfield-disabled-background
 			}
 		},
 		
@@ -174,7 +184,13 @@
    			default: { minus: file, plus: folder_close, selection: file }
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-   			default: { fontColorUnselected: red, selection: quickPlay, fontColorSelected: red, font: default-font }		
+   			default: { 
+   				fontColorUnselected: red, 
+   				selection: list-selection, 
+   				fontColorSelected: red, 
+   				font: default-font,
+   				background: list-background
+   			}		
    		},
    		com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle:{
    			default-horizontal: {
@@ -211,15 +227,13 @@
    				knob: pause
    			}
    		},
-   		
-   		
-   		
    		com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle:{
    			default: {
    				fontColor: red,
    				font: default-font,
    				listStyle: default,
-   				scrollStyle: default
+   				scrollStyle: default,
+   				background: selectbox-background
    			}
    		}
  }
