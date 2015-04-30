@@ -501,71 +501,134 @@ folder_open
   orig: 8, 8
   offset: 0, 1
   index: -1
-  
-macs.png
+
+Mac1.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
-checkbox-checked
-  rotate: false
-  xy: 607, 2
-  size: 13, 13
-  orig: 13, 13
-  offset: 0, 0
-  index: -1
-checkbox-unchecked
-  rotate: false
-  xy: 622, 2
-  size: 13, 13
-  orig: 13, 13
-  offset: 0, 0
-  index: -1
-list-background
+button-up
   rotate: false
   xy: 2, 2
+  size: 248, 43
+  orig: 248, 43
+  offset: 0, 0
+  index: -1
+button-over
+  rotate: false
+  xy: 2, 47
+  size: 248, 43
+  orig: 248, 43
+  offset: 0, 0
+  index: -1
+button-down
+  rotate: false
+  xy: 252, 2
+  size: 248, 43
+  orig: 248, 43
+  offset: 0, 0
+  index: -1
+window-top
+  rotate: false
+  xy: 2, 92
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+window-background
+  rotate: false
+  xy: 36, 92
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+textfield-background
+  rotate: false
+  xy: 252, 47
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 list-selection
   rotate: false
-  xy: 193, 2
+  xy: 252, 75
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
-radio-checked
+list-background
   rotate: false
-  xy: 575, 2
-  size: 14, 15
-  orig: 14, 15
-  offset: 0, 0
-  index: -1
-radio-unchecked
-  rotate: false
-  xy: 591, 2
-  size: 14, 14
-  orig: 14, 14
+  xy: 502, 2
+  size: 189, 26
+  orig: 189, 26
   offset: 0, 0
   index: -1
 selectbox-background
   rotate: false
-  xy: 2, 2
-  size: 189, 26
-  orig: 189, 26
-  offset: 0, 0
-  index: -1
-textfield-background
-  rotate: false
-  xy: 384, 2
+  xy: 502, 2
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 textfield-disabled-background
   rotate: false
-  xy: 2, 2
+  xy: 502, 2
   size: 189, 26
   orig: 189, 26
+  offset: 0, 0
+  index: -1
+knob
+  rotate: false
+  xy: 70, 92
+  size: 15, 18
+  orig: 15, 18
+  offset: 0, 0
+  index: -1
+knob-disabled
+  rotate: false
+  xy: 87, 92
+  size: 15, 18
+  orig: 15, 18
+  offset: 0, 0
+  index: -1
+radio-checked
+  rotate: false
+  xy: 104, 92
+  size: 14, 15
+  orig: 14, 15
+  offset: 0, 0
+  index: -1
+radio-unchecked
+  rotate: false
+  xy: 70, 112
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+checkbox-unchecked
+  rotate: false
+  xy: 87, 112
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+checkbox-checked
+  rotate: false
+  xy: 104, 109
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+slider-disabled-background
+  rotate: false
+  xy: 693, 2
+  size: 204, 5
+  orig: 204, 5
+  offset: 0, 0
+  index: -1
+slider-background
+  rotate: false
+  xy: 693, 9
+  size: 204, 5
+  orig: 204, 5
   offset: 0, 0
   index: -1

@@ -14,7 +14,7 @@
    		com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: { 
 			"default": { 
 				"titleFont": "default-font",
-				background: list-background
+				background: window-background
 			},
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
@@ -24,6 +24,10 @@
 				down: lock,
 				over: quickPlay,
 				checkedOver: quickPlayClick
+			},
+			radio: {
+				up: radio-unchecked,
+				checked: radio-checked
 			}
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
@@ -34,9 +38,9 @@
 			},
 			default: {
 				font: default-font,
-				up: backMenu,
-				down: backMenuClick,
-				over: lock
+				up: button-up,
+				down: button-down,
+				over: button-over
 			},
 			
 			default-locked:{

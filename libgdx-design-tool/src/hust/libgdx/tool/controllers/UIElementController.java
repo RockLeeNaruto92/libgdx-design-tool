@@ -484,4 +484,8 @@ public class UIElementController extends Controller {
 		property.setObject(actor);
 		property.refresh();
 	}
+
+	public void onCreationObjectDlgOkBtnClick() {
+		
+	}
 }
