@@ -499,8 +499,22 @@ public class UIElementController extends Controller {
 		default:
 			break;
 		}
+		
+		if (object instanceof Label) setLabelProperty((Label)object, type, value);
 	}
 	
+	private void setLabelProperty(Label object, ActorPropertyType type,
+			Object value) {
+		switch (type) {
+		case TEXT:
+			object.setText((String)value);
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	public void setPropertyView(Actor actor){
 		Property property = screen.getRender().getPropertyView(actor);
 		

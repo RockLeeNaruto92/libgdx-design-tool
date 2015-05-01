@@ -1,14 +1,21 @@
 package hust.libgdx.tool.views.renderers.properties;
 
+import hust.libgdx.tool.constants.Constant;
+import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.utilities.Utility;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class LabelProperty extends ActorProperty {
 	private static LabelProperty _instance;
+	
+	private TextField text;
 
 	public LabelProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
@@ -23,13 +30,22 @@ public class LabelProperty extends ActorProperty {
 	}
 
 	@Override
-	public void createOtherField() {
+	public void createOtherField(Skin skin, Vector2 parentSize) {
+		createTextFieldText(skin, parentSize);
+	}
+	
+	private void createTextFieldText(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.TEXT};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
 		
+		text = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.TEXT);
 	}
 
 	@Override
 	public void setActorProperty(Actor actor) {
-		// TODO Auto-generated method stub
 		super.setActorProperty(actor);
+		Label obj = (Label)actor;
+		
+		text.setText(obj.getText() + "");
 	}
 }

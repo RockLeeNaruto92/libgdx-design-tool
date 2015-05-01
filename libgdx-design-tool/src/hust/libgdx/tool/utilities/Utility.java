@@ -152,6 +152,11 @@ public class Utility {
 		textfield.addListener(new InputListener(){
 			@Override
 			public boolean keyTyped(InputEvent event, char character) {
+				// validation
+				
+				Actor object = property.getObject();
+				if (object == null) return super.keyTyped(event, character);
+				controller.setObjectProperty(object, type, textfield.getText());
 				
 				return super.keyTyped(event, character);
 			}

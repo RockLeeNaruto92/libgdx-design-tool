@@ -74,7 +74,7 @@ public abstract class ActorProperty extends Property{
 		debug = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.VISIBLE);
 	}
 	
-	public abstract void createOtherField();
+	public abstract void createOtherField(Skin skin, Vector2 parentSize);
 	
 	@Override
 	public void refresh(){
@@ -100,6 +100,6 @@ public abstract class ActorProperty extends Property{
 		createTextFieldHeight(skin, parentSize);
 		createCheckboxVisibleField(skin, parentSize);
 		createCheckboxDebugField(skin, parentSize);
-		createOtherField();
+		createOtherField(skin, parentSize);
 	}
 }
