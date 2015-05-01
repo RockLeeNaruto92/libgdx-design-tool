@@ -19,6 +19,7 @@ public class LabelProperty extends ActorProperty {
 	private static LabelProperty _instance;
 	
 	private TextField text;
+	private TextField fontScaleX, fontScaleY;
 	private SelectBox<Object> align;
 	private CheckBox wrap;
 
@@ -39,6 +40,8 @@ public class LabelProperty extends ActorProperty {
 		createTextFieldText(skin, parentSize);
 		createSelectBoxAlign(skin, parentSize);
 		createCheckBoxWrap(skin, parentSize);
+		createFontScaleX(skin, parentSize);
+		createFontScaleY(skin, parentSize);
 	}
 	
 	private void createTextFieldText(Skin skin, Vector2 parentSize){
@@ -61,6 +64,23 @@ public class LabelProperty extends ActorProperty {
 		
 		wrap = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.WRAP);
 	}
+	
+	private void createFontScaleX(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.FONT_SCALE, Word.X};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		float[] sliderInfo = {Constant.FONT_SCALE_RANGE.x, Constant.FONT_SCALE_RANGE.y, Constant.SLIDER_STEP};
+		
+		fontScaleX = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_X);
+	}
+	
+	private void createFontScaleY(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.NULL, Word.Y};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		float[] sliderInfo = {Constant.FONT_SCALE_RANGE.x, Constant.FONT_SCALE_RANGE.y, Constant.SLIDER_STEP};
+		
+		fontScaleY = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_Y);
+	}
+	
 	@Override
 	public void setActorProperty(Actor actor) {
 		super.setActorProperty(actor);
@@ -69,5 +89,7 @@ public class LabelProperty extends ActorProperty {
 		text.setText(obj.getText() + "");
 		align.setSelectedIndex(CAlign.getIndex(obj.getAlign()));
 		wrap.setChecked(obj.isWrap());
+		fontScaleX.setText(obj.getFontScaleX() + "");
+		fontScaleY.setText(obj.getFontScaleY() + "");
 	}
 }

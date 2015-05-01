@@ -517,6 +517,12 @@ public class UIElementController extends Controller {
 		case WRAP:
 			object.setWrap((boolean)value);
 			break;
+		case FONT_SCALE_X:
+			object.setFontScaleX((float)value);
+			break;
+		case FONT_SCALE_Y:
+			object.setFontScaleY((float)value);
+			break;
 		default:
 			break;
 		}
