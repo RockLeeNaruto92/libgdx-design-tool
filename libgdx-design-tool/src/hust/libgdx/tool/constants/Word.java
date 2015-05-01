@@ -32,4 +32,5 @@ public class Word {
 	public static final String DEBUG = "Debug";
 	public static final String TEXT = "Text";
 	public static final String ALIGN = "Align";
+	public static final String WRAP = "Wrap";
 }

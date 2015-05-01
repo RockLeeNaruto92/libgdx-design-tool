@@ -514,7 +514,9 @@ public class UIElementController extends Controller {
 		case ALIGN:
 			object.setAlignment(CAlign.getAlign((int)value));
 			break;
-
+		case WRAP:
+			object.setWrap((boolean)value);
+			break;
 		default:
 			break;
 		}
