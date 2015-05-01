@@ -503,6 +503,32 @@ public class UIElementController extends Controller {
 		}
 		
 		if (object instanceof Label) setLabelProperty((LLabel)object, type, value);
+		else if (object instanceof Button) setButtonProperty((Button)object, type, value);
+	}
+	
+	private void setButtonProperty(Button object, ActorPropertyType type, Object value){
+		switch (type) {
+		case DISABLE:
+			object.setDisabled((boolean)value);
+			break;
+		case CHECK:
+			object.setChecked((boolean)value);
+			break;
+		case PAD_LEFT:
+			object.padLeft((float)value);
+			break;
+		case PAD_RIGHT:
+			object.padRight((float)value);
+			break;
+		case PAD_TOP:
+			object.padTop((float)value);
+			break;
+		case PAD_BOTTOM:
+			object.padBottom((float)value);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private void setLabelProperty(LLabel object, ActorPropertyType type,

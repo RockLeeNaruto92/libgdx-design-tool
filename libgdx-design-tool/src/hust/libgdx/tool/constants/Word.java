@@ -35,4 +35,11 @@ public class Word {
 	public static final String WRAP = "Wrap";
 	public static final String FONT_SCALE = "Font scale";
 	public static final String ELLIPSIS = "Ellipsis";
+	public static final String PAD = "Pad";
+	public static final String LEFT = "Left";
+	public static final String RIGHT = "Right";
+	public static final String TOP = "Top";
+	public static final String BOTTOM = "Bottom";
+	public static final String CHECK = "Check";
+	public static final String DISABLE = "Disable";
 }

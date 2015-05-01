@@ -2,6 +2,7 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.views.renderers.properties.ButtonProperty;
 import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
 import hust.libgdx.tool.views.renderers.properties.LabelProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
@@ -15,6 +16,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -96,6 +99,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		// load all instance of property
 		properties.add(EmptyProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(LabelProperty.getInstance(mainStage, skin, location, size, controller));
+		properties.add(ButtonProperty.getInstance(mainStage, skin, location, size, controller));
 		
 		property = properties.get(0);
 		property.show(true);
@@ -319,6 +323,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		
 		if (actor == null) property = properties.get(0);
 		else if (actor instanceof Label) property = properties.get(1);
+		else if (actor instanceof CheckBox) property = null;
+		else if (actor instanceof Button) property = properties.get(2);
 		else property = null;
 		
 		property.show(true);
