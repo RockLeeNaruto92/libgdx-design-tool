@@ -1,8 +1,11 @@
 package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
+import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.utilities.LObject;
 import hust.libgdx.tool.views.renderers.dialogs.MessageDialog;
+import hust.libgdx.tool.views.renderers.dialogs.ObjectCreationDialog;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
 
@@ -30,6 +33,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	private Editor editor;
 	private MessageDialog messgaeDialog;
 	private Property property;
+	private ObjectCreationDialog ocDialog;
 	
 	private boolean displayBound;
 	private boolean isSelecting = true;
@@ -50,6 +54,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		createOutlinePart();
 		createEditorPart();
 		createMessageDialog();
+		createOCDialog();
 	}
 	
 	private void createStages(){
@@ -105,6 +110,13 @@ public class HomeRenderer extends ApplicationRenderer{
 	
 	private void createMessageDialog(){
 //		messgaeDialog = new MessageDialog(mainStage, skin);
+	}
+	
+	private void createOCDialog(){
+		ocDialog = new ObjectCreationDialog(Word.NULL, skin, "default");
+		ocDialog.setVisible(false);
+		ocDialog.setController(controller);
+		mainStage.addActor(ocDialog);
 	}
 
 	@Override
@@ -311,5 +323,14 @@ public class HomeRenderer extends ApplicationRenderer{
 	
 	public Property getPropertyView(){
 		return property;
+	}
+
+	public void showObjectCreationDialog(ArrayList<LObject> objects) {
+		ocDialog.setListItems(objects);
+		ocDialog.setVisible(true);
+	}
+
+	public void hideObjectCreationDialog() {
+		ocDialog.setVisible(false);
 	}
 }

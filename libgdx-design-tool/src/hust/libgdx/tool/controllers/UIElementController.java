@@ -3,6 +3,7 @@ package hust.libgdx.tool.controllers;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
+import hust.libgdx.tool.utilities.LObject;
 import hust.libgdx.tool.utilities.LSprite;
 import hust.libgdx.tool.views.HomeScreen;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
@@ -36,6 +37,7 @@ public class UIElementController extends Controller {
 	private Direction resizeDirection = Direction.CENTER;
 	private Actor currentActor;
 	private ArrayList<Actor> selectedActors;
+	private ArrayList<LObject> objects;
 	private HomeScreen screen;
 	private ArrayList<Actor> actors;
 	private UIElementType selectActorType = UIElementType.EMPTY;
@@ -46,6 +48,7 @@ public class UIElementController extends Controller {
 	public UIElementController() {
 		actors = new ArrayList<Actor>();
 		selectedActors = new ArrayList<Actor>();
+		objects = new ArrayList<>();
 		selectedBound = new Rectangle();
 	}
 
@@ -238,6 +241,11 @@ public class UIElementController extends Controller {
 	}
 
 	public void drop(float x, float y) {
+		if (selectedActors.get(0) instanceof LObject){
+			screen.showObjectCreationDialog(objects);
+			return;
+		}
+		
 		// add new actor to list of actors
 		actors.add(currentActor);
 		freeNewActor();
@@ -269,6 +277,7 @@ public class UIElementController extends Controller {
 			actor = new LSprite();
 			break;
 		case ANIMATION:
+			actor = new LObject(skin);
 			break;
 
 		default:
@@ -304,7 +313,6 @@ public class UIElementController extends Controller {
 					// TODO 
 					// set cursor image
 					
-					
 					return super.mouseMoved(event, x, y);
 				}
 			});
@@ -331,6 +339,8 @@ public class UIElementController extends Controller {
 			return Word.IMAGE_PATTERN_NAME + (i++);
 		case SPRITE:
 			return Word.SPRITE_PATTERN_NAME + (i++);
+		case ANIMATION:
+			return Word.OBJECT_PATTERN_NAME + (i++);
 		default:
 			break;
 		}
@@ -485,7 +495,28 @@ public class UIElementController extends Controller {
 		property.refresh();
 	}
 
-	public void onCreationObjectDlgOkBtnClick() {
+	public void onCreationObjectDlgOkBtnClick(boolean existed, LObject selection, String name) {
+		LObject obj = (LObject)currentActor;
+		
+		if (existed){
+			selection.addAnimation(obj.getCurrentAnimation());
+			selection.setCurrentAnimation(obj.getCurrentAnimation());
+			selectedActors.clear();
+			selectedActors.add(selection);
+			currentActor.remove();
+			freeNewActor();
+		} else {
+			currentActor.setName(name);
+			objects.add((LObject)obj);
+			actors.add(obj);
+			selectedActors.clear();
+			selectedActors.add(obj);
+		}
+		
+		screen.hideObjectCreationDialog();
+	}
+	
+	public void onCreateionObjectDlgCancelBtnClick(){
 		
 	}
 }

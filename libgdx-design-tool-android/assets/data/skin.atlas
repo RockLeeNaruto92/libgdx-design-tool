@@ -506,128 +506,268 @@ Mac1.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-button-up
+anim-9
   rotate: false
   xy: 2, 2
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-7
+  rotate: false
+  xy: 148, 2
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-8
+  rotate: false
+  xy: 148, 2
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-6
+  rotate: false
+  xy: 294, 2
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-5
+  rotate: false
+  xy: 2, 124
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-3
+  rotate: false
+  xy: 148, 124
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-4
+  rotate: false
+  xy: 148, 124
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-20
+  rotate: false
+  xy: 294, 124
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-2
+  rotate: false
+  xy: 2, 246
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-19
+  rotate: false
+  xy: 148, 246
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-18
+  rotate: false
+  xy: 294, 246
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-17
+  rotate: false
+  xy: 2, 368
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-16
+  rotate: false
+  xy: 148, 368
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-15
+  rotate: false
+  xy: 294, 368
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-13
+  rotate: false
+  xy: 2, 490
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-14
+  rotate: false
+  xy: 2, 490
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-12
+  rotate: false
+  xy: 148, 490
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-11
+  rotate: false
+  xy: 294, 490
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-10
+  rotate: false
+  xy: 2, 612
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+anim-1
+  rotate: false
+  xy: 2, 734
+  size: 144, 120
+  orig: 144, 120
+  offset: 0, 0
+  index: -1
+button-up
+  rotate: false
+  xy: 148, 612
   size: 248, 43
   orig: 248, 43
   offset: 0, 0
   index: -1
 button-over
   rotate: false
-  xy: 2, 47
+  xy: 148, 657
   size: 248, 43
   orig: 248, 43
   offset: 0, 0
   index: -1
 button-down
   rotate: false
-  xy: 252, 2
+  xy: 148, 702
   size: 248, 43
   orig: 248, 43
   offset: 0, 0
   index: -1
 window-top
   rotate: false
-  xy: 2, 92
+  xy: 440, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window-background
   rotate: false
-  xy: 36, 92
+  xy: 474, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 textfield-background
   rotate: false
-  xy: 252, 47
+  xy: 148, 747
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 list-selection
   rotate: false
-  xy: 252, 75
+  xy: 148, 775
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 list-background
   rotate: false
-  xy: 502, 2
+  xy: 148, 803
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 selectbox-background
   rotate: false
-  xy: 502, 2
+  xy: 148, 803
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 textfield-disabled-background
   rotate: false
-  xy: 502, 2
+  xy: 148, 803
   size: 189, 26
   orig: 189, 26
   offset: 0, 0
   index: -1
 knob
   rotate: false
-  xy: 70, 92
+  xy: 440, 36
   size: 15, 18
   orig: 15, 18
   offset: 0, 0
   index: -1
 knob-disabled
   rotate: false
-  xy: 87, 92
+  xy: 457, 36
   size: 15, 18
   orig: 15, 18
   offset: 0, 0
   index: -1
 radio-checked
   rotate: false
-  xy: 104, 92
+  xy: 474, 36
   size: 14, 15
   orig: 14, 15
   offset: 0, 0
   index: -1
 radio-unchecked
   rotate: false
-  xy: 70, 112
+  xy: 490, 36
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 checkbox-unchecked
   rotate: false
-  xy: 87, 112
+  xy: 440, 56
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 checkbox-checked
   rotate: false
-  xy: 104, 109
+  xy: 440, 71
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 slider-disabled-background
   rotate: false
-  xy: 693, 2
+  xy: 148, 831
   size: 204, 5
   orig: 204, 5
   offset: 0, 0
   index: -1
 slider-background
   rotate: false
-  xy: 693, 9
+  xy: 148, 838
   size: 204, 5
   orig: 204, 5
   offset: 0, 0

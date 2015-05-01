@@ -88,12 +88,12 @@ public class ObjectCreationDialog extends BorderWindow{
 		
 		ok.addListener(new InputListener(){
 			@Override
-			public void touchUp(InputEvent event, float x, float y,
+			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				if (controller == null) return;
-				controller.onCreationObjectDlgOkBtnClick();
+				if (controller == null) return false;
+				controller.onCreationObjectDlgOkBtnClick(exist.isChecked(), list.getSelected(), name.getText());
 				
-				super.touchUp(event, x, y, pointer, button);
+				return super.touchDown(event, x, y, pointer, button);
 			}
 		});
 		
