@@ -2,7 +2,8 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
-import hust.libgdx.tool.views.renderers.properties.ActorProperty;
+import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
+import hust.libgdx.tool.views.renderers.properties.LabelProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class HomeRenderer extends ApplicationRenderer{
@@ -27,6 +29,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	private Editor editor;
 	private MessageDialog messgaeDialog;
 	private Property property;
+	private ArrayList<Property> properties;
 	
 	private boolean displayBound;
 	private boolean isSelecting = true;
@@ -36,6 +39,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	public HomeRenderer(UIElementController controller) {
 		super();
 		this.controller = controller;
+		properties = new ArrayList<>();
 		
 		createStages();
 		
@@ -89,7 +93,12 @@ public class HomeRenderer extends ApplicationRenderer{
 		size.x = Constant.PROPERTY_SIZE.x * Constant.SCREEN_SIZE.x;
 		size.y = Constant.PROPERTY_SIZE.y * Constant.SCREEN_SIZE.y;
 		
-		property = new ActorProperty(mainStage, skin, location, size, controller);
+		// load all instance of property
+		properties.add(EmptyProperty.getInstance(mainStage, skin, location, size, controller));
+		properties.add(LabelProperty.getInstance(mainStage, skin, location, size, controller));
+		
+		property = properties.get(0);
+		property.show(true);
 	}
 
 	private void createOutlinePart() {
@@ -305,7 +314,14 @@ public class HomeRenderer extends ApplicationRenderer{
 		property.setObject(actor);
 	}
 	
-	public Property getPropertyView(){
+	public Property getPropertyView(Actor actor){
+		property.show(false);
+		
+		if (actor == null) property = properties.get(0);
+		else if (actor instanceof Label) property = properties.get(1);
+		else property = null;
+		
+		property.show(true);
 		return property;
 	}
 }

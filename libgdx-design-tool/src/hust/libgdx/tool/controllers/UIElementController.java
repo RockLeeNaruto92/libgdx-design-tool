@@ -6,8 +6,8 @@ import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.models.uielements.LAnimation;
 import hust.libgdx.tool.models.uielements.LSprite;
 import hust.libgdx.tool.views.HomeScreen;
-import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
+import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
@@ -499,7 +499,7 @@ public class UIElementController extends Controller {
 	public void setPropertyView(Actor actor){
 		if (actor == null) return;
 		
-		ActorProperty property = (ActorProperty)screen.getRender().getPropertyView();
+		Property property = screen.getRender().getPropertyView(actor);
 		
 		property.setObject(actor);
 		property.refresh();

@@ -26,6 +26,7 @@ public abstract class Property {
 		createContainer(stage, bound);
 		createProperties(skin, size);
 		createScroll(skin);
+		container.setVisible(false);
 	}
 	
 	private void createContainer(Stage stage, Rectangle bound){
@@ -73,5 +74,10 @@ public abstract class Property {
 		return bound.contains(x, y);
 	}
 	
+	public void show(boolean show){
+		container.setVisible(show);
+	}
+	
 	public abstract void createProperties(Skin skin, Vector2 parentSize);
+	public abstract void refresh();
 }

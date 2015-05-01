@@ -10,11 +10,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class EmptyProperty extends Property {
+	private static EmptyProperty _instance;
+	
 	private Label label;
 
 	public EmptyProperty(Stage stage, Skin skin, Vector2 location,
 			Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
+	}
+	
+	public static EmptyProperty getInstance(Stage stage, Skin skin, Vector2 location,
+			Vector2 size, UIElementController controller){
+		if (_instance == null)
+			_instance = new EmptyProperty(stage, skin, location, size, controller);
+		
+		return _instance;
 	}
 
 	@Override
@@ -28,4 +38,8 @@ public class EmptyProperty extends Property {
 		getParent().add(label).colspan(3).width(width).height(height);
 	}
 
+	@Override
+	public void refresh() {
+		
+	}
 }

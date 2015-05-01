@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
-public class ActorProperty extends Property{
+public abstract class ActorProperty extends Property{
 	private TextField x, y, width, height;
 	private TextField name;
 	private CheckBox visible, debug;
@@ -74,15 +74,14 @@ public class ActorProperty extends Property{
 		debug = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.VISIBLE);
 	}
 	
-	private void createOtherField(){
-		
-	}
+	public abstract void createOtherField();
 	
+	@Override
 	public void refresh(){
 		setActorProperty(getObject());
 	}
 	
-	private void setActorProperty(Actor actor){
+	public void setActorProperty(Actor actor){
 		name.setText(actor.getName());
 		x.setText(actor.getX() + "");
 		y.setText(actor.getY() + "");
@@ -101,5 +100,6 @@ public class ActorProperty extends Property{
 		createTextFieldHeight(skin, parentSize);
 		createCheckboxVisibleField(skin, parentSize);
 		createCheckboxDebugField(skin, parentSize);
+		createOtherField();
 	}
 }
