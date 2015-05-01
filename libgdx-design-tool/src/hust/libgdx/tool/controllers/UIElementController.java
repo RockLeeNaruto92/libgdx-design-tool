@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -271,6 +272,9 @@ public class UIElementController extends Controller {
 		case ANIMATION:
 			actor = new LAnimation(skin);
 			break;
+		case BUTTON:
+			actor = new Button(skin);
+			break;
 
 		default:
 			break;
@@ -334,6 +338,8 @@ public class UIElementController extends Controller {
 			return Word.SPRITE_PATTERN_NAME + (i++);
 		case ANIMATION:
 			return Word.ANIMATION_PATTERN_NAME + (i++);
+		case BUTTON:
+			return Word.BUTTON_PATTERN_NAME + (i++);
 		default:
 			break;
 		}

@@ -15,6 +15,7 @@ public class Word {
 	public static final String IMAGE_PATTERN_NAME = "Image";
 	public static final String SPRITE_PATTERN_NAME = "Sprite";
 	public static final String ANIMATION_PATTERN_NAME = "Animation";
+	public static final String BUTTON_PATTERN_NAME = "Button";
 	
 	public static final String PROPERTY_EMPTY = "Property is not availabe!";
 
