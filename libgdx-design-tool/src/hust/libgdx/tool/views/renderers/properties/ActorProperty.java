@@ -67,6 +67,13 @@ public class ActorProperty extends Property{
 		visible = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.VISIBLE);
 	}
 	
+	private void createCheckboxDebugField(Skin skin, Vector2 parentSize) {
+		String[] labels = {Word.DEBUG};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, 0};
+		
+		debug = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.VISIBLE);
+	}
+	
 	private void createOtherField(){
 		
 	}
@@ -81,6 +88,8 @@ public class ActorProperty extends Property{
 		y.setText(actor.getY() + "");
 		width.setText(actor.getWidth() + "");
 		height.setText(actor.getHeight() + "");
+		visible.setChecked(actor.isVisible());
+		debug.setChecked(actor.getDebug());
 	}
 
 	@Override
@@ -91,5 +100,6 @@ public class ActorProperty extends Property{
 		createTextFieldWidth(skin, parentSize);
 		createTextFieldHeight(skin, parentSize);
 		createCheckboxVisibleField(skin, parentSize);
+		createCheckboxDebugField(skin, parentSize);
 	}
 }

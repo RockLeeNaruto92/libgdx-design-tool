@@ -488,6 +488,9 @@ public class UIElementController extends Controller {
 		case VISIBLE:
 			object.setVisible((boolean)value);
 			break;
+		case DEBUG:
+			object.setDebug((boolean)value);
+			break;
 		default:
 			break;
 		}
