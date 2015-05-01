@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -199,6 +200,42 @@ public class Utility {
 		});
 		
 		return checkbox;
+	}
+	
+	public static SelectBox<Object> createSelectBox(Table parent,
+			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
+			final ActorProperty property, final UIElementController controller,
+			final ActorPropertyType type, Object[] objects){
+		int i;
+		
+		parent.row();
+		
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
+			
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+					.pad(Constant.PROPERTY_CELL_PAD);
+		}
+		
+		final SelectBox<Object> sb = new SelectBox<Object>(skin);
+		sb.setItems(objects);
+		parent.add(sb).align(Align.left)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+		sb.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Actor object = property.getObject();
+				if (object == null) return;
+				controller.setObjectProperty(object, type, sb.getSelectedIndex());
+			}
+		});
+		
+		return sb;
 	}
 	
 	public static class NodeElement {

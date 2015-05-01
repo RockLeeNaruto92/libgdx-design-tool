@@ -3,7 +3,9 @@ package hust.libgdx.tool.controllers;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
+import hust.libgdx.tool.models.customs.CAlign;
 import hust.libgdx.tool.models.uielements.LAnimation;
+import hust.libgdx.tool.models.uielements.LLabel;
 import hust.libgdx.tool.models.uielements.LSprite;
 import hust.libgdx.tool.views.HomeScreen;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
@@ -264,7 +266,7 @@ public class UIElementController extends Controller {
 
 		switch (type) {
 		case LABEL:
-			actor = new Label(name, skin);
+			actor = new LLabel(name, skin);
 			break;
 		case CHECKBOX:
 			actor = new CheckBox(name, skin);
@@ -500,14 +502,17 @@ public class UIElementController extends Controller {
 			break;
 		}
 		
-		if (object instanceof Label) setLabelProperty((Label)object, type, value);
+		if (object instanceof Label) setLabelProperty((LLabel)object, type, value);
 	}
 	
-	private void setLabelProperty(Label object, ActorPropertyType type,
+	private void setLabelProperty(LLabel object, ActorPropertyType type,
 			Object value) {
 		switch (type) {
 		case TEXT:
 			object.setText((String)value);
+			break;
+		case ALIGN:
+			object.setAlignment(CAlign.getAlign((int)value));
 			break;
 
 		default:
