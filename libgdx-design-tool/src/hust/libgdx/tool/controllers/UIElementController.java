@@ -171,12 +171,16 @@ public class UIElementController extends Controller {
 			if (selectedActors.isEmpty()){
 				displayBound(false);
 				setCurrentAction(Action.NONE);
+				setPropertyView(null);
 			} else {
 				displayBound(true);
 				screen.getRender().setSelecting(false);
 				
 				selectedBound = getSelectedBound(true);
 				setCurrentAction(Action.SELECTED);
+				
+				if (selectedActors.size() == 1)
+					setPropertyView(selectedActors.get(0));
 			}
 			break;
 			
@@ -184,6 +188,7 @@ public class UIElementController extends Controller {
 			selectedBound = getSelectedBound(true);
 			screen.getRender().setSelecting(false);
 			displayBound(true);
+			System.out.println("Selected, set property " + selectedActors.size());
 			break;
 
 		default:
@@ -497,11 +502,9 @@ public class UIElementController extends Controller {
 	}
 	
 	public void setPropertyView(Actor actor){
-		if (actor == null) return;
-		
 		Property property = screen.getRender().getPropertyView(actor);
 		
-		property.setObject(actor);
+		if (actor != null) property.setObject(actor);
 		property.refresh();
 	}
 }
