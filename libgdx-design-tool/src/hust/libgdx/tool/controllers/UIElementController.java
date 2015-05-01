@@ -4,6 +4,7 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.models.customs.CAlign;
+import hust.libgdx.tool.models.customs.CScaling;
 import hust.libgdx.tool.models.uielements.LAnimation;
 import hust.libgdx.tool.models.uielements.LLabel;
 import hust.libgdx.tool.models.uielements.LSprite;
@@ -506,8 +507,26 @@ public class UIElementController extends Controller {
 		else if (object instanceof CheckBox) setCheckBoxProperty((CheckBox)object, type, value);
 		else if (object instanceof Button) setButtonProperty((Button)object, type, value);
 		else if (object instanceof Slider) setSliderProperty((Slider)object, type, value);
+		else if (object instanceof Image) setImageProperty((Image)object, type, value);
 	}
 	
+	private void setImageProperty(Image object, ActorPropertyType type,
+			Object value) {
+		switch (type) {
+		case ALIGN:
+			object.setAlign(CAlign.getAlign((int)value));
+			break;
+		case SCALING:
+			object.setScaling(CScaling.getScaling((int)value));
+			break;
+		case IMAGE:
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	private void setSliderProperty(Slider object, ActorPropertyType type,
 			Object value) {
 		switch (type) {

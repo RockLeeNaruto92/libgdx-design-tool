@@ -46,4 +46,7 @@ public class Word {
 	public static final String MAX_VALUE = "Max value";
 	public static final String STEP_VALUE = "Step value";
 	public static final String INIT_VALUE = "Init value";
+	public static final String SCALING = "Scaling";
+	public static final String SET = "Set"; 
+	public static final String IMAGE = "Image";
 }

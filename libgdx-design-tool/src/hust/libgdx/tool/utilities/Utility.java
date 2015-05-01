@@ -15,11 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -231,12 +233,44 @@ public class Utility {
 			public void changed(ChangeEvent event, Actor actor) {
 				Actor object = property.getObject();
 				if (object == null) return;
-				System.out.println("Selected index: " + sb.getSelectedIndex());
 				controller.setObjectProperty(object, type, sb.getSelectedIndex());
 			}
 		});
 		
 		return sb;
+	}
+	
+	public static Image createImageField(Table parent,
+			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
+			final ActorProperty property, final UIElementController controller,
+			final ActorPropertyType type){
+		int i;
+		
+		parent.row();
+		
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
+			
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+					.pad(Constant.PROPERTY_CELL_PAD);
+		}
+		
+		final Image image = new Image(skin, "anim-1");
+		parent.add(image).align(Align.left)
+				.width(widths[i])
+				.height(widths[i++])
+				.pad(Constant.PROPERTY_CELL_PAD);
+		
+		TextButton btn = new TextButton(Word.SET, skin);
+		parent.add(btn).align(Align.left)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+		
+		return image;
 	}
 	
 	public static class NodeElement {

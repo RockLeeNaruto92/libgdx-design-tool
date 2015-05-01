@@ -5,6 +5,7 @@ import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.views.renderers.properties.ButtonProperty;
 import hust.libgdx.tool.views.renderers.properties.CheckBoxProperty;
 import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
+import hust.libgdx.tool.views.renderers.properties.ImageProperty;
 import hust.libgdx.tool.views.renderers.properties.LabelProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
 import hust.libgdx.tool.views.renderers.properties.SliderProperty;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -105,6 +107,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		properties.add(CheckBoxProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(ButtonProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(SliderProperty.getInstance(mainStage, skin, location, size, controller));
+		properties.add(ImageProperty.getInstance(mainStage, skin, location, size, controller));
 		
 		property = properties.get(0);
 		property.show(true);
@@ -331,6 +334,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		else if (actor instanceof CheckBox) property = properties.get(2);
 		else if (actor instanceof Button) property = properties.get(3);
 		else if (actor instanceof Slider) property = properties.get(4);
+		else if (actor instanceof Image) property = properties.get(5);
 		else property = null;
 		
 		property.show(true);
