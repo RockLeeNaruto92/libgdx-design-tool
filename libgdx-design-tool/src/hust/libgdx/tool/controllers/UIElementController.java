@@ -503,7 +503,23 @@ public class UIElementController extends Controller {
 		}
 		
 		if (object instanceof Label) setLabelProperty((LLabel)object, type, value);
+		else if (object instanceof CheckBox) setCheckBoxProperty((CheckBox)object, type, value);
 		else if (object instanceof Button) setButtonProperty((Button)object, type, value);
+	}
+	
+	private void setCheckBoxProperty(CheckBox object, ActorPropertyType type, Object value){
+		setButtonProperty(object, type, value);
+		
+		switch (type) {
+		case TEXT:
+			object.setText((String)value);
+			break;
+		case ALIGN:
+			object.align(CAlign.getAlign((int)value));
+			break;
+		default:
+			break;
+		}
 	}
 	
 	private void setButtonProperty(Button object, ActorPropertyType type, Object value){

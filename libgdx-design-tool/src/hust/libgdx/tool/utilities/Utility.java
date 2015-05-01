@@ -231,6 +231,7 @@ public class Utility {
 			public void changed(ChangeEvent event, Actor actor) {
 				Actor object = property.getObject();
 				if (object == null) return;
+				System.out.println("Selected index: " + sb.getSelectedIndex());
 				controller.setObjectProperty(object, type, sb.getSelectedIndex());
 			}
 		});

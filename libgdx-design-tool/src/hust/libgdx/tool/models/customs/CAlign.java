@@ -1,5 +1,7 @@
 package hust.libgdx.tool.models.customs;
 
+import hust.libgdx.tool.constants.Word;
+
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class CAlign extends Align {
@@ -32,6 +34,32 @@ public class CAlign extends Align {
 		default:
 			return -1;
 		}
+	}
+	
+	public static String toString(int align) {
+		switch (align) {
+		case Align.top:
+			return Word.TOP;
+		case Align.topLeft:
+			return "Top left";
+		case Align.topRight:
+			return "Top right";
+		case Align.bottom:
+			return "Bottom";
+		case Align.bottomLeft:
+			return "Bottom left";
+		case Align.bottomRight:
+			return "Bottom right";
+		case Align.left:
+			return "Left";
+		case Align.right:
+			return "Right";
+		case Align.center:
+			return "Center";
+		default:
+			break;
+		}
+		return "Not ";
 	}
 
 	public static int getIndex(int align) {

@@ -3,6 +3,7 @@ package hust.libgdx.tool.views.renderers;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.views.renderers.properties.ButtonProperty;
+import hust.libgdx.tool.views.renderers.properties.CheckBoxProperty;
 import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
 import hust.libgdx.tool.views.renderers.properties.LabelProperty;
 import hust.libgdx.tool.views.renderers.properties.Property;
@@ -99,6 +100,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		// load all instance of property
 		properties.add(EmptyProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(LabelProperty.getInstance(mainStage, skin, location, size, controller));
+		properties.add(CheckBoxProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(ButtonProperty.getInstance(mainStage, skin, location, size, controller));
 		
 		property = properties.get(0);
@@ -323,8 +325,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		
 		if (actor == null) property = properties.get(0);
 		else if (actor instanceof Label) property = properties.get(1);
-		else if (actor instanceof CheckBox) property = null;
-		else if (actor instanceof Button) property = properties.get(2);
+		else if (actor instanceof CheckBox) property = properties.get(2);
+		else if (actor instanceof Button) property = properties.get(3);
 		else property = null;
 		
 		property.show(true);
