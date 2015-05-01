@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 
 public class UIElementController extends Controller {
 	enum Action {
@@ -275,6 +276,8 @@ public class UIElementController extends Controller {
 		case BUTTON:
 			actor = new Button(skin);
 			break;
+		case SLIDER:
+			actor = new Slider(Constant.SLIDER_DEFAULT_RANGE.x, Constant.SLIDER_DEFAULT_RANGE.y, Constant.SLIDER_STEP, false, skin);
 
 		default:
 			break;
@@ -340,6 +343,8 @@ public class UIElementController extends Controller {
 			return Word.ANIMATION_PATTERN_NAME + (i++);
 		case BUTTON:
 			return Word.BUTTON_PATTERN_NAME + (i++);
+		case SLIDER:
+			return Word.SLIDER_PATTERN_NAME + (i++);
 		default:
 			break;
 		}

@@ -214,9 +214,10 @@
    		},
    		com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
    			default-horizontal: {
-   				background: quickPlay,
-   				disabledBackground: quickPlayClick,
-   				knob: pause
+   				background: slider-background,
+   				disabledBackground: slider-disabled-background,
+   				knob: knob,
+   				disabledKnob: knob-disabled
    			}
    		},
    		
