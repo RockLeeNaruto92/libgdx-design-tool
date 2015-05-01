@@ -42,4 +42,8 @@ public class Word {
 	public static final String BOTTOM = "Bottom";
 	public static final String CHECK = "Check";
 	public static final String DISABLE = "Disable";
+	public static final String MIN_VALUE = "Min value";
+	public static final String MAX_VALUE = "Max value";
+	public static final String STEP_VALUE = "Step value";
+	public static final String INIT_VALUE = "Init value";
 }

@@ -505,8 +505,29 @@ public class UIElementController extends Controller {
 		if (object instanceof Label) setLabelProperty((LLabel)object, type, value);
 		else if (object instanceof CheckBox) setCheckBoxProperty((CheckBox)object, type, value);
 		else if (object instanceof Button) setButtonProperty((Button)object, type, value);
+		else if (object instanceof Slider) setSliderProperty((Slider)object, type, value);
 	}
 	
+	private void setSliderProperty(Slider object, ActorPropertyType type,
+			Object value) {
+		switch (type) {
+		case MAX:
+			object.setRange(object.getMinValue(), Float.parseFloat((String)value));
+			break;
+		case MIN:
+			object.setRange(Float.parseFloat((String)value), object.getMaxValue());
+			break;
+		case STEP:
+			object.setStepSize(Float.parseFloat((String)value));
+			break;
+		case INIT:
+			object.setValue(Float.parseFloat((String)value));
+			break;
+		default:
+			break;
+		}
+	}
+
 	private void setCheckBoxProperty(CheckBox object, ActorPropertyType type, Object value){
 		setButtonProperty(object, type, value);
 		
