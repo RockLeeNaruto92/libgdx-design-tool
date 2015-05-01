@@ -21,7 +21,7 @@ public class LabelProperty extends ActorProperty {
 	private TextField text;
 	private TextField fontScaleX, fontScaleY;
 	private SelectBox<Object> align;
-	private CheckBox wrap;
+	private CheckBox wrap, ellipsis;
 
 	public LabelProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
@@ -42,6 +42,7 @@ public class LabelProperty extends ActorProperty {
 		createCheckBoxWrap(skin, parentSize);
 		createFontScaleX(skin, parentSize);
 		createFontScaleY(skin, parentSize);
+		createCheckBoxEllipsis(skin, parentSize);
 	}
 	
 	private void createTextFieldText(Skin skin, Vector2 parentSize){
@@ -81,6 +82,13 @@ public class LabelProperty extends ActorProperty {
 		fontScaleY = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_Y);
 	}
 	
+	private void createCheckBoxEllipsis(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.ELLIPSIS};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		
+		ellipsis = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ELLIPSIS);
+	}
+	
 	@Override
 	public void setActorProperty(Actor actor) {
 		super.setActorProperty(actor);
@@ -91,5 +99,6 @@ public class LabelProperty extends ActorProperty {
 		wrap.setChecked(obj.isWrap());
 		fontScaleX.setText(obj.getFontScaleX() + "");
 		fontScaleY.setText(obj.getFontScaleY() + "");
+		ellipsis.setChecked(obj.isEllipsis());
 	}
 }

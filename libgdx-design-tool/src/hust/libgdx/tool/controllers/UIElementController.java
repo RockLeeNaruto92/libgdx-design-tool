@@ -523,6 +523,9 @@ public class UIElementController extends Controller {
 		case FONT_SCALE_Y:
 			object.setFontScaleY((float)value);
 			break;
+		case ELLIPSIS:
+			object.setEllipsis((boolean)value);
+			break;
 		default:
 			break;
 		}

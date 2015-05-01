@@ -34,4 +34,5 @@ public class Word {
 	public static final String ALIGN = "Align";
 	public static final String WRAP = "Wrap";
 	public static final String FONT_SCALE = "Font scale";
+	public static final String ELLIPSIS = "Ellipsis";
 }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 public class LLabel extends Label {
 	private int align;
-	private boolean wrap;
+	private boolean wrap, ellipsis;
 
 	public LLabel(CharSequence text, Skin skin) {
 		super(text, skin);
@@ -32,5 +32,15 @@ public class LLabel extends Label {
 	
 	public boolean isWrap(){
 		return wrap;
+	}
+
+	@Override
+	public void setEllipsis(boolean ellipsis) {
+		this.ellipsis = ellipsis;
+		super.setEllipsis(ellipsis);
+	}
+	
+	public boolean isEllipsis(){
+		return ellipsis;
 	}
 }
