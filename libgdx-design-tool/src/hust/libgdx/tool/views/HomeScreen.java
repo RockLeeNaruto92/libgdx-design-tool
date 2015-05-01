@@ -1,5 +1,8 @@
 package hust.libgdx.tool.views;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
+
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.views.renderers.HomeRenderer;
@@ -60,11 +63,18 @@ public class HomeScreen extends ApplicationScreen{
 
 	@Override
 	public boolean keyTyped(char character) {
-		if (character == '='){
-			controller.zoom(true);
-		}
-		else if (character == '-'){
+		switch ((int)character) {
+		case '=':
 			controller.zoom(false);
+			break;
+		case '-':
+			controller.zoom(true);
+			break;
+		case 127: // delete
+			controller.deleteSelectedActors();
+			break;
+		default:
+			break;
 		}
 		
 		return super.keyTyped(character);
