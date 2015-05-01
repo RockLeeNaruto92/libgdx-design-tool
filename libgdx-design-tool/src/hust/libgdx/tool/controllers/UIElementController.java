@@ -485,6 +485,9 @@ public class UIElementController extends Controller {
 		case HEIGHT:
 			object.setHeight((float)value);
 			break;
+		case VISIBLE:
+			object.setVisible((boolean)value);
+			break;
 		default:
 			break;
 		}

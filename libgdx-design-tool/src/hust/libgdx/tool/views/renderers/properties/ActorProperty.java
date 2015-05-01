@@ -8,12 +8,14 @@ import hust.libgdx.tool.utilities.Utility;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class ActorProperty extends Property{
 	private TextField x, y, width, height;
 	private TextField name;
+	private CheckBox visible, debug;
 	
 	public ActorProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
 		super(stage, skin, location, size, controller);
@@ -58,6 +60,13 @@ public class ActorProperty extends Property{
 		height = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.HEIGHT);
 	}
 	
+	private void createCheckboxVisibleField(Skin skin, Vector2 parentSize){
+		String[] labels = {Word.VISIBLE};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, 0};
+		
+		visible = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.VISIBLE);
+	}
+	
 	private void createOtherField(){
 		
 	}
@@ -81,5 +90,6 @@ public class ActorProperty extends Property{
 		createTextFieldY(skin, parentSize);
 		createTextFieldWidth(skin, parentSize);
 		createTextFieldHeight(skin, parentSize);
+		createCheckboxVisibleField(skin, parentSize);
 	}
 }

@@ -681,6 +681,20 @@ window-background
   orig: 32, 32
   offset: 0, 0
   index: -1
+border-normal
+  rotate: false
+  xy: 440, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+border-focus
+  rotate: false
+  xy: 474, 36
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 textfield-background
   rotate: false
   xy: 148, 747
@@ -718,42 +732,42 @@ textfield-disabled-background
   index: -1
 knob
   rotate: false
-  xy: 440, 36
+  xy: 440, 70
   size: 15, 18
   orig: 15, 18
   offset: 0, 0
   index: -1
 knob-disabled
   rotate: false
-  xy: 457, 36
+  xy: 440, 90
   size: 15, 18
   orig: 15, 18
   offset: 0, 0
   index: -1
 radio-checked
   rotate: false
-  xy: 474, 36
+  xy: 457, 70
   size: 14, 15
   orig: 14, 15
   offset: 0, 0
   index: -1
 radio-unchecked
   rotate: false
-  xy: 490, 36
+  xy: 457, 87
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 checkbox-unchecked
   rotate: false
-  xy: 440, 56
+  xy: 457, 103
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
   index: -1
 checkbox-checked
   rotate: false
-  xy: 440, 71
+  xy: 473, 70
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
@@ -772,4 +786,3 @@ slider-background
   orig: 204, 5
   offset: 0, 0
   index: -1
- 

@@ -3,6 +3,7 @@ package hust.libgdx.tool.utilities;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.models.customs.BorderTextField;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
 
@@ -75,7 +76,7 @@ public class Utility {
 		}
 		
 		// create text field
-		final TextField textfield = new TextField(Word.NULL, skin);
+		final TextField textfield = new BorderTextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
 				.width(widths[i++] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
@@ -140,7 +141,7 @@ public class Utility {
 		}
 
 		// create text field
-		final TextField textfield = new TextField(Word.NULL, skin);
+		final TextField textfield = new BorderTextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
 				.width(widths[i++] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
@@ -158,6 +159,41 @@ public class Utility {
 		});
 		
 		return textfield;
+	}
+	
+	public static CheckBox createCheckboxField(Table parent,
+			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
+			final ActorProperty property, final UIElementController controller,
+			final ActorPropertyType type){
+		int i;
+		
+		parent.row();
+		
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
+			
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+					.pad(Constant.PROPERTY_CELL_PAD);
+		}
+		
+		final CheckBox checkbox = new CheckBox(Word.NULL, skin);
+		parent.add(checkbox).align(Align.left)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+		checkbox.addListener(new ChangeListener(){
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				Actor object = property.getObject();
+				if (object == null) return;
+				controller.setObjectProperty(object, type, checkbox.isChecked());
+			}
+		});
+		
+		return checkbox;
 	}
 	
 	public static class NodeElement {

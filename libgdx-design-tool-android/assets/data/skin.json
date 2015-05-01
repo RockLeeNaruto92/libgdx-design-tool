@@ -168,8 +168,7 @@
 		com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 			default: {
 				font: default-font,
-				fontColor: red,
-				background: quickPlay
+				fontColor: red
 			}
 		},
 		
@@ -197,8 +196,8 @@
    		com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
    			default: {
    				font: default-font,
-   				checkboxOn: quickPlay, 
-   				checkboxOff: quickPlayClick
+   				checkboxOn: checkbox-checked, 
+   				checkboxOff: checkbox-unchecked
    			}
    		},
    		com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {

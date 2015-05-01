@@ -28,4 +28,5 @@ public class Word {
 	public static final String SIZE = "Size";
 	public static final String WIDTH = "Width";
 	public static final String HEIGHT = "Height";
+	public static final String VISIBLE = "Visible";
 }

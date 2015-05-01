@@ -29,6 +29,7 @@ public class Constant {
 	public static Vector2 SLIDER_DEFAULT_RANGE = new Vector2(0, 0);
 	
 	public static Vector2 SUB_MENU_SIZE = new Vector2(0.3f, 0f);
+	public static float TEXTFIELD_PAD = 2f;
 	
 	public static float CAMERA_ZOOM_STEP = 0.1f;
 	
