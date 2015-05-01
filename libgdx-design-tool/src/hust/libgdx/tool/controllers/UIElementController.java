@@ -3,7 +3,8 @@ package hust.libgdx.tool.controllers;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
-import hust.libgdx.tool.utilities.LSprite;
+import hust.libgdx.tool.models.uielements.LAnimation;
+import hust.libgdx.tool.models.uielements.LSprite;
 import hust.libgdx.tool.views.HomeScreen;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
@@ -267,6 +268,9 @@ public class UIElementController extends Controller {
 		case SPRITE:
 			actor = new LSprite();
 			break;
+		case ANIMATION:
+			actor = new LAnimation(skin);
+			break;
 
 		default:
 			break;
@@ -328,6 +332,8 @@ public class UIElementController extends Controller {
 			return Word.IMAGE_PATTERN_NAME + (i++);
 		case SPRITE:
 			return Word.SPRITE_PATTERN_NAME + (i++);
+		case ANIMATION:
+			return Word.ANIMATION_PATTERN_NAME + (i++);
 		default:
 			break;
 		}

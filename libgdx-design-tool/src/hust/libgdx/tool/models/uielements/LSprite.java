@@ -1,4 +1,4 @@
-package hust.libgdx.tool.utilities;
+package hust.libgdx.tool.models.uielements;
 
 import hust.libgdx.tool.views.renderers.HomeRenderer;
 

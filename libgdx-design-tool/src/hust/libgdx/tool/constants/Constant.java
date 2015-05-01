@@ -57,5 +57,7 @@ public class Constant {
 	
 	// default
 	public static String DEFAULT_IMAGE = "quickPlay"; 
+	public static int DEFAULT_ANIMATION_FRAMES_NUM = 20;
+	public static float DEFAULT_ANIMATION_FRAME_DURATION = 0.23f;
 	
 }
