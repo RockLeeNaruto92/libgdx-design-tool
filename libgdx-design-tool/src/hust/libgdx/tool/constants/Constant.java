@@ -24,6 +24,7 @@ public class Constant {
 	public static Vector2 HEIGHT_RANGE = new Vector2(-1000, 1000);
 	public static Vector2 FONT_SCALE_RANGE = new Vector2(0.1f, 100);
 	public static Vector2 PAD_RANGE = new Vector2(0, 1000);
+	public static Vector2 ROTATION_RANGE = new Vector2(0, 360);
 	
 	public static float SLIDER_STEP = 0.1f;
 	public static float SLIDER_KNOB_WIDTH = 0.01f;

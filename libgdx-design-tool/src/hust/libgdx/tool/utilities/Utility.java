@@ -62,7 +62,7 @@ public class Utility {
 	public static TextField createTextFieldWithSlider(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths,
 			float sliderInfo[], Skin skin, final ActorProperty property,
-			final UIElementController controller, final ActorPropertyType type) {
+			final UIElementController controller, final ActorPropertyType type, int[] colspans) {
 		int i;
 		
 		parent.row();
@@ -75,28 +75,28 @@ public class Utility {
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD);
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
 		}
 		
 		// create text field
 		final TextField textfield = new BorderTextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
-				.width(widths[i++] * parentSize.x)
+				.width(widths[i] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-				.pad(Constant.PROPERTY_CELL_PAD);
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(colspans[i++]);
 		
 		
 		// create slider
-		float sliderWidth = 0;
-		while (i < widths.length) sliderWidth += widths[i++] * parentSize.x;
-		
 		final Slider slider = new Slider(sliderInfo[0], sliderInfo[1], sliderInfo[2], false, skin);
 		slider.getStyle().knob.setMinHeight(parentSize.y * Constant.PROPERTY_ROW_HEIGHT);
 		slider.getStyle().knob.setMinWidth(parentSize.x * Constant.SLIDER_KNOB_WIDTH);
 		parent.add(slider).align(Align.left)
-				.width(sliderWidth)
+				.width(widths[i] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-				.pad(Constant.PROPERTY_CELL_PAD);
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(colspans[i++]);
 		
 		// add listener to slider, when slider changed -> change textfield value and set object value
 		slider.addListener(new ChangeListener() {
@@ -127,7 +127,7 @@ public class Utility {
 	public static TextField createTextFieldWithOutSlider(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
-			final ActorPropertyType type) {
+			final ActorPropertyType type, int[] colspans) {
 		int i;
 		
 		parent.row();
@@ -140,16 +140,17 @@ public class Utility {
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD);
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
 		}
 
 		// create text field
 		final TextField textfield = new BorderTextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
-				.width(widths[i++] * parentSize.x)
+				.width(widths[i] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+				.colspan(colspans[i++]);
 		
 		// add listener to text field, if textfield change value -> check validation and set value for object
 		textfield.addListener(new InputListener(){
@@ -172,7 +173,7 @@ public class Utility {
 	public static CheckBox createCheckboxField(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
-			final ActorPropertyType type){
+			final ActorPropertyType type, int[] colspans){
 		int i;
 		
 		parent.row();
@@ -184,14 +185,15 @@ public class Utility {
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD);
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
 		}
 		
 		final CheckBox checkbox = new CheckBox(Word.NULL, skin);
 		parent.add(checkbox).align(Align.left)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+				.colspan(colspans[i++]);
 		checkbox.addListener(new ChangeListener(){
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -207,7 +209,7 @@ public class Utility {
 	public static SelectBox<Object> createSelectBox(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
-			final ActorPropertyType type, Object[] objects){
+			final ActorPropertyType type, Object[] objects, int[] colspans){
 		int i;
 		
 		parent.row();
@@ -219,7 +221,8 @@ public class Utility {
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD);
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
 		}
 		
 		final SelectBox<Object> sb = new SelectBox<Object>(skin);
@@ -227,7 +230,7 @@ public class Utility {
 		parent.add(sb).align(Align.left)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+				.colspan(colspans[i++]);
 		sb.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
@@ -271,6 +274,41 @@ public class Utility {
 				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
 		
 		return image;
+	}
+	
+	public static TextField createColorField(Table parent,
+			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
+			final ActorProperty property, final UIElementController controller,
+			final ActorPropertyType type){
+		int i;
+		
+		parent.row();
+		
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
+			
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+					.pad(Constant.PROPERTY_CELL_PAD);
+		}
+		
+		final TextField textfield = new BorderTextField(Word.NULL, skin);
+		textfield.setDisabled(true);
+		parent.add(textfield).align(Align.left)
+				.width(widths[i++] * parentSize.x)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+		
+		TextButton btn = new TextButton(Word.SET, skin);
+		parent.add(btn).align(Align.left)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+		
+		return textfield;
 	}
 	
 	public static class NodeElement {

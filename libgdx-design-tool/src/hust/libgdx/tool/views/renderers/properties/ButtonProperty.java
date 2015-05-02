@@ -44,47 +44,53 @@ public class ButtonProperty extends ActorProperty {
 	protected void createCheckBoxDisable(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.DISABLE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		disable = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.DISABLE);
+		disable = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.DISABLE, colspans);
 	}
 	
 	protected void createTextFieldPadLeft(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.PAD, Word.LEFT};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.PAD_RANGE.x, Constant.PAD_RANGE.y, Constant.SLIDER_STEP};
+		int[] colspans = {1, 1, 1, 1};
 		
-		padLeft = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_LEFT);
+		padLeft = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_LEFT, colspans);
 	}
 	
 	protected void createTextFieldPadRight(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.NULL, Word.RIGHT};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 1, 1, 1};
 		float[] sliderInfo = {Constant.PAD_RANGE.x, Constant.PAD_RANGE.y, Constant.SLIDER_STEP};
 		
-		padRight = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_RIGHT);
+		padRight = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_RIGHT, colspans);
 	}
 	
 	protected void createTextFieldPadTop(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.NULL, Word.TOP};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.PAD_RANGE.x, Constant.PAD_RANGE.y, Constant.SLIDER_STEP};
+		int[] colspans = {1, 1, 1, 1};
 		
-		padTop = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_TOP);
+		padTop = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_TOP, colspans);
 	}
 	
 	protected void createTextFieldPadBottom(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.NULL, Word.BOTTOM};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.PAD_RANGE.x, Constant.PAD_RANGE.y, Constant.SLIDER_STEP};
+		int[] colspans = {1, 1, 1, 1};
 		
-		padBottom = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_BOTTOM);
+		padBottom = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.PAD_BOTTOM, colspans);
 	}
 	
 	protected void createCheckBoxCheck(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.CHECK};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		check = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.CHECK);
+		check = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.CHECK, colspans);
 	}
 	
 	@Override

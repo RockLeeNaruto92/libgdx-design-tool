@@ -43,7 +43,7 @@ public class ImageProperty extends ActorProperty {
 	
 	private void createImageImage(Skin skin, Vector2 parentSize) {
 		String[] labels = {Word.IMAGE};
-		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
 		
 		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE);
 	}
@@ -51,15 +51,17 @@ public class ImageProperty extends ActorProperty {
 	private void createSelectBoxAlign(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.ALIGN};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		align = Utility.createSelectBox(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ALIGN, CAlign.aligns);
+		align = Utility.createSelectBox(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ALIGN, CAlign.aligns, colspans);
 	}
 	
 	private void createSelectBoxScaling(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.SCALING};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		scaling = Utility.createSelectBox(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.SCALING, CScaling.scalings);
+		scaling = Utility.createSelectBox(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.SCALING, CScaling.scalings, colspans);
 	}
 	
 	@Override

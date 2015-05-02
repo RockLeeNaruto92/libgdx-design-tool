@@ -48,45 +48,51 @@ public class LabelProperty extends ActorProperty {
 	private void createTextFieldText(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.TEXT};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		text = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.TEXT);
+		text = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.TEXT, colspans);
 	}
 	
 	private void createSelectBoxAlign(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.ALIGN};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		align = Utility.createSelectBox(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ALIGN, CAlign.aligns);
+		align = Utility.createSelectBox(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ALIGN, CAlign.aligns, colspans);
 	}
 	
 	private void createCheckBoxWrap(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.WRAP};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		wrap = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.WRAP);
+		wrap = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.WRAP, colspans);
 	}
 	
 	private void createFontScaleX(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.FONT_SCALE, Word.X};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.FONT_SCALE_RANGE.x, Constant.FONT_SCALE_RANGE.y, Constant.SLIDER_STEP};
+		int[] colspans = {1, 1, 1, 1};
 		
-		fontScaleX = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_X);
+		fontScaleX = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_X, colspans);
 	}
 	
 	private void createFontScaleY(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.NULL, Word.Y};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
 		float[] sliderInfo = {Constant.FONT_SCALE_RANGE.x, Constant.FONT_SCALE_RANGE.y, Constant.SLIDER_STEP};
+		int[] colspans = {1, 1, 1, 1};
 		
-		fontScaleY = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_Y);
+		fontScaleY = Utility.createTextFieldWithSlider(getParent(), parentSize, labels, widths, sliderInfo, skin, this, getController(), ActorPropertyType.FONT_SCALE_Y, colspans);
 	}
 	
 	private void createCheckBoxEllipsis(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.ELLIPSIS};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		ellipsis = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ELLIPSIS);
+		ellipsis = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.ELLIPSIS, colspans);
 	}
 	
 	@Override

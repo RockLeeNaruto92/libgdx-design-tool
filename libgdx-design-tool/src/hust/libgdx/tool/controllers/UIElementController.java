@@ -15,6 +15,7 @@ import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -508,8 +509,30 @@ public class UIElementController extends Controller {
 		else if (object instanceof Button) setButtonProperty((Button)object, type, value);
 		else if (object instanceof Slider) setSliderProperty((Slider)object, type, value);
 		else if (object instanceof Image) setImageProperty((LImage)object, type, value);
+		else if (object instanceof LSprite) setSpriteProperty((LSprite)object, type, value);
 	}
 	
+	private void setSpriteProperty(LSprite object, ActorPropertyType type,
+			Object value) {
+		switch (type) {
+		case COLOR:
+			object.setColor((Color)value);
+			break;
+		case SCALE_X:
+			object.setScaleX(Float.parseFloat((String)value));
+			break;
+		case SCALE_Y:
+			object.setScaleY(Float.parseFloat((String)value));
+			break;
+		case ROTATION:
+			object.setRotation((float)value);
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	private void setImageProperty(LImage object, ActorPropertyType type,
 			Object value) {
 		switch (type) {
@@ -521,7 +544,6 @@ public class UIElementController extends Controller {
 			break;
 		case IMAGE:
 			break;
-
 		default:
 			break;
 		}

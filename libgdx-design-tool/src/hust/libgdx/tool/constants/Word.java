@@ -49,4 +49,8 @@ public class Word {
 	public static final String SCALING = "Scaling";
 	public static final String SET = "Set"; 
 	public static final String IMAGE = "Image";
+	public static final String ROTATION = "Rotation";
+	public static final String FLIP = "Flip";
+	public static final String COLOR = "Color";
+	public static final String SCALE = "Scale";
 }

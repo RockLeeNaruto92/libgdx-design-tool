@@ -44,36 +44,41 @@ public class SliderProperty extends ActorProperty {
 	protected void createCheckBoxDisable(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.CHECK};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		disable = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.CHECK);
+		disable = Utility.createCheckboxField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.CHECK, colspans);
 	}
 	
 	private void createTextFieldMin(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.MIN_VALUE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		min = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.MIN);
+		min = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.MIN, colspans);
 	}
 	
 	private void createTextFieldMax(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.MAX_VALUE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		max = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.MAX);
+		max = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.MAX, colspans);
 	}
 	
 	private void createTextFieldStep(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.STEP_VALUE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		step = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.STEP);
+		step = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.STEP, colspans);
 	}
 	
 	private void createTextFieldInit(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.INIT_VALUE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
 		
-		init = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.INIT);
+		init = Utility.createTextFieldWithOutSlider(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.INIT, colspans);
 	}
 	
 	@Override
