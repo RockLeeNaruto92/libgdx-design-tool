@@ -6,6 +6,7 @@ import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.models.customs.CAlign;
 import hust.libgdx.tool.models.customs.CScaling;
 import hust.libgdx.tool.models.uielements.LAnimation;
+import hust.libgdx.tool.models.uielements.LImage;
 import hust.libgdx.tool.models.uielements.LLabel;
 import hust.libgdx.tool.models.uielements.LSprite;
 import hust.libgdx.tool.views.HomeScreen;
@@ -191,7 +192,6 @@ public class UIElementController extends Controller {
 			selectedBound = getSelectedBound(true);
 			screen.getRender().setSelecting(false);
 			displayBound(true);
-			System.out.println("Selected, set property " + selectedActors.size());
 			break;
 
 		default:
@@ -273,7 +273,7 @@ public class UIElementController extends Controller {
 			actor = new CheckBox(name, skin);
 			break;
 		case IMAGE:
-			actor = new Image(skin, Constant.DEFAULT_IMAGE);
+			actor = new LImage(skin, Constant.DEFAULT_IMAGE);
 			break;
 		case SPRITE:
 			actor = new LSprite();
@@ -507,10 +507,10 @@ public class UIElementController extends Controller {
 		else if (object instanceof CheckBox) setCheckBoxProperty((CheckBox)object, type, value);
 		else if (object instanceof Button) setButtonProperty((Button)object, type, value);
 		else if (object instanceof Slider) setSliderProperty((Slider)object, type, value);
-		else if (object instanceof Image) setImageProperty((Image)object, type, value);
+		else if (object instanceof Image) setImageProperty((LImage)object, type, value);
 	}
 	
-	private void setImageProperty(Image object, ActorPropertyType type,
+	private void setImageProperty(LImage object, ActorPropertyType type,
 			Object value) {
 		switch (type) {
 		case ALIGN:
@@ -521,7 +521,6 @@ public class UIElementController extends Controller {
 			break;
 		case IMAGE:
 			break;
-
 		default:
 			break;
 		}

@@ -260,14 +260,15 @@ public class Utility {
 		
 		final Image image = new Image(skin, "anim-1");
 		parent.add(image).align(Align.left)
-				.width(widths[i])
-				.height(widths[i++])
+				.width(widths[i] * parentSize.x)
+				.height(widths[i++] * parentSize.x)
 				.pad(Constant.PROPERTY_CELL_PAD);
 		
 		TextButton btn = new TextButton(Word.SET, skin);
 		parent.add(btn).align(Align.left)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
+				.width(widths[i++] * parentSize.x)
 				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
 		
 		return image;
