@@ -5,7 +5,7 @@ import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.customs.CAlign;
 import hust.libgdx.tool.models.customs.CScaling;
-import hust.libgdx.tool.models.uielements.LLabel;
+import hust.libgdx.tool.models.uielements.LImage;
 import hust.libgdx.tool.utilities.Utility;
 
 import com.badlogic.gdx.math.Vector2;
@@ -65,10 +65,10 @@ public class ImageProperty extends ActorProperty {
 	@Override
 	public void setActorProperty(Actor actor) {
 		super.setActorProperty(actor);
-		Image obj = (Image)actor;
+		LImage obj = (LImage)actor;
 		
-//		align.setSelectedIndex(CAlign.getIndex(obj.getAlign()));
-//		scaling.setSelectedIndex(CScaling.getIndex(obj.getSca));
-		
+		align.setSelectedIndex(CAlign.getIndex(obj.getAlign()));
+		scaling.setSelectedIndex(CScaling.getIndex(obj.getScaling()));
+		image.setDrawable(obj.getDrawable());
 	}
 }
