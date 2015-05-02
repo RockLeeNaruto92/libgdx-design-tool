@@ -39,7 +39,7 @@ public class SpriteProperty extends ActorProperty {
 		createTextFieldRotation(skin, parentSize);
 		createTextFieldScaleX(skin, parentSize);
 		createTextFieldScaleY(skin, parentSize);
-//		createTextFieldColor(skin, parentSize);
+		createTextFieldColor(skin, parentSize);
 		createImageImage(skin, parentSize);
 	}
 	
@@ -79,8 +79,9 @@ public class SpriteProperty extends ActorProperty {
 	private void createTextFieldColor(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.COLOR};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 2, 1};
 		
-		color = Utility.createColorField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.COLOR);
+		color = Utility.createColorField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.COLOR, colspans);
 	}
 
 	@Override

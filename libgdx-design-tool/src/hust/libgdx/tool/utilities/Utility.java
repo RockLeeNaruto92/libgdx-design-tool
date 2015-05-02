@@ -4,6 +4,7 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.customs.BorderTextField;
+import hust.libgdx.tool.models.customs.ColorTextField;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
 
@@ -282,7 +283,7 @@ public class Utility {
 	public static TextField createColorField(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
-			final ActorPropertyType type){
+			final ActorPropertyType type, int[] colspans){
 		int i;
 		
 		parent.row();
@@ -294,22 +295,23 @@ public class Utility {
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD);
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
 		}
 		
-		final TextField textfield = new BorderTextField(Word.NULL, skin);
+		final TextField textfield = new ColorTextField(Word.NULL, skin);
 		textfield.setDisabled(true);
 		parent.add(textfield).align(Align.left)
-				.width(widths[i++] * parentSize.x)
+				.width(widths[i] * parentSize.x)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+				.colspan(colspans[i++]);
 		
 		TextButton btn = new TextButton(Word.SET, skin);
 		parent.add(btn).align(Align.left)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+				.colspan(colspans[i++]);
 		
 		return textfield;
 	}
