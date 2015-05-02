@@ -246,7 +246,7 @@ public class Utility {
 	public static Image createImageField(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
-			final ActorPropertyType type){
+			final ActorPropertyType type, int[] colspans){
 		int i;
 		
 		parent.row();
@@ -258,20 +258,23 @@ public class Utility {
 			parent.add(label).align(Align.left)
 					.width(widths[i] * parentSize.x)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD);
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
 		}
 		
 		final Image image = new Image(skin, "anim-1");
 		parent.add(image).align(Align.left)
 				.width(widths[i] * parentSize.x)
-				.height(widths[i++] * parentSize.x)
-				.pad(Constant.PROPERTY_CELL_PAD);
+				.height(widths[i] * parentSize.x)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(colspans[i++]);
+		
 		
 		TextButton btn = new TextButton(Word.SET, skin);
 		parent.add(btn).align(Align.left)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(Constant.PROPERTY_COLUMNS - labels.length);
+				.colspan(i);
 		
 		return image;
 	}

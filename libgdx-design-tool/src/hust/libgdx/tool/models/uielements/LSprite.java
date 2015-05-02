@@ -17,19 +17,12 @@ public class LSprite extends Actor {
 	private boolean flipX, flipY;
 	private float rotation = 0;
 	
-	public LSprite(Sprite sprite) {
-		super();
-		
-		this.sprite = sprite;
-		setSize(sprite.getWidth(), sprite.getHeight());
-		trd = new TextureRegionDrawable(new TextureRegion(sprite.getTexture()));
-	}
-	
 	public LSprite(){
 		super();
 		
 		sprite = new Sprite(HomeRenderer.DEFAULT_SPRITE_TEXTURE);
 		setSize(sprite.getWidth(), sprite.getHeight());
+		trd = new TextureRegionDrawable(new TextureRegion(sprite.getTexture()));
 	}
 	
 	public Drawable getDrawble(){

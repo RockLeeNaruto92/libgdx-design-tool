@@ -44,8 +44,9 @@ public class ImageProperty extends ActorProperty {
 	private void createImageImage(Skin skin, Vector2 parentSize) {
 		String[] labels = {Word.IMAGE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 1, 2};
 		
-		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE);
+		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans);
 	}
 
 	private void createSelectBoxAlign(Skin skin, Vector2 parentSize){
@@ -71,6 +72,6 @@ public class ImageProperty extends ActorProperty {
 		
 		align.setSelectedIndex(CAlign.getIndex(obj.getAlign()));
 		scaling.setSelectedIndex(CScaling.getIndex(obj.getScaling()));
-		image.setDrawable(obj.getDrawable());
+//		image.setDrawable(obj.getDrawable());
 	}
 }

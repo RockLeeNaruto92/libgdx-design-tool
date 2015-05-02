@@ -3,20 +3,15 @@ package hust.libgdx.tool.views.renderers.properties;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
-import hust.libgdx.tool.models.uielements.LImage;
 import hust.libgdx.tool.models.uielements.LSprite;
 import hust.libgdx.tool.utilities.Utility;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class SpriteProperty extends ActorProperty {
 	private static SpriteProperty _instance;
@@ -28,6 +23,7 @@ public class SpriteProperty extends ActorProperty {
 
 	public SpriteProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
+		getParent().debugAll();
 	}
 	
 	public static SpriteProperty getInstance(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
@@ -75,8 +71,9 @@ public class SpriteProperty extends ActorProperty {
 	private void createImageImage(Skin skin, Vector2 parentSize) {
 		String[] labels = {Word.IMAGE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 1, 2};
 		
-		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE);
+		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans);
 	}
 	
 	private void createTextFieldColor(Skin skin, Vector2 parentSize){
@@ -94,6 +91,6 @@ public class SpriteProperty extends ActorProperty {
 		image.setDrawable(obj.getDrawble());
 		scaleX.setText(obj.getScaleX() + "");
 		scaleY.setText(obj.getScaleY() + "");
-//		rotation.setText(obj.getRotation() + "");
+		rotation.setText(obj.getRotation() + "");
 	}
 }
