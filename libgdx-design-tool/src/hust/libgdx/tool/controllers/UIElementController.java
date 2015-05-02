@@ -4,6 +4,7 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.models.customs.CAlign;
+import hust.libgdx.tool.models.customs.CPlayMode;
 import hust.libgdx.tool.models.customs.CScaling;
 import hust.libgdx.tool.models.uielements.LAnimation;
 import hust.libgdx.tool.models.uielements.LImage;
@@ -510,8 +511,27 @@ public class UIElementController extends Controller {
 		else if (object instanceof Slider) setSliderProperty((Slider)object, type, value);
 		else if (object instanceof Image) setImageProperty((LImage)object, type, value);
 		else if (object instanceof LSprite) setSpriteProperty((LSprite)object, type, value);
+		else if (object instanceof LAnimation) setAnimationProperty((LAnimation)object, type, value);
 	}
 	
+	private void setAnimationProperty(LAnimation object,
+			ActorPropertyType type, Object value) {
+		switch (type) {
+		case PLAY_MODE:
+			object.setPlayMode(CPlayMode.getPlayMode((int)value));
+			break;
+		case ROTATION:
+			object.setRotation((float)value);
+			break;
+		case TIME_PER_FRAME:
+			object.setTimePerFrame(Float.parseFloat((String)value));
+			break;
+
+		default:
+			break;
+		}
+	}
+
 	private void setSpriteProperty(LSprite object, ActorPropertyType type,
 			Object value) {
 		switch (type) {

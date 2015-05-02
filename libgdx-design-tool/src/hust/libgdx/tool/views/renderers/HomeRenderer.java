@@ -2,7 +2,9 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
+import hust.libgdx.tool.models.uielements.LAnimation;
 import hust.libgdx.tool.models.uielements.LSprite;
+import hust.libgdx.tool.views.renderers.properties.AnimationProperty;
 import hust.libgdx.tool.views.renderers.properties.ButtonProperty;
 import hust.libgdx.tool.views.renderers.properties.CheckBoxProperty;
 import hust.libgdx.tool.views.renderers.properties.EmptyProperty;
@@ -111,6 +113,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		properties.add(SliderProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(ImageProperty.getInstance(mainStage, skin, location, size, controller));
 		properties.add(SpriteProperty.getInstance(mainStage, skin, location, size, controller));
+		properties.add(AnimationProperty.getInstance(mainStage, skin, location, size, controller));
 		
 		property = properties.get(0);
 		property.show(true);
@@ -339,6 +342,7 @@ public class HomeRenderer extends ApplicationRenderer{
 		else if (actor instanceof Slider) property = properties.get(4);
 		else if (actor instanceof Image) property = properties.get(5);
 		else if (actor instanceof LSprite) property = properties.get(6);
+		else if (actor instanceof LAnimation) property = properties.get(7);
 		else property = null;
 		
 		property.show(true);

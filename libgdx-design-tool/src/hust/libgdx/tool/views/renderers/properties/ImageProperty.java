@@ -72,6 +72,6 @@ public class ImageProperty extends ActorProperty {
 		
 		align.setSelectedIndex(CAlign.getIndex(obj.getAlign()));
 		scaling.setSelectedIndex(CScaling.getIndex(obj.getScaling()));
-//		image.setDrawable(obj.getDrawable());
+		image.setDrawable(obj.getDrawable());
 	}
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
@@ -42,5 +43,21 @@ public class LAnimation extends Actor{
 		
 		stateTime += Gdx.graphics.getDeltaTime();
 		batch.draw(anim.getKeyFrame(stateTime), getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public PlayMode getPlayMode(){
+		return anim.getPlayMode();
+	}
+	
+	public void setPlayMode(PlayMode playMode){
+		anim.setPlayMode(playMode);
+	}
+
+	public float getTimePerFrame() {
+		return anim.getFrameDuration();
+	}
+	
+	public void setTimePerFrame(float time){
+		anim.setFrameDuration(time);
 	}
 }

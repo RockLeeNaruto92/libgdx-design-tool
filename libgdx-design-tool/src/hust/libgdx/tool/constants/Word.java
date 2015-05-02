@@ -53,4 +53,6 @@ public class Word {
 	public static final String FLIP = "Flip";
 	public static final String COLOR = "Color";
 	public static final String SCALE = "Scale";
+	public static final String TIME_PER_FRAME = "Time per frame";
+	public static final String PLAY_MODE = "Play mode";
 }
