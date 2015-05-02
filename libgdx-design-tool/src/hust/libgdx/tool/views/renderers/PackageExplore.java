@@ -1,6 +1,7 @@
 package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.models.UIElementType;
+import hust.libgdx.tool.models.customs.CustomTree;
 import hust.libgdx.tool.utilities.Utility;
 import hust.libgdx.tool.utilities.Utility.NodeElement;
 import hust.libgdx.tool.utilities.Utility.NodeType;
@@ -31,7 +32,6 @@ public class PackageExplore extends CustomTree {
 	}
 	
 	private NodeElement createRootNodeElement(){
-		System.out.println(folderPath);
 		FileHandle file = Gdx.files.absolute(folderPath);
 		NodeElement root;
 		if (file.isDirectory()){

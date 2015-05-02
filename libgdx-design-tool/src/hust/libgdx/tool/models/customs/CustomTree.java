@@ -1,4 +1,4 @@
-package hust.libgdx.tool.views.renderers;
+package hust.libgdx.tool.models.customs;
 
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.utilities.Utility.NodeElement;
@@ -6,6 +6,7 @@ import hust.libgdx.tool.utilities.Utility.NodeElement;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree.Node;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
-public abstract class CustomTree {
+public abstract class CustomTree{
 	private Table table, container;
 	private Stage stage;
 	private Skin skin;

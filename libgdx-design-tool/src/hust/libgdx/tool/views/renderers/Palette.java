@@ -3,6 +3,7 @@ package hust.libgdx.tool.views.renderers;
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.UIElementType;
+import hust.libgdx.tool.models.customs.CustomTree;
 import hust.libgdx.tool.utilities.Utility.NodeElement;
 import hust.libgdx.tool.utilities.Utility.NodeType;
 
@@ -35,7 +36,6 @@ public class Palette extends CustomTree {
 
 	@Override
 	public void onTouchDown(UIElementType type) {
-		System.out.println("Touch down on " + type);
 	}
 
 	@Override

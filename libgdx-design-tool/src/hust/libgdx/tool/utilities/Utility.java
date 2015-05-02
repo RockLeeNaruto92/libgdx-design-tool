@@ -5,11 +5,15 @@ import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.customs.BorderTextField;
 import hust.libgdx.tool.models.customs.ColorTextField;
+import hust.libgdx.tool.models.customs.FileChooser;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -26,6 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Utility {
 	public enum NodeType{
@@ -276,6 +281,32 @@ public class Utility {
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
 				.colspan(i);
+		btn.addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				Actor object = property.getObject();
+				if (object == null) return false;
+				
+				FileChooser fileChooser = FileChooser.getInstance();
+				
+				controller.disableStage(true);
+				fileChooser.show(true, new String[]{"png", "jpg"});
+				
+				String resultPath = fileChooser.getResultPath();
+				
+				if (resultPath != null){
+					TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute(resultPath))));
+					controller.setObjectProperty(object, ActorPropertyType.IMAGE, drawable);
+					image.setDrawable(drawable);
+				}
+				
+				controller.disableStage(false);
+				
+				return super.touchDown(event, x, y, pointer, button);
+			}
+			
+		});
 		
 		return image;
 	}
@@ -361,7 +392,15 @@ public class Utility {
 		public void setChilds(ArrayList<NodeElement> childs) {
 			this.childs = childs;
 		}
-
+		
+		public void addChild(NodeElement node){
+			childs.add(node);
+		}
+		
+		public void removeChild(NodeElement node){
+			childs.remove(node);
+		}
+		
 		public Object getObject() {
 			return object;
 		}

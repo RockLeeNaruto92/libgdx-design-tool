@@ -18,6 +18,8 @@ public class Constant {
 	public static Vector2 DESIGN_SIZE = new Vector2(0.6f, 0.66875f);
 	public static Vector2 DESIGN_LOCATION = new Vector2(0.2f, 0.3f);
 	
+	public static Vector2 FILE_CHOOSE_DIALOG_SIZE = new Vector2(0.5f, 0.4f);
+	
 	public static Vector2 X_RANGE = new Vector2(-1000, 1000);
 	public static Vector2 Y_RANGE = new Vector2(-1000, 1000);
 	public static Vector2 WIDTH_RANGE = new Vector2(-1000, 1000);
@@ -63,8 +65,10 @@ public class Constant {
 	public static String FILE_UIELEMENT_LIST = "uielementList.txt";
 	
 	// default
-	public static String DEFAULT_IMAGE = "quickPlay"; 
+	public static String DEFAULT_IMAGE = "quickPlay";
+	public static String DEFAULT_PATH = "D:\\OSImage\\Window";
 	public static int DEFAULT_ANIMATION_FRAMES_NUM = 20;
 	public static float DEFAULT_ANIMATION_FRAME_DURATION = 0.23f;
+	
 	
 }

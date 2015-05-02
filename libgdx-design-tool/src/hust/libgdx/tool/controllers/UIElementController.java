@@ -16,7 +16,10 @@ import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -28,6 +31,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class UIElementController extends Controller {
 	enum Action {
@@ -386,7 +391,7 @@ public class UIElementController extends Controller {
 										+ actor.getHeight()))
 					selectedActors.add(actor);
 			}
-		else 
+		else
 			for (Actor actor : actors){
 				Rectangle bound = new Rectangle(actor.getX(), actor.getY(), actor.getWidth(), actor.getHeight());
 				if (bound.contains(selectedBound)){
@@ -563,6 +568,7 @@ public class UIElementController extends Controller {
 			object.setScaling(CScaling.getScaling((int)value));
 			break;
 		case IMAGE:
+			object.setDrawable((Drawable)value);
 			break;
 		default:
 			break;
@@ -660,5 +666,9 @@ public class UIElementController extends Controller {
 		
 		if (actor != null) property.setObject(actor);
 		property.refresh();
+	}
+
+	public void disableStage(boolean disable) {
+		screen.enable(!disable);
 	}
 }

@@ -16,10 +16,9 @@ public class Main {
 		cfg.width = screenSize.width;
 		cfg.height = screenSize.height;
 		
-		System.out.println(screenSize);
-		
 //		new LwjglApplication(new OrthographicCameraExample(), cfg);
 //		new LwjglApplication(new ScrollPaneTest(), cfg);
 		new LwjglApplication(new LibgdxDesignTool(), cfg);
+//		new LwjglApplication(new FileChooserTest(), cfg);
 	}
 }

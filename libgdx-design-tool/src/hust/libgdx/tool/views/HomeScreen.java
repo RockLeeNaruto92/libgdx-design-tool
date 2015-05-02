@@ -79,5 +79,15 @@ public class HomeScreen extends ApplicationScreen{
 		
 		return super.keyTyped(character);
 	}
+
+	public void enable(boolean enable) {
+		if (enable){
+			removeProcessor(render.getStage());
+			removeProcessor(render.getEditorStage());
+		} else {
+			addProcessor(render.getStage());
+			addProcessor(render.getEditorStage());
+		}
+	}
 	
 }

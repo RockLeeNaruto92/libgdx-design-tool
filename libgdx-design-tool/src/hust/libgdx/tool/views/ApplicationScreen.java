@@ -32,6 +32,10 @@ public class ApplicationScreen implements Screen, InputProcessor{
 	public void addProcessor(InputProcessor processor){
 		inputMultiplexer.addProcessor(processor);
 	}
+	
+	public void removeProcessor(InputProcessor processor){
+		inputMultiplexer.removeProcessor(processor);
+	}
 
 	@Override
 	public boolean keyDown(int keycode) {

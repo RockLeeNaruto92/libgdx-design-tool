@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 public class LAnimation extends Actor{
 	private Animation anim;
 	private float stateTime = 0f;
+	private Array<TextureRegion> keyFrames;
 	
 	public LAnimation(Skin skin){
 		createDefaultAnimation(skin);
@@ -21,14 +22,14 @@ public class LAnimation extends Actor{
 	}
 	
 	private void createDefaultAnimation(Skin skin){
-		Array<TextureRegion> keyFrames = new Array<TextureRegion>();
+		keyFrames = new Array<TextureRegion>();
 		
 		for (int i = 1; i < Constant.DEFAULT_ANIMATION_FRAMES_NUM + 1; i++)
 			keyFrames.add(skin.getRegion("anim-" + i));
 
 		anim = new Animation(Constant.DEFAULT_ANIMATION_FRAME_DURATION, keyFrames);
 	}
-
+	
 	public Animation getAnim() {
 		return anim;
 	}
