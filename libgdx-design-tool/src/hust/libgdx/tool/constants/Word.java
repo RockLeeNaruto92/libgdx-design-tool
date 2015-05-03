@@ -59,4 +59,9 @@ public class Word {
 	public static final String FRAME = "Frame";
 	public static final String BACKGROUND = "Background";
 	public static final String FONT = "Font";
+	public static final String UP = "Up";
+	public static final String DOWN = "Down";
+	public static final String CHECKED = "Checked";
+	public static final String OVER = "Over";
+	public static final String CHECKED_OVER = "Checked over";
 }

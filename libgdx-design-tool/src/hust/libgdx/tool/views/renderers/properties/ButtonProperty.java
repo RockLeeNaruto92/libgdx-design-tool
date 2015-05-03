@@ -4,20 +4,24 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.utilities.Utility;
+import hust.libgdx.tool.utilities.Utility.ImageTableField;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class ButtonProperty extends ActorProperty {
 	private static ButtonProperty _instance;
 	
 	private TextField padLeft, padRight, padTop, padBottom;
 	private CheckBox  check, disable;
+	private ImageTableField up, down, over, checked, checkedOver, disabled;
 	
 	public ButtonProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
@@ -39,8 +43,21 @@ public class ButtonProperty extends ActorProperty {
 		createTextFieldPadRight(skin, parentSize);
 		createTextFieldPadTop(skin, parentSize);
 		createTextFieldPadBottom(skin, parentSize);
+		createStyle(skin, parentSize);
 	}
 	
+	protected void createStyle(Skin skin, Vector2 parentSize) {
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 , Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 1, 2};
+		
+		up = Utility.createImageField(getParent(), parentSize, new String[]{Word.UP}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 0);
+		down = Utility.createImageField(getParent(), parentSize, new String[]{Word.DOWN}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 1);
+		over = Utility.createImageField(getParent(), parentSize, new String[]{Word.OVER}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 2);
+		checked = Utility.createImageField(getParent(), parentSize, new String[]{Word.CHECKED}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 3);
+		checkedOver = Utility.createImageField(getParent(), parentSize, new String[]{Word.CHECKED_OVER}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 4);
+		disabled = Utility.createImageField(getParent(), parentSize, new String[]{Word.DISABLE}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 5);
+	}
+
 	protected void createCheckBoxDisable(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.DISABLE};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
@@ -104,5 +121,17 @@ public class ButtonProperty extends ActorProperty {
 		padRight.setText(obj.getPadRight() + "");
 		padTop.setText(obj.getPadTop() + "");
 		padBottom.setText(obj.getPadBottom() + "");
+		
+		setDrawable(obj.getStyle().up, up);
+		setDrawable(obj.getStyle().down, down);
+		setDrawable(obj.getStyle().checked, checked);
+		setDrawable(obj.getStyle().checkedOver, checkedOver);
+		setDrawable(obj.getStyle().disabled, disabled);
+		setDrawable(obj.getStyle().over, over);
+	}
+
+	protected void setDrawable(Drawable drawable, ImageTableField field) {
+		drawable = (drawable == null) ? getSkin().getDrawable("window-top") : drawable;
+		field.setImage(drawable);
 	}
 }

@@ -26,13 +26,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class UIElementController extends Controller {
@@ -289,9 +289,12 @@ public class UIElementController extends Controller {
 		case ANIMATION:
 			actor = new LAnimation(skin);
 			break;
-		case BUTTON:
-			actor = new Button(skin);
+		case BUTTON:{
+			Button btn = new Button(skin);
+			btn.setStyle(new ButtonStyle(btn.getStyle()));
+			actor = btn;
 			break;
+		}
 		case SLIDER:
 			actor = new Slider(Constant.SLIDER_DEFAULT_RANGE.x, Constant.SLIDER_DEFAULT_RANGE.y, Constant.SLIDER_STEP, false, skin);
 
@@ -618,6 +621,8 @@ public class UIElementController extends Controller {
 		case ALIGN:
 			object.align(CAlign.getAlign((int)value));
 			break;
+		case IMAGE:
+			break;
 		default:
 			break;
 		}
@@ -642,6 +647,32 @@ public class UIElementController extends Controller {
 			break;
 		case PAD_BOTTOM:
 			object.padBottom((float)value);
+			break;
+		case IMAGE:
+			Object[] result = (Object[]) value;
+			Drawable drawable = new TextureRegionDrawable(new TextureRegion((Texture)result[1]));
+			switch ((int)result[0]) {
+			case 0:
+				object.getStyle().up = drawable; 
+				break;
+			case 1:
+				object.getStyle().down = drawable;
+				break;
+			case 2:
+				object.getStyle().over = drawable;
+				break;
+			case 3:
+				object.getStyle().checked = drawable;
+				break;
+			case 4:
+				object.getStyle().checkedOver = drawable;
+				break;
+			case 5:
+				object.getStyle().disabled = drawable;
+				break;
+			default:
+				break;
+			}
 			break;
 		default:
 			break;
