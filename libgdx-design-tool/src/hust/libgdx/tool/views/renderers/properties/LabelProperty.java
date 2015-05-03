@@ -6,6 +6,7 @@ import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.customs.CAlign;
 import hust.libgdx.tool.models.uielements.LLabel;
 import hust.libgdx.tool.utilities.Utility;
+import hust.libgdx.tool.utilities.Utility.ImageTableField;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -14,14 +15,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class LabelProperty extends ActorProperty {
 	private static LabelProperty _instance;
 	
-	private TextField text;
+	private TextField text, font;
 	private TextField fontScaleX, fontScaleY;
 	private SelectBox<Object> align;
 	private CheckBox wrap, ellipsis;
+	private TextField color;
+	private ImageTableField background;
 
 	public LabelProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
@@ -43,8 +47,31 @@ public class LabelProperty extends ActorProperty {
 		createFontScaleX(skin, parentSize);
 		createFontScaleY(skin, parentSize);
 		createCheckBoxEllipsis(skin, parentSize);
+		createTextFieldFont(skin, parentSize);
+		createTextFieldFontColor(skin, parentSize);
+		createImageBackground(skin, parentSize);
 	}
 	
+	private void createImageBackground(Skin skin, Vector2 parentSize) {
+		String[] labels = {Word.BACKGROUND};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 3};
+		
+		background = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 0);
+	}
+
+	private void createTextFieldFontColor(Skin skin, Vector2 parentSize) {
+		
+	}
+
+	private void createTextFieldFont(Skin skin, Vector2 parentSize) {
+		String[] labels = {Word.FONT};
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3, Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 2, 1};
+		
+		font = Utility.createFontField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.FONT, colspans, 0);
+	}
+
 	private void createTextFieldText(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.TEXT};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
@@ -106,5 +133,9 @@ public class LabelProperty extends ActorProperty {
 		fontScaleX.setText(obj.getFontScaleX() + "");
 		fontScaleY.setText(obj.getFontScaleY() + "");
 		ellipsis.setChecked(obj.isEllipsis());
+		font.setText(obj.getStyle().font.toString());
+		
+		Drawable backgroundImg = obj.getStyle().background == null ? getSkin().getDrawable("window-top") : obj.getStyle().background;
+		background.setImage(backgroundImg);
 	}
 }

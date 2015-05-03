@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -668,6 +669,16 @@ public class UIElementController extends Controller {
 		case ELLIPSIS:
 			object.setEllipsis((boolean)value);
 			break;
+		case FONT:{
+			Object[] result = (Object[])value;
+			object.getStyle().font = (BitmapFont)result[1];
+			break;
+		}
+		case IMAGE:{
+			Object[] result = (Object[])value;
+			object.getStyle().background = new TextureRegionDrawable(new TextureRegion((Texture)result[1]));
+			break;
+		}
 		default:
 			break;
 		}

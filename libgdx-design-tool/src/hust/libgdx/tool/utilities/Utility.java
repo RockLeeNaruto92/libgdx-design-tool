@@ -8,12 +8,13 @@ import hust.libgdx.tool.models.customs.ColorTextField;
 import hust.libgdx.tool.models.customs.FileChooser;
 import hust.libgdx.tool.views.renderers.properties.ActorProperty;
 import hust.libgdx.tool.views.renderers.properties.ActorPropertyType;
+import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -33,7 +34,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Utility {
@@ -83,7 +83,7 @@ public class Utility {
 			label.setFontScale(Constant.FONT_SCALE);
 			
 			parent.add(label).align(Align.left)
-					.width(widths[i] * parentSize.x)
+					.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD)
 					.colspan(colspans[i]);
@@ -92,7 +92,7 @@ public class Utility {
 		// create text field
 		final TextField textfield = new BorderTextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
-				.width(widths[i] * parentSize.x)
+				.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
 				.colspan(colspans[i++]);
@@ -103,7 +103,7 @@ public class Utility {
 		slider.getStyle().knob.setMinHeight(parentSize.y * Constant.PROPERTY_ROW_HEIGHT);
 		slider.getStyle().knob.setMinWidth(parentSize.x * Constant.SLIDER_KNOB_WIDTH);
 		parent.add(slider).align(Align.left)
-				.width(widths[i] * parentSize.x)
+				.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
 				.colspan(colspans[i++]);
@@ -148,7 +148,7 @@ public class Utility {
 			label.setFontScale(Constant.FONT_SCALE);
 
 			parent.add(label).align(Align.left)
-					.width(widths[i] * parentSize.x)
+					.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD)
 					.colspan(colspans[i]);
@@ -157,7 +157,7 @@ public class Utility {
 		// create text field
 		final TextField textfield = new BorderTextField(Word.NULL, skin);
 		parent.add(textfield).align(Align.left)
-				.width(widths[i] * parentSize.x)
+				.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
 				.colspan(colspans[i++]);
@@ -193,7 +193,7 @@ public class Utility {
 			label.setFontScale(Constant.FONT_SCALE);
 			
 			parent.add(label).align(Align.left)
-					.width(widths[i] * parentSize.x)
+					.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD)
 					.colspan(colspans[i]);
@@ -229,7 +229,7 @@ public class Utility {
 			label.setFontScale(Constant.FONT_SCALE);
 			
 			parent.add(label).align(Align.left)
-					.width(widths[i] * parentSize.x)
+					.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD)
 					.colspan(colspans[i]);
@@ -238,6 +238,7 @@ public class Utility {
 		final SelectBox<Object> sb = new SelectBox<Object>(skin);
 		sb.setItems(objects);
 		parent.add(sb).align(Align.left)
+				.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
 				.colspan(colspans[i++]);
@@ -255,7 +256,7 @@ public class Utility {
 	
 	public static ImageTableField createImageField(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
-			final ActorProperty property, final UIElementController controller,
+			final Property property, final UIElementController controller,
 			final ActorPropertyType type, int[] colspans, final int ordinal){
 		int i;
 		ImageTableField field = new ImageTableField(skin, parentSize);
@@ -318,6 +319,68 @@ public class Utility {
 		return field;
 	}
 	
+	public static TextField createFontField(Table parent, Vector2 parentSize, String[] labels, float[] widths, Skin skin,
+			final ActorProperty property, final UIElementController controller,
+			final ActorPropertyType type, int[] colspans, final int ordinal){
+		int i;
+		
+		parent.row();
+		
+		for (i = 0; i < labels.length; i++){
+			Label label = new Label(labels[i], skin);
+			label.setFontScale(Constant.FONT_SCALE);
+			
+			parent.add(label).align(Align.left)
+					.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
+					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+					.pad(Constant.PROPERTY_CELL_PAD)
+					.colspan(colspans[i]);
+		}
+		
+		final TextField textfield = new ColorTextField(Word.NULL, skin);
+		textfield.setDisabled(true);
+		parent.add(textfield).align(Align.left)
+				.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
+				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+				.pad(Constant.PROPERTY_CELL_PAD)
+				.colspan(colspans[i++]);
+		
+		
+		TextButton btn = new TextButton(Word.SET, skin);
+		parent.add(btn).align(Align.left)
+			.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
+			.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
+			.pad(Constant.PROPERTY_CELL_PAD)
+			.colspan(colspans[i++]);
+		btn.addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				Actor object = property.getObject();
+				if (object == null) return false;
+				
+				FileChooser fileChooser = FileChooser.getInstance();
+				
+				controller.disableStage(true);
+				fileChooser.show(true, new String[]{"png", "jpg"});
+				
+				String resultPath = fileChooser.getResultPath();
+				
+				if (resultPath != null){
+					BitmapFont font = new BitmapFont(Gdx.files.absolute(resultPath));
+					controller.setObjectProperty(object, ActorPropertyType.FONT, new Object[]{ordinal, font});
+					textfield.setText(font.toString());
+				}
+				
+				controller.disableStage(false);
+				
+				return super.touchDown(event, x, y, pointer, button);
+			}
+		});
+		
+		return textfield;
+	}
+	
 	public static TextField createColorField(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
@@ -331,7 +394,7 @@ public class Utility {
 			label.setFontScale(Constant.FONT_SCALE);
 			
 			parent.add(label).align(Align.left)
-					.width(widths[i] * parentSize.x)
+					.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 					.pad(Constant.PROPERTY_CELL_PAD)
 					.colspan(colspans[i]);
@@ -340,7 +403,7 @@ public class Utility {
 		final TextField textfield = new ColorTextField(Word.NULL, skin);
 		textfield.setDisabled(true);
 		parent.add(textfield).align(Align.left)
-				.width(widths[i] * parentSize.x)
+				.width(widths[i] * parentSize.x - 2 * Constant.PROPERTY_CELL_PAD)
 				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
 				.pad(Constant.PROPERTY_CELL_PAD)
 				.colspan(colspans[i++]);

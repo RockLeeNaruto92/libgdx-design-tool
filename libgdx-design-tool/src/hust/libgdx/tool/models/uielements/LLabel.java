@@ -11,6 +11,7 @@ public class LLabel extends Label {
 	public LLabel(CharSequence text, Skin skin) {
 		super(text, skin);
 		
+		setStyle(new LabelStyle(getStyle()));
 		align = Align.left;
 	}
 

@@ -17,6 +17,7 @@ public abstract class Property {
 	private Table container, parent;
 	private UIElementController controller;
 	private Vector2 size;
+	private Skin skin;
 	
 	public Property(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
 		this.controller = controller;
@@ -24,6 +25,7 @@ public abstract class Property {
 		bound = new Rectangle();
 		setBound(location, size);
 		this.size = size;
+		this.skin = skin;
 		
 		createContainer(stage, bound);
 		createProperties(skin, size);
@@ -33,6 +35,10 @@ public abstract class Property {
 	
 	public Vector2 getSize(){
 		return size;
+	}
+	
+	public Skin getSkin(){
+		return skin;
 	}
 	
 	private void createContainer(Stage stage, Rectangle bound){

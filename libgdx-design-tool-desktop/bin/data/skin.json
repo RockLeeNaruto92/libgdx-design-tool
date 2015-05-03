@@ -28,14 +28,17 @@
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 			toggle: {
 				font: default-font,
-				up: backMenu,
-				down: backMenuClick
+				up: button-up,
+				down: button-down,
+				over: button-over,
+				checked: button-down
 			},
 			default: {
 				font: default-font,
-				up: backMenu,
-				down: backMenuClick,
-				over: lock
+				up: button-up,
+				down: button-down,
+				over: button-over,
+				checked: button-down
 			},
 			
 			default-locked:{

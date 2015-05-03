@@ -57,4 +57,6 @@ public class Word {
 	public static final String PLAY_MODE = "Play mode";
 	public static final String IMAGES = "Images";
 	public static final String FRAME = "Frame";
+	public static final String BACKGROUND = "Background";
+	public static final String FONT = "Font";
 }
