@@ -157,6 +157,7 @@ public class UIElementController extends Controller {
 				displayBound(true);
 				screen.getRender().setSelecting(false);
 				setPropertyView(selectedActors.get(0));
+				screen.getRender().updateOutline();
 			}
 			else {
 				screen.getRender().removeActors(selectedActors);
@@ -765,5 +766,15 @@ public class UIElementController extends Controller {
 
 	public void disableStage(boolean disable) {
 		screen.enable(!disable);
+	}
+
+	public ArrayList<Actor> getActors() {
+		return actors;
+	}
+
+	public void setSelected(Actor object) {
+		selectedActors.clear();
+		selectedActors.add(object);
+		setCurrentAction(Action.SELECTED);
 	}
 }

@@ -1,12 +1,12 @@
 package hust.libgdx.tool.models.customs;
 
+import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.UIElementType;
 import hust.libgdx.tool.utilities.Utility.NodeElement;
 
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -24,6 +24,7 @@ public abstract class CustomTree{
 	private Vector2 size;
 	private ArrayList<NodeElement> roots;
 	private Tree tree;
+	private UIElementController controller;
 	
 	public abstract void onTouchDown(UIElementType type);
 	public abstract void onTouchUp(UIElementType type);
@@ -38,6 +39,20 @@ public abstract class CustomTree{
 		this.size = size;
 		
 		init();
+	}
+	
+	public CustomTree(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
+		this.stage = stage;
+		this.skin = skin;
+		this.location = location;
+		this.size = size;
+		this.controller = controller;
+		
+		init();
+	}
+	
+	public UIElementController getController(){
+		return controller;
 	}
 	
 	private void init(){
@@ -67,29 +82,35 @@ public abstract class CustomTree{
 	private void createTree(){
 		tree = new Tree(skin);
 		
+		createTreeNodes();
+		
+		table = new Table(skin);
+		table.row();
+		table.add(tree);
+		table.align(Align.topLeft);
+	}
+	
+	protected void createTreeNodes() {
 		for (NodeElement root : roots) {
 			// create label
 			Label nodeLabel = createNodeLabel(root);
 			// create root node
 			Node rootNode = new Node(nodeLabel);
+			rootNode.setObject(root);
 			// add node to tree
 			tree.add(rootNode);
 			// create root node childs
+			if (root.getChilds() == null) continue;
 			for (NodeElement node : root.getChilds()) 
 				createChildNode(node, rootNode);
 		}
-
-		table = new Table(skin);
-		table.row();
-		table.add(tree);
-		table.align(Align.topLeft);
-		
 	}
 	
 	private void createChildNode(NodeElement object, Node parent){
 		// create child node label
 		Label label = createNodeLabel(object);
 		Node node = new Node(label);
+		node.setObject(object);
 		parent.add(node);
 		
 		if (object.getChilds() == null) return;
@@ -125,6 +146,44 @@ public abstract class CustomTree{
 	public ArrayList<NodeElement> getRoots() {
 		return roots;
 	}
+	
+	public void setRoots(ArrayList<NodeElement> roots){
+		this.roots = roots;
+	}
+	
+	public Node getNode(NodeElement node){
+		return tree.findNode(node);
+	}
+	
+	public NodeElement getNodeElement(Object object){
+		for (NodeElement node : roots) {
+			NodeElement result = getNodeElement(node, object);
+			
+			if (result != null) return result;
+		}
+		
+		return null;
+	}
+	
+	public NodeElement getNodeElement(NodeElement node, Object object){
+		if (node.getObject() == object) return node;
+		
+		for (NodeElement child : node.getChilds()) {
+			NodeElement result = getNodeElement(child, object);
+			
+			if (result != null) return result;
+		}
+		
+		return null;
+	}
+	
+	public void removeAllNode(){
+		for (Node node : tree.getRootNodes()){
+			node.removeAll();
+			tree.remove(node);
+		}
+	}
+	
 //	
 //	public Tree createTreeFromArrayList(CustomTree container,
 //			ArrayList<NodeElement> roots, Skin skin, UIElementType[] types) {

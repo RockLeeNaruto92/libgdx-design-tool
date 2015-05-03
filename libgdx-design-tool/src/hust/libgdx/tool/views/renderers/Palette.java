@@ -23,15 +23,12 @@ public class Palette extends CustomTree {
 			{ "Static images", "Sprite", "Image" },
 			{ "Animation", "Animation" } };
 	
-	private UIElementController controller;
-	
 	public Palette(Stage stage, Skin skin, Vector2 location, Vector2 size) {
 		super(stage, skin, location, size);
 	}
 	
 	public Palette(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
-		super(stage, skin, location, size);
-		this.controller = controller;
+		super(stage, skin, location, size, controller);
 	}
 
 	@Override
@@ -61,6 +58,7 @@ public class Palette extends CustomTree {
 			for (int j = 1; j < group.length; j++) {
 				NodeElement childNode = new NodeElement(NodeType.UIELEMENT, group[j], getUIElementType(group[j]), null);
 				root.getChilds().add(childNode);
+				root.retrive(0);
 			}
 		}
 		
@@ -84,22 +82,9 @@ public class Palette extends CustomTree {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				controller.onTouchDown(type, event.getStageX(), event.getStageY());
+				getController().onTouchDown(type, event.getStageX(), event.getStageY());
 				return super.touchDown(event, x, y, pointer, button);
 			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y,
-					int pointer, int button) {
-				
-				super.touchUp(event, x, y, pointer, button);
-			}
-
-			@Override
-			public void touchDragged(InputEvent event, float x, float y, int pointer) {
-				super.touchDragged(event, x, y, pointer);
-			}
-			
 		});
 		
 		return label;

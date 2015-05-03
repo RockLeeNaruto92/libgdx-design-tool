@@ -42,6 +42,8 @@ public class HomeRenderer extends ApplicationRenderer{
 	private MessageDialog messgaeDialog;
 	private Property property;
 	private ArrayList<Property> properties;
+	private Outline outline;
+	private Palette palette;
 	
 	private boolean displayBound;
 	private boolean isSelecting = true;
@@ -90,9 +92,8 @@ public class HomeRenderer extends ApplicationRenderer{
 		size.y = Constant.PALETTE_SIZE.y * Constant.SCREEN_SIZE.y;
 		
 //		packageExplore = new PackageExplore("D:\\Example", mainStage, skin, location, size);
-		System.out.println("Pallete location: " + location);
 		
-		new Palette(mainStage, skin, location, size, controller);
+		palette = new Palette(mainStage, skin, location, size, controller);
 	}
 
 	private void createPropertyPart() {
@@ -101,7 +102,6 @@ public class HomeRenderer extends ApplicationRenderer{
 		
 		location.x = Constant.PROPERTY_LOCATION.x * Constant.SCREEN_SIZE.x;
 		location.y = Constant.PROPERTY_LOCATION.y * Constant.SCREEN_SIZE.y;
-		
 		size.x = Constant.PROPERTY_SIZE.x * Constant.SCREEN_SIZE.x;
 		size.y = Constant.PROPERTY_SIZE.y * Constant.SCREEN_SIZE.y;
 		
@@ -120,6 +120,15 @@ public class HomeRenderer extends ApplicationRenderer{
 	}
 
 	private void createOutlinePart() {
+		Vector2 location = new Vector2();
+		Vector2 size = new Vector2();
+		
+		location.x = Constant.OUTLINE_LOCATION.x * Constant.SCREEN_SIZE.x;
+		location.y = Constant.OUTLINE_LOCATION.y * Constant.SCREEN_SIZE.y;
+		size.x = Constant.OUTLINE_SIZE.x * Constant.SCREEN_SIZE.x;
+		size.y = Constant.OUTLINE_SIZE.y * Constant.SCREEN_SIZE.y;
+		
+		outline = new Outline(mainStage, skin, location, size, controller);
 	}
 
 	private void createEditorPart() {
@@ -347,5 +356,9 @@ public class HomeRenderer extends ApplicationRenderer{
 		
 		property.show(true);
 		return property;
+	}
+	
+	public void updateOutline(){
+		outline.update();
 	}
 }
