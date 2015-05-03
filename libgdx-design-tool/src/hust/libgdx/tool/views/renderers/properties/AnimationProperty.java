@@ -113,6 +113,5 @@ public class AnimationProperty extends ActorProperty {
 			field.setImage(new TextureRegionDrawable((obj.getAnim().getKeyFrames()[i])));
 			keyFrames.add(field);
 		}
-		
 	}
 }

@@ -3,6 +3,7 @@ package hust.libgdx.tool.models.uielements;
 import hust.libgdx.tool.views.renderers.HomeRenderer;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -37,7 +38,12 @@ public class LSprite extends Actor {
 		trd.setRegion(new TextureRegion(sprite.getTexture()));
 		this.sprite = sprite;
 	}
-
+	
+	public void setImage(Texture texture){
+		trd.setRegion(new TextureRegion(texture));
+		sprite.setTexture(texture);
+	}
+	
 	public Color getColor() {
 		return color;
 	}

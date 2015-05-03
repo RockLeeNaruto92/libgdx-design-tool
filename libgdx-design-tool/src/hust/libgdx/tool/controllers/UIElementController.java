@@ -29,6 +29,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class UIElementController extends Controller {
 	enum Action {
@@ -550,6 +551,10 @@ public class UIElementController extends Controller {
 		case ROTATION:
 			object.setRotation((float)value);
 			break;
+		case IMAGE:
+			Object[] result = (Object[]) value;
+			object.setSprite(((SpriteDrawable)result[1]).getSprite());
+			break;
 
 		default:
 			break;
@@ -566,7 +571,8 @@ public class UIElementController extends Controller {
 			object.setScaling(CScaling.getScaling((int)value));
 			break;
 		case IMAGE:
-			object.setDrawable((Drawable)value);
+			Object[] result = (Object[]) value;
+			object.setDrawable((Drawable)result[1]);
 			break;
 		default:
 			break;

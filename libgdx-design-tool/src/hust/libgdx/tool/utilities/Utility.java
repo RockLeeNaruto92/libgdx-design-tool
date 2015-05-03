@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,7 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class Utility {
 	public enum NodeType{
@@ -275,7 +275,6 @@ public class Utility {
 		final Image image = new Image(skin, "anim-1");
 		float imageWidth = widths[i++] * parentSize.x;
 		field.addImage(image, imageWidth);
-		field.debugAll();
 		
 		// create set button
 		TextButton btn = new TextButton(Word.SET, skin);
@@ -296,7 +295,7 @@ public class Utility {
 				String resultPath = fileChooser.getResultPath();
 				
 				if (resultPath != null){
-					TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute(resultPath))));
+					SpriteDrawable drawable = new SpriteDrawable(new Sprite(new Texture(Gdx.files.absolute(resultPath))));
 					controller.setObjectProperty(object, ActorPropertyType.IMAGE, new Object[]{ordinal, drawable});
 					image.setDrawable(drawable);
 				}
@@ -311,7 +310,8 @@ public class Utility {
 		parent.add(field).align(Align.left)
 			.width(parentSize.x)
 			.height(imageWidth)
-			.colspan(colspan);
+			.colspan(colspan)
+			.pad(Constant.PROPERTY_CELL_PAD);
 		
 		return field;
 	}
