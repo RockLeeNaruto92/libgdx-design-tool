@@ -17,6 +17,8 @@ import hust.libgdx.tool.views.renderers.properties.Property;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -30,6 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class UIElementController extends Controller {
 	enum Action {
@@ -531,6 +534,10 @@ public class UIElementController extends Controller {
 		case KEY_FRAMES_COUNT:
 			object.setCount(Integer.parseInt((String)value));
 			break;
+		case IMAGE:
+			Object[] result = (Object[]) value;
+			object.setKeyFrame((int)result[0], (Texture)result[1]);
+			break;
 		default:
 			break;
 		}
@@ -553,7 +560,7 @@ public class UIElementController extends Controller {
 			break;
 		case IMAGE:
 			Object[] result = (Object[]) value;
-			object.setSprite(((SpriteDrawable)result[1]).getSprite());
+			object.setImage((Texture)result[1]);
 			break;
 
 		default:
@@ -572,7 +579,8 @@ public class UIElementController extends Controller {
 			break;
 		case IMAGE:
 			Object[] result = (Object[]) value;
-			object.setDrawable((Drawable)result[1]);
+			TextureRegionDrawable trd = new TextureRegionDrawable(new TextureRegion((Texture)result[1]));
+			object.setDrawable(trd);
 			break;
 		default:
 			break;

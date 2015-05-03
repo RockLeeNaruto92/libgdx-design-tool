@@ -3,12 +3,14 @@ package hust.libgdx.tool.models.uielements;
 import hust.libgdx.tool.constants.Constant;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 
 public class LAnimation extends Actor{
@@ -74,5 +76,10 @@ public class LAnimation extends Actor{
 	
 	public void setTimePerFrame(float time){
 		anim.setFrameDuration(time);
+	}
+
+	public void setKeyFrame(int index, Texture texture) {
+		TextureRegion frame = keyFrames.get(index);
+		frame.setRegion(texture);
 	}
 }

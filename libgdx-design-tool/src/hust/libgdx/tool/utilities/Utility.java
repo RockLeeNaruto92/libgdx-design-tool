@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -33,6 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Utility {
 	public enum NodeType{
@@ -295,9 +297,9 @@ public class Utility {
 				String resultPath = fileChooser.getResultPath();
 				
 				if (resultPath != null){
-					SpriteDrawable drawable = new SpriteDrawable(new Sprite(new Texture(Gdx.files.absolute(resultPath))));
-					controller.setObjectProperty(object, ActorPropertyType.IMAGE, new Object[]{ordinal, drawable});
-					image.setDrawable(drawable);
+					Texture texture = new Texture(Gdx.files.absolute(resultPath));
+					controller.setObjectProperty(object, ActorPropertyType.IMAGE, new Object[]{ordinal, texture});
+					image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
 				}
 				
 				controller.disableStage(false);
