@@ -610,6 +610,24 @@ public class UIElementController extends Controller {
 		case INIT:
 			object.setValue(Float.parseFloat((String)value));
 			break;
+		case IMAGE:
+			Object[] result = (Object[]) value;
+			Drawable drawable = new TextureRegionDrawable(new TextureRegion((Texture)result[1]));
+			switch ((int)result[0]) {
+			case 0:
+				object.getStyle().background = drawable; 
+				break;
+			case 1:
+				object.getStyle().disabledBackground = drawable;
+				break;
+			case 2:
+				object.getStyle().knob = drawable;
+				break;
+			case 3:
+				object.getStyle().disabledKnob = drawable;
+				break;
+			}
+			break;
 		default:
 			break;
 		}

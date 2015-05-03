@@ -68,4 +68,7 @@ public class Word {
 	public static final String OFF = "Off";
 	public static final String ON_DISABLED = "On disabled";
 	public static final String OFF_DISABLED = "Off disabled";
+	public static final String DISABLED_BACKGROUND = "Disabled background";
+	public static final String KNOB = "Knob";
+	public static final String DISABLED_KNOB = "Disabled knob";
 }

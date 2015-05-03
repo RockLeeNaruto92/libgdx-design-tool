@@ -4,6 +4,7 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.utilities.Utility;
+import hust.libgdx.tool.utilities.Utility.ImageTableField;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,12 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class SliderProperty extends ActorProperty {
 	private static SliderProperty _instance;
 	
 	private TextField min, max, step, init;
 	private CheckBox disable;
+	private ImageTableField background, disabledBackground, knob, disabledKnob;
 	
 	public SliderProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
 		super(stage, skin, location, size, controller);
@@ -39,9 +42,20 @@ public class SliderProperty extends ActorProperty {
 		createTextFieldMin(skin, parentSize);
 		createTextFieldStep(skin, parentSize);
 		createTextFieldInit(skin, parentSize);
+		createStyle(skin, parentSize);
 	}
 	
-	protected void createCheckBoxDisable(Skin skin, Vector2 parentSize){
+	private void createStyle(Skin skin, Vector2 parentSize) {
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 , Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 1, 2};
+		
+		background = Utility.createImageField(getParent(), parentSize, new String[]{Word.BACKGROUND}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 0);
+		disabledBackground = Utility.createImageField(getParent(), parentSize, new String[]{Word.DISABLED_BACKGROUND}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 1);
+		knob = Utility.createImageField(getParent(), parentSize, new String[]{Word.KNOB}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 2);
+		disabledKnob = Utility.createImageField(getParent(), parentSize, new String[]{Word.DISABLED_KNOB}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 3);
+	}
+
+	private void createCheckBoxDisable(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.CHECK};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
 		int[] colspans = {1, 3};
@@ -91,5 +105,15 @@ public class SliderProperty extends ActorProperty {
 		max.setText(object.getMaxValue() + "");
 		step.setText(object.getStepSize() + "");
 		init.setText(object.getValue() + "");
+		
+		setDrawable(object.getStyle().background, background);
+		setDrawable(object.getStyle().disabledBackground, disabledBackground);
+		setDrawable(object.getStyle().knob, knob);
+		setDrawable(object.getStyle().disabledKnob, disabledKnob);
+	}
+	
+	protected void setDrawable(Drawable drawable, ImageTableField field) {
+		drawable = (drawable == null) ? getSkin().getDrawable("window-top") : drawable;
+		field.setImage(drawable);
 	}
 }
