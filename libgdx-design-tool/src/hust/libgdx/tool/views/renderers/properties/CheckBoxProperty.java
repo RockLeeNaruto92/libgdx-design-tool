@@ -5,6 +5,7 @@ import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.customs.CAlign;
 import hust.libgdx.tool.utilities.Utility;
+import hust.libgdx.tool.utilities.Utility.ImageTableField;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,6 +20,7 @@ public class CheckBoxProperty extends ButtonProperty {
 	
 	private TextField text;
 	private SelectBox<Object> align;
+	private ImageTableField on, off, onDisabled, offDisabled, over;
 
 	public CheckBoxProperty(Stage stage, Skin skin, Vector2 location,
 			Vector2 size, UIElementController controller) {
@@ -42,8 +44,24 @@ public class CheckBoxProperty extends ButtonProperty {
 		createTextFieldPadBottom(skin, parentSize);
 		createTextFieldText(skin, parentSize);
 		createSelectBoxAlign(skin, parentSize);
+		createStyle(skin, parentSize);
 	}
 	
+	
+	@Override
+	protected void createStyle(Skin skin, Vector2 parentSize) {
+		super.createStyle(skin, parentSize);
+		
+		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 , Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
+		int[] colspans = {1, 1, 2};
+		
+		on = Utility.createImageField(getParent(), parentSize, new String[]{Word.ON}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 6);
+		onDisabled = Utility.createImageField(getParent(), parentSize, new String[]{Word.ON_DISABLED}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 7);
+		over = Utility.createImageField(getParent(), parentSize, new String[]{Word.OVER}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 8);
+		off = Utility.createImageField(getParent(), parentSize, new String[]{Word.OFF}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 9);
+		offDisabled = Utility.createImageField(getParent(), parentSize, new String[]{Word.OFF_DISABLED}, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 10);
+	}
+
 	private void createTextFieldText(Skin skin, Vector2 parentSize){
 		String[] labels = {Word.TEXT};
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2 + Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
@@ -68,5 +86,11 @@ public class CheckBoxProperty extends ButtonProperty {
 		
 		text.setText(object.getText() + "");
 		align.setSelectedIndex(CAlign.getIndex(object.getAlign()));
+		
+		setDrawable(object.getStyle().checkboxOn, on);
+		setDrawable(object.getStyle().checkboxOff, off);
+		setDrawable(object.getStyle().checkboxOnDisabled, onDisabled);
+		setDrawable(object.getStyle().checkboxOffDisabled, offDisabled);
+		setDrawable(object.getStyle().checkboxOver, over);
 	}
 }

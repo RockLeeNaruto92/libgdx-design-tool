@@ -28,6 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -277,9 +278,12 @@ public class UIElementController extends Controller {
 		case LABEL:
 			actor = new LLabel(name, skin);
 			break;
-		case CHECKBOX:
-			actor = new CheckBox(name, skin);
+		case CHECKBOX:{
+			CheckBox cb = new CheckBox(name, skin);
+			cb.setStyle(new CheckBoxStyle(cb.getStyle()));
+			actor = cb;
 			break;
+		}
 		case IMAGE:
 			actor = new LImage(skin, Constant.DEFAULT_IMAGE);
 			break;
@@ -297,7 +301,7 @@ public class UIElementController extends Controller {
 		}
 		case SLIDER:
 			actor = new Slider(Constant.SLIDER_DEFAULT_RANGE.x, Constant.SLIDER_DEFAULT_RANGE.y, Constant.SLIDER_STEP, false, skin);
-
+			
 		default:
 			break;
 		}
@@ -622,6 +626,25 @@ public class UIElementController extends Controller {
 			object.align(CAlign.getAlign((int)value));
 			break;
 		case IMAGE:
+			Object[] result = (Object[]) value;
+			Drawable drawable = new TextureRegionDrawable(new TextureRegion((Texture)result[1]));
+			switch ((int)result[0]) {
+			case 6:
+				object.getStyle().checkboxOn = drawable;
+				break;
+			case 7:
+				object.getStyle().checkboxOnDisabled = drawable;
+				break;
+			case 8:
+				object.getStyle().checkboxOver = drawable;
+				break;
+			case 9:
+				object.getStyle().checkboxOff = drawable;
+				break;
+			case 10:
+				object.getStyle().checkboxOffDisabled = drawable;
+				break;
+			}
 			break;
 		default:
 			break;

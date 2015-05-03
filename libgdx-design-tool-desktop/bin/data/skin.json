@@ -28,6 +28,7 @@
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
 			toggle: {
 				font: default-font,
+				fontColor: white,
 				up: button-up,
 				down: button-down,
 				over: button-over,
@@ -199,6 +200,7 @@
    		com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
    			default: {
    				font: default-font,
+   				fontColor: white,
    				checkboxOn: checkbox-checked, 
    				checkboxOff: checkbox-unchecked
    			}

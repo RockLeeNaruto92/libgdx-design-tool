@@ -64,4 +64,8 @@ public class Word {
 	public static final String CHECKED = "Checked";
 	public static final String OVER = "Over";
 	public static final String CHECKED_OVER = "Checked over";
+	public static final String ON = "On";
+	public static final String OFF = "Off";
+	public static final String ON_DISABLED = "On disabled";
+	public static final String OFF_DISABLED = "Off disabled";
 }
