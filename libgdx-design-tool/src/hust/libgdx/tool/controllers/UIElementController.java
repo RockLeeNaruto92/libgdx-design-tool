@@ -16,10 +16,7 @@ import hust.libgdx.tool.views.renderers.properties.Property;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -32,7 +29,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class UIElementController extends Controller {
 	enum Action {
@@ -531,7 +527,9 @@ public class UIElementController extends Controller {
 		case TIME_PER_FRAME:
 			object.setTimePerFrame(Float.parseFloat((String)value));
 			break;
-
+		case KEY_FRAMES_COUNT:
+			object.setCount(Integer.parseInt((String)value));
+			break;
 		default:
 			break;
 		}

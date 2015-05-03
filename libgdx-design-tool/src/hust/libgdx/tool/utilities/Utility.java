@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -30,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Utility {
@@ -249,11 +251,17 @@ public class Utility {
 		return sb;
 	}
 	
-	public static Image createImageField(Table parent,
+	public static ImageTableField createImageField(Table parent,
 			Vector2 parentSize, String[] labels, float[] widths, Skin skin,
 			final ActorProperty property, final UIElementController controller,
-			final ActorPropertyType type, int[] colspans){
+			final ActorPropertyType type, int[] colspans, final int ordinal){
 		int i;
+		ImageTableField field = new ImageTableField(skin, parentSize);
+		float rowHeight = parentSize.y * Constant.PROPERTY_ROW_HEIGHT;
+		int colspan = 0;
+		
+		for (int index : colspans) 
+			colspan += index;
 		
 		parent.row();
 		
@@ -261,26 +269,18 @@ public class Utility {
 			Label label = new Label(labels[i], skin);
 			label.setFontScale(Constant.FONT_SCALE);
 			
-			parent.add(label).align(Align.left)
-					.width(widths[i] * parentSize.x)
-					.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-					.pad(Constant.PROPERTY_CELL_PAD)
-					.colspan(colspans[i]);
+			field.addLabel(label, widths[i] * parentSize.x, rowHeight);
 		}
 		
 		final Image image = new Image(skin, "anim-1");
-		parent.add(image).align(Align.left)
-				.width(widths[i] * parentSize.x)
-				.height(widths[i] * parentSize.x)
-				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(colspans[i++]);
+		float imageWidth = widths[i++] * parentSize.x;
+		field.addImage(image, imageWidth);
+		field.debugAll();
 		
-		
+		// create set button
 		TextButton btn = new TextButton(Word.SET, skin);
-		parent.add(btn).align(Align.left)
-				.height(parentSize.y * Constant.PROPERTY_ROW_HEIGHT)
-				.pad(Constant.PROPERTY_CELL_PAD)
-				.colspan(i);
+		field.addButton(btn, widths[i++] * parentSize.x, rowHeight);
+		
 		btn.addListener(new InputListener(){
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -297,7 +297,7 @@ public class Utility {
 				
 				if (resultPath != null){
 					TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.absolute(resultPath))));
-					controller.setObjectProperty(object, ActorPropertyType.IMAGE, drawable);
+					controller.setObjectProperty(object, ActorPropertyType.IMAGE, new Object[]{ordinal, drawable});
 					image.setDrawable(drawable);
 				}
 				
@@ -308,7 +308,12 @@ public class Utility {
 			
 		});
 		
-		return image;
+		parent.add(field).align(Align.left)
+			.width(parentSize.x)
+			.height(imageWidth)
+			.colspan(colspan);
+		
+		return field;
 	}
 	
 	public static TextField createColorField(Table parent,
@@ -345,6 +350,40 @@ public class Utility {
 				.colspan(colspans[i++]);
 		
 		return textfield;
+	}
+	
+	public static class ImageTableField extends Table{
+		private Image image;
+		private TextButton btn;
+		
+		public ImageTableField(Skin skin, Vector2 size){
+			setSize(size.x, size.y);
+		}
+		
+		public void addLabel(Label label, float width, float rowHeight){
+			add(label).align(Align.left)
+				.width(width).height(rowHeight);
+		}
+		
+		public void addImage(Image image, float width){
+			this.image = image;
+			add(image).align(Align.left)
+				.width(width)
+				.height(width);
+		}
+		
+		public void addButton(Button btn, float width, float height){
+			add(btn).align(Align.left)
+				.width(width).height(height);
+		}
+		
+		public void setImage(Drawable drawable){
+			image.setDrawable(drawable);
+		}
+		
+		public Button getButton(){
+			return btn;
+		}
 	}
 	
 	public static class NodeElement {

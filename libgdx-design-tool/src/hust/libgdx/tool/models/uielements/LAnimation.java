@@ -15,8 +15,10 @@ public class LAnimation extends Actor{
 	private Animation anim;
 	private float stateTime = 0f;
 	private Array<TextureRegion> keyFrames;
+	private Skin skin;
 	
 	public LAnimation(Skin skin){
+		this.skin = skin;
 		createDefaultAnimation(skin);
 		setBounds(0, 0, anim.getKeyFrame(0).getRegionWidth(), anim.getKeyFrame(0).getRegionHeight());
 	}
@@ -32,6 +34,18 @@ public class LAnimation extends Actor{
 	
 	public Animation getAnim() {
 		return anim;
+	}
+	
+	public int count(){
+		return keyFrames.size;
+	}
+	
+	public void setCount(int count){
+		if (keyFrames.size > count){
+			while (keyFrames.size > count) keyFrames.removeIndex(keyFrames.size - 1);
+		}else {
+			while (keyFrames.size < count) keyFrames.add(skin.getRegion("anim-1"));
+		}
 	}
 
 	public void setAnim(Animation anim) {

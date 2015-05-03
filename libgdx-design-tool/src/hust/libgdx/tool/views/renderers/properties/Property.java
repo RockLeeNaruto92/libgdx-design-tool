@@ -16,17 +16,23 @@ public abstract class Property {
 	private Rectangle bound;
 	private Table container, parent;
 	private UIElementController controller;
+	private Vector2 size;
 	
 	public Property(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller){
 		this.controller = controller;
 		
 		bound = new Rectangle();
 		setBound(location, size);
+		this.size = size;
 		
 		createContainer(stage, bound);
 		createProperties(skin, size);
 		createScroll(skin);
 		container.setVisible(false);
+	}
+	
+	public Vector2 getSize(){
+		return size;
 	}
 	
 	private void createContainer(Stage stage, Rectangle bound){

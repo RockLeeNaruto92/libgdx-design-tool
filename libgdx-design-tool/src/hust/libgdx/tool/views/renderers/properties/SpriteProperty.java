@@ -5,11 +5,11 @@ import hust.libgdx.tool.constants.Word;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.uielements.LSprite;
 import hust.libgdx.tool.utilities.Utility;
+import hust.libgdx.tool.utilities.Utility.ImageTableField;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
@@ -18,7 +18,7 @@ public class SpriteProperty extends ActorProperty {
 	
 	private TextField rotation, color;
 	private TextField scaleX, scaleY;
-	private Image image;
+	private ImageTableField image;
 	
 
 	public SpriteProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
@@ -73,7 +73,7 @@ public class SpriteProperty extends ActorProperty {
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
 		int[] colspans = {1, 1, 2};
 		
-		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans);
+		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 0);
 	}
 	
 	private void createTextFieldColor(Skin skin, Vector2 parentSize){
@@ -89,7 +89,7 @@ public class SpriteProperty extends ActorProperty {
 		super.setActorProperty(actor);
 		LSprite obj = (LSprite)actor;
 		
-		image.setDrawable(obj.getDrawble());
+		image.setImage(obj.getDrawble());
 		scaleX.setText(obj.getScaleX() + "");
 		scaleY.setText(obj.getScaleY() + "");
 		rotation.setText(obj.getRotation() + "");

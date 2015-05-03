@@ -55,4 +55,6 @@ public class Word {
 	public static final String SCALE = "Scale";
 	public static final String TIME_PER_FRAME = "Time per frame";
 	public static final String PLAY_MODE = "Play mode";
+	public static final String IMAGES = "Images";
+	public static final String FRAME = "Frame";
 }

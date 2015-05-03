@@ -7,6 +7,7 @@ import hust.libgdx.tool.models.customs.CAlign;
 import hust.libgdx.tool.models.customs.CScaling;
 import hust.libgdx.tool.models.uielements.LImage;
 import hust.libgdx.tool.utilities.Utility;
+import hust.libgdx.tool.utilities.Utility.ImageTableField;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,7 +20,7 @@ public class ImageProperty extends ActorProperty {
 	private static ImageProperty _instance;
 	
 	private SelectBox<Object> align, scaling;
-	private Image image;
+	private ImageTableField image;
 	
 
 	public ImageProperty(Stage stage, Skin skin, Vector2 location, Vector2 size, UIElementController controller) {
@@ -46,7 +47,7 @@ public class ImageProperty extends ActorProperty {
 		float[] widths = {Constant.PROPERTY_COLUMN_1, Constant.PROPERTY_COLUMN_2, Constant.PROPERTY_COLUMN_3 + Constant.PROPERTY_COLUMN_4};
 		int[] colspans = {1, 1, 2};
 		
-		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans);
+		image = Utility.createImageField(getParent(), parentSize, labels, widths, skin, this, getController(), ActorPropertyType.IMAGE, colspans, 0);
 	}
 
 	private void createSelectBoxAlign(Skin skin, Vector2 parentSize){
@@ -72,6 +73,6 @@ public class ImageProperty extends ActorProperty {
 		
 		align.setSelectedIndex(CAlign.getIndex(obj.getAlign()));
 		scaling.setSelectedIndex(CScaling.getIndex(obj.getScaling()));
-		image.setDrawable(obj.getDrawable());
+		image.setImage(obj.getDrawable());
 	}
 }
