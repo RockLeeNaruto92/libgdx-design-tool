@@ -178,7 +178,10 @@
 		
 		com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
 			default: {
-				
+				hScroll: quickPlay,
+				vScroll: quickPlay,
+				hScrollKnob: window-top,
+				vScrollKnob: window-top
 			}
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle: {

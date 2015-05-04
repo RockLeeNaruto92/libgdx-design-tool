@@ -1,5 +1,6 @@
 package hust.libgdx.tool.views.renderers.properties;
 
+import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -7,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -53,10 +55,20 @@ public abstract class Property {
 	
 	private void createScroll(Skin skin){
 		ScrollPane scroll = new ScrollPane(parent, skin);
+		
+		ScrollPaneStyle style = scroll.getStyle();
+		style.hScroll.setMinHeight(Constant.SCROLL_WEIGHT);
+		style.vScroll.setMinWidth(Constant.SCROLL_WEIGHT);
+		style.hScrollKnob.setMinHeight(Constant.SCROLL_WEIGHT);
+		style.vScrollKnob.setMinWidth(Constant.SCROLL_WEIGHT);
+		
+		scroll.setFadeScrollBars(getFadeScrollBars());
+		
 		container.row();
 		container.add(scroll);
 	}
 	
+	public abstract boolean getFadeScrollBars();
 	
 	private void setBound(Vector2 location, Vector2 size){
 		bound.set(location.x, location.y, size.x, size.y);

@@ -42,4 +42,9 @@ public class EmptyProperty extends Property {
 	public void refresh() {
 		
 	}
+
+	@Override
+	public boolean getFadeScrollBars() {
+		return true;
+	}
 }

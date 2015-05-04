@@ -109,4 +109,9 @@ public abstract class ActorProperty extends Property{
 		createCheckboxDebugField(skin, parentSize);
 		createOtherField(skin, parentSize);
 	}
+
+	@Override
+	public boolean getFadeScrollBars() {
+		return false;
+	} 
 }

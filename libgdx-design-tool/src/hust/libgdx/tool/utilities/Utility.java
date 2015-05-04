@@ -174,7 +174,6 @@ public class Utility {
 				
 				return super.keyTyped(event, character);
 			}
-			
 		});
 		
 		return textfield;
