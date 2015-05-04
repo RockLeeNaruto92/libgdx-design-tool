@@ -2,19 +2,17 @@ package hust.libgdx.tool.views.renderers;
 
 import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.constants.Word;
+import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.utilities.Utility;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class Menu {
@@ -22,17 +20,17 @@ public class Menu {
 		FILE, WINDOWS, NONE
 	};
 	
-	private float subMenuX, subMenuY;
-	
 	private TextButton fileMenu, windowsMenu;
-	private HorizontalGroup menuGroup;
-	private VerticalGroup subMenuGroup;
-	private ArrayList<Actor> subFileMenu, subWindowsMenu;
+	private Table mainMenu;
+	private Table subFileMenu, subWindowsMenu;
+	private UIElementController controller;
+	private Rectangle bound;
 	
 	private Stage stage;
 	
-	public Menu(Stage stage, Skin skin){
+	public Menu(Stage stage, Skin skin, UIElementController controller){
 		this.stage = stage;
+		this.controller = controller;
 		
 		init(skin);
 	}
@@ -43,20 +41,14 @@ public class Menu {
 	}
 	
 	private void createMenuGroup(Skin skin){
-		Rectangle bound = Utility.getActualBound(Constant.MENU_LOCATION, Constant.MENU_SIZE);
+		bound = Utility.getActualBound(Constant.MENU_LOCATION, Constant.MENU_SIZE);
 		
-		menuGroup = new HorizontalGroup();
-		menuGroup.padLeft(Constant.GROUP_PAD_LEFT);
-		menuGroup.space(Constant.HORIZONTAL_GROUP_SPACE);
-		menuGroup.setDebug(true);
-		menuGroup.setX(bound.x);
-		menuGroup.setY(bound.y);
-		menuGroup.setDebug(true, true);
+		mainMenu = new Table(skin);
+		mainMenu.setBounds(bound.x, bound.y, bound.width, bound.height);
+		mainMenu.left();
+		mainMenu.setBackground("window-top");
 		
-		createFileMenu(skin);
-		createWindowsMenu(skin);
-		
-		stage.addActor(menuGroup);
+		stage.addActor(mainMenu);
 	}
 	
 	private void createWindowsMenu(Skin skin){
@@ -68,14 +60,17 @@ public class Menu {
 				super.clicked(event, x, y);
 				displaySubMenuGroup(Action.WINDOWS);
 			}
-			
 		});
 		
-		menuGroup.addActor(windowsMenu);
+		float width = windowsMenu.getStyle().font.getBounds(windowsMenu.getText()).width * Constant.FONT_SCALE + Constant.GROUP_PAD_LEFT; 
+		mainMenu.add(windowsMenu).left().width(width).height(mainMenu.getHeight()).padLeft(Constant.GROUP_PAD_LEFT);
+		
+		createSubWindowsMenu(skin);
 	}
 	
 	private void createFileMenu(Skin skin){
 		fileMenu = new TextButton(Word.FILE, skin);
+		
 		fileMenu.getLabel().setFontScale(Constant.FONT_SCALE);
 		fileMenu.addListener(new ClickListener(){
 			@Override
@@ -85,93 +80,99 @@ public class Menu {
 			}
 		});
 		
-		menuGroup.addActor(fileMenu);
+		float width = fileMenu.getStyle().font.getBounds(fileMenu.getText()).width * Constant.FONT_SCALE + Constant.GROUP_PAD_LEFT; 
+		mainMenu.add(fileMenu).left().width(width).height(mainMenu.getHeight()).padLeft(Constant.GROUP_PAD_LEFT);
+		
+		createSubFileMenu(skin);
 	}
 	
 	private void createSubMenuGroup(Skin skin){
-		subMenuGroup = new VerticalGroup();
-		subMenuGroup.left();
-		subMenuGroup.space(Constant.VERTICAL_GROUP_SPACE);
-		subFileMenu = new ArrayList<Actor>();
-		subWindowsMenu = new ArrayList<Actor>();
-		subMenuGroup.setDebug(true, true);
-		subMenuGroup.setColor(24, 243, 12, 255);
-		
-		
-		createSubFileMenu(skin);
-		createSubWindowsMenu(skin);
-		stage.addActor(subMenuGroup);
+		createFileMenu(skin);
+		createWindowsMenu(skin);
 	}
 	
 	private void createSubFileMenu(Skin skin){
-		CheckBox btnNew = Utility.createSubMenuCheckbox(Word.NEW, skin);
-		subFileMenu.add(btnNew);
+		subFileMenu = (new Table(skin)).align(Align.left);
+		subFileMenu.setVisible(false);
+		subFileMenu.setBackground("window-top");
 		
-		CheckBox btnOpen = Utility.createSubMenuCheckbox(Word.OPEN, skin);
-		subFileMenu.add(btnOpen);
+		CheckBox btnNew = Utility.createSubMenuCheckbox(Word.NEW, skin, "no-has-image");
+		float height = btnNew.getStyle().font.getBounds(btnNew.getText()).height * Constant.FONT_SCALE + Constant.GROUP_PAD_LEFT;
+		subFileMenu.row();
+		subFileMenu.add(btnNew).height(height).left();
+		
+		CheckBox btnOpen = Utility.createSubMenuCheckbox(Word.OPEN, skin, "no-has-image");
+		subFileMenu.row();
+		subFileMenu.add(btnOpen).height(height).left();
+		
+		CheckBox btnImport = Utility.createSubMenuCheckbox(Word.IMPORT, skin, "import");
+		subFileMenu.row();
+		subFileMenu.add(btnImport).height(height).left();
+		
+		CheckBox btnSave = Utility.createSubMenuCheckbox(Word.SAVE, skin, "save");
+		subFileMenu.row();
+		subFileMenu.add(btnSave).height(height).left();
+		
+		subFileMenu.setSize(subFileMenu.getPrefWidth(), subFileMenu.getPrefHeight());
+		subFileMenu.setX(0);
+		subFileMenu.setY(mainMenu.getY() - subFileMenu.getHeight());
+		stage.addActor(subFileMenu);
 	}
 	
 	private void createSubWindowsMenu(Skin skin){
-		CheckBox property = Utility.createSubMenuCheckbox(Word.PROPERTY, skin);
-		subWindowsMenu.add(property);
+		subWindowsMenu = (new Table(skin)).align(Align.left);
+		subWindowsMenu.setVisible(false);
+		subWindowsMenu.setBackground("window-top");
 		
-		CheckBox outline = Utility.createSubMenuCheckbox(Word.OUTLINE, skin);
-		subWindowsMenu.add(outline);
+		CheckBox property = Utility.createSubMenuCheckbox(Word.PROPERTY, skin, "no-has-image");
+		float height = property.getStyle().font.getBounds(property.getText()).height * Constant.FONT_SCALE + Constant.GROUP_PAD_LEFT;
+		subWindowsMenu.row();
+		subWindowsMenu.add(property).height(height).left();
 		
-		CheckBox palette = Utility.createSubMenuCheckbox(Word.PALETTE, skin);
-		subWindowsMenu.add(palette);
+		CheckBox packageExplore = Utility.createSubMenuCheckbox(Word.PACKAGE_EXPLORE, skin, "no-has-image");
+		subWindowsMenu.row();
+		subWindowsMenu.add(packageExplore).height(height).left();
 		
-		CheckBox preview = Utility.createSubMenuCheckbox(Word.PALETTE, skin);
-		subWindowsMenu.add(preview);
+		CheckBox palette = Utility.createSubMenuCheckbox(Word.PALETTE, skin, "no-has-image");
+		subWindowsMenu.row();
+		subWindowsMenu.add(palette).height(height).left();
+		
+		CheckBox outline = Utility.createSubMenuCheckbox(Word.OUTLINE, skin, "no-has-image");
+		subWindowsMenu.row();
+		subWindowsMenu.add(outline).height(height).left();
+		
+		subWindowsMenu.setSize(subWindowsMenu.getPrefWidth(), subWindowsMenu.getPrefHeight());
+		subWindowsMenu.setY(mainMenu.getY() - subWindowsMenu.getHeight());
+		subWindowsMenu.setX(mainMenu.getCell(fileMenu).getMinWidth() + 2 * mainMenu.getPadLeft());
+		stage.addActor(subWindowsMenu);
 	}
 	
-	private void displaySubMenuGroup(Action choose){
+	public void displaySubMenuGroup(Action choose){
 		switch (choose) {
 		case FILE:
-			removeActorFromSubMenu(subWindowsMenu);
-			addActorToSubMenu(subFileMenu);
+			subFileMenu.setVisible(true);
+			subWindowsMenu.setVisible(false);
 			break;
 		case WINDOWS:
-			removeActorFromSubMenu(subFileMenu);
-			addActorToSubMenu(subWindowsMenu);
+			subFileMenu.setVisible(false);
+			subWindowsMenu.setVisible(true);
 			break;
 		case NONE:
-			removeActorFromSubMenu(subFileMenu);
-			removeActorFromSubMenu(subWindowsMenu);
+			subFileMenu.setVisible(false);
+			subWindowsMenu.setVisible(false);
 			break;
 		default:
 			break;
 		}
-		setSubMenuLocation(choose);
-		subMenuGroup.layout();
 	}
 	
-	private void addActorToSubMenu(ArrayList<Actor> list){
-		for (Actor actor : list) {
-			subMenuGroup.addActor(actor);
-		}
-	}
-	
-	private void removeActorFromSubMenu(ArrayList<Actor> list){
-		for (Actor actor : list) {
-			subMenuGroup.removeActor(actor);
-		}
-	}
-	
-	private void setSubMenuLocation(Action choose){
-		switch (choose) {
-		case FILE:
-			subMenuX = menuGroup.getX() + menuGroup.getPadLeft();
-			break;
-		case WINDOWS:
-			subMenuX = menuGroup.getX() + menuGroup.getPadLeft() + fileMenu.getPrefWidth() + menuGroup.getSpace();
-			break;
-
-		default:
-			break;
-		}
-		subMenuY = menuGroup.getY() - menuGroup.getPrefHeight();
-		subMenuGroup.setX(subMenuX);
-		subMenuGroup.setY(subMenuY);
+	public boolean contains(float x, float y){
+		if (bound.contains(x, y)) return true;
+		
+		Rectangle rect = new Rectangle(subFileMenu.getX(), subFileMenu.getY(), subFileMenu.getWidth(), subFileMenu.getHeight());
+		if (subFileMenu.isVisible() && rect.contains(x, y)) return true;
+		
+		rect.set(subWindowsMenu.getX(), subWindowsMenu.getY(), subWindowsMenu.getWidth(), subWindowsMenu.getHeight());
+		return subWindowsMenu.isVisible() && rect.contains(x, y);
 	}
 }

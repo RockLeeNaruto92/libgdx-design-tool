@@ -4,6 +4,7 @@ import hust.libgdx.tool.constants.Constant;
 import hust.libgdx.tool.controllers.UIElementController;
 import hust.libgdx.tool.models.uielements.LAnimation;
 import hust.libgdx.tool.models.uielements.LSprite;
+import hust.libgdx.tool.views.renderers.Menu.Action;
 import hust.libgdx.tool.views.renderers.properties.AnimationProperty;
 import hust.libgdx.tool.views.renderers.properties.ButtonProperty;
 import hust.libgdx.tool.views.renderers.properties.CheckBoxProperty;
@@ -59,12 +60,12 @@ public class HomeRenderer extends ApplicationRenderer{
 		
 		loadDatas();
 		
-		createMenuPart();
 		createPalletePart();
 		createPropertyPart();
 		createOutlinePart();
 		createEditorPart();
 		createMessageDialog();
+		createMenuPart();
 	}
 	
 	private void createStages(){
@@ -78,7 +79,7 @@ public class HomeRenderer extends ApplicationRenderer{
 	}
 
 	private void createMenuPart() {
-		menu = new Menu(mainStage, skin);
+		menu = new Menu(mainStage, skin, controller);
 	}
 
 	private void createPalletePart() {
@@ -360,5 +361,13 @@ public class HomeRenderer extends ApplicationRenderer{
 	
 	public void updateOutline(){
 		outline.update();
+	}
+
+	public boolean isInMenu(float x, float y) {
+		return menu.contains(x, y);
+	}
+
+	public void hideMenu() {
+		menu.displaySubMenuGroup(Action.NONE);
 	}
 }

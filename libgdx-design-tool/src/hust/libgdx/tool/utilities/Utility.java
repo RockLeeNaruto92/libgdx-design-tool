@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -59,12 +60,14 @@ public class Utility {
 			return Constant.SCREEN_SIZE.y * arg;
 	}
 	
-	public static CheckBox createSubMenuCheckbox(String text, Skin skin){
-		CheckBox checkbox = new CheckBox(text, skin);
+	public static CheckBox createSubMenuCheckbox(String text, Skin skin, String styleName){
+		CheckBox checkbox = new CheckBox(text, skin, styleName);
 		checkbox.getLabel().setFontScale(Constant.FONT_SCALE);
-		checkbox.getCells().get(0)
+		checkbox.getLabelCell().left();
+		checkbox.getImageCell()
 			.size(Constant.VERTICAL_GROUP_IMAGE_WIDTH, Constant.VERTICAL_GROUP_IMAGE_HEIGHT)
-			.padRight(Constant.VERTICAL_GROUP_PAD_RIGHT);
+			.padLeft(Constant.VERTICAL_GROUP_PAD_RIGHT).padRight(Constant.VERTICAL_GROUP_PAD_RIGHT).left();
+		checkbox.left();
 		
 		return checkbox;
 	}

@@ -139,12 +139,14 @@ public class UIElementController extends Controller {
 			}
 			currentTouchPos.set(x, y);
 			displayBound(true);
+			screen.getRender().hideMenu();
 			
 		} else {
 			displayBound(false);
-			
 			if (screen.getRender().isInProperty(x, y))
 				setCurrentAction(Action.MODIFY_IN_PROPERTY);
+			if (!screen.getRender().isInMenu(x, y))
+				screen.getRender().hideMenu();
 		}
 	}
 

@@ -26,14 +26,8 @@
 			}
 		},
 		com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-			toggle: {
-				font: default-font,
-				fontColor: white,
-				up: button-up,
-				down: button-down,
-				over: button-over,
-				checked: button-down
-			},
+			
+			
 			default: {
 				font: default-font,
 				up: button-up,
@@ -41,7 +35,7 @@
 				over: button-over,
 				checked: button-down
 			},
-			
+						
 			default-locked:{
 				up: lock,
 				down: lock,
@@ -206,6 +200,36 @@
    				fontColor: white,
    				checkboxOn: checkbox-checked, 
    				checkboxOff: checkbox-unchecked
+   			},
+   			
+   			no-has-image: {
+   				font: default-font,
+   				fontColor: white,
+   				checkboxOn: empty,
+   				checkboxOff: empty,
+   				up: empty,
+   				down: button-down,
+   				over: button-over
+   			},
+   			
+   			import: {
+   				font: default-font,
+   				fontColor: white,
+   				checkboxOn: import,
+   				checkboxOff: import,
+   				up: empty,
+   				down: button-down,
+   				over: button-over 
+   			},
+   			
+   			save: {
+   				font: default-font,
+   				fontColor: white,
+   				checkboxOn: save,
+   				checkboxOff: save,
+   				up: empty,
+   				down: button-down,
+   				over: button-over
    			}
    		},
    		com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle: {
